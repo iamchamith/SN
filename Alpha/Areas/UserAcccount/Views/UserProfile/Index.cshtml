@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_View.cshtml";
+}
+<ul id="leftmenu" class="list-group" style="margin:0px;">
+    <li class="list-group-item active list-group-edit menu" data-menu="preview" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#" data-toggle="tab" class="menu" data-menu="preview">Profile</a>
+    </li>
+    <li class="list-group-item list-group-edit menu" data-menu="ask" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#" data-toggle="tab" class="menu" data-menu="ask">Ask</a>
+    </li>
+    <li class="list-group-item list-group-edit menu" data-menu="anwers" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#" data-toggle="tab" class="menu" data-menu="anwers">Answers</a>
+    </li>
+    <li class="list-group-item list-group-edit menu" data-menu="criends" style="padding:10px; padding-left:20px; border-radius:0px; margin-top:5px;">
+        <a href="#" data-toggle="tab" data-menu="criends" class="menu">Criends</a>
+    </li>
+</ul>
+@{Html.RenderPartial("_Posts"); }
+@section scripts{
+<script src="~/Asserts/ts/user/profile/profileRoute.js"></script>
+<script src="~/Asserts/ts/user/profile/profileViewModel.js"></script>
+<script src="~/Asserts/ts/posts/ask/post.js"></script>
+<script src="~/Asserts/ts/posts/ask/postViewModel.js"></script>
+<script src="~/Asserts/ts/user/profile/profile.js"></script>
+}

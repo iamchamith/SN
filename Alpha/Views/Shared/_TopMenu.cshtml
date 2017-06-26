@@ -1,0 +1,21 @@
+﻿<div class="navbar-collapse collapse pull-right">
+    <ul class="nav navbar-nav">
+        <li class="askQuestionMenu pull-left"><a href="#" class="askQuestionMenu">Ask Question | </a></li>
+        <li><a href="/posts/post/index?type=feed">Feeds | </a></li>
+        <li><a href="/posts/post/index?type=answers">Answer | </a></li>
+        <li><a href="/posts/post/index?type=ask">Question | </a></li>
+        <li><a href="/useracccount/Settings/search">Criends | </a></li>
+        <li class="dropdown">
+            <a data-toggle="dropdown" style="padding-top:10px; padding-bottom:10px; color:#fff; border-radius:0px; cursor:pointer;">
+                <img id="id_top_avatar" width="30" height="30" src="@Alpha.Utility.GCSession.ProfileImage"
+                     style="border-radius:100px;" />
+                @Alpha.Utility.GCSession.UserDisplayName <b class="caret"></b>
+            </a>
+            <ul id="menu3" class="dropdown-menu" style="margin-top:0px; border-top:none;">
+                <li><a href="/useracccount/settings#/preview" tabindex="-1">My Profile</a></li>
+                <li><a href="/useracccount/settings#/basic" tabindex="-1">Settings</a></li>
+                <li id="logout"><a tabindex="-1">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,40 @@
+﻿<div id="usertags">
+    <div>
+        <div class="header-title-bg">
+            Tags
+            <span class="pull-right help"
+                  data-url="/asserts/ts/help/settings/help.tags.template.html"
+                  data-caption="Tags | Help "
+                  title="Help">?</span>
+        </div>
+        <br> <br> <br>
+        <div class="form-group">
+            <div class="demo-section k-content">
+                <h4>Type your interesting and search</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <select id="tags" style="width: 100%;"></select><br /><br />
+                        <p class="demo-hint">e.g. 'cricket'</p>
+                        <textarea id="tagDescription" required style="width:100%" class="hidden"
+                                  placeholder="You are the creator of tag :).Enter some small description"></textarea>
+                        <button type="button" class="btn btn-primary hidden pull-right" id="crateAndAddTag">Create and Add</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary" id="searchTags">Search</button>
+                        <button type="button" class="btn btn-primary hidden" id="addTag">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12" id="userTags"></div>
+    </div>
+</div>
+<script type="text/x-kendo-template" id="userTags-template">
+    #for(var i=0;i< data.length;i++ ){
+    var ele = data[i];
+    #
+     <a href="\#." class="tags" data-tagid="#=ele.TagId#">\##=ele.TagName#  </a>,
+    #}#
+</script>

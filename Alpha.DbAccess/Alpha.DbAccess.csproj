@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D014B391-9C5F-4FC6-9F04-DF33B67E71C5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alpha.DbAccess</RootNamespace>
+    <AssemblyName>Alpha.DbAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlphaContext.cs" />
+    <Compile Include="DatabaseInfo.cs" />
+    <Compile Include="Migrations\201706070942379_init.cs" />
+    <Compile Include="Migrations\201706070942379_init.Designer.cs">
+      <DependentUpon>201706070942379_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706070943558_post.cs" />
+    <Compile Include="Migrations\201706070943558_post.Designer.cs">
+      <DependentUpon>201706070943558_post.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706071000562_userpost.cs" />
+    <Compile Include="Migrations\201706071000562_userpost.Designer.cs">
+      <DependentUpon>201706071000562_userpost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706071006146_firstParse.cs" />
+    <Compile Include="Migrations\201706071006146_firstParse.Designer.cs">
+      <DependentUpon>201706071006146_firstParse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706071059014_addtags.cs" />
+    <Compile Include="Migrations\201706071059014_addtags.Designer.cs">
+      <DependentUpon>201706071059014_addtags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706071103172_addtags1.cs" />
+    <Compile Include="Migrations\201706071103172_addtags1.Designer.cs">
+      <DependentUpon>201706071103172_addtags1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706071134039_userPostCommentEnhance.cs" />
+    <Compile Include="Migrations\201706071134039_userPostCommentEnhance.Designer.cs">
+      <DependentUpon>201706071134039_userPostCommentEnhance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706071136538_addUserPOstComment.cs" />
+    <Compile Include="Migrations\201706071136538_addUserPOstComment.Designer.cs">
+      <DependentUpon>201706071136538_addUserPOstComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706161417251_refactor1.cs" />
+    <Compile Include="Migrations\201706161417251_refactor1.Designer.cs">
+      <DependentUpon>201706161417251_refactor1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706161419044_refactor2.cs" />
+    <Compile Include="Migrations\201706161419044_refactor2.Designer.cs">
+      <DependentUpon>201706161419044_refactor2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706161419550_refactor3.cs" />
+    <Compile Include="Migrations\201706161419550_refactor3.Designer.cs">
+      <DependentUpon>201706161419550_refactor3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706171425104_updateusertable.cs" />
+    <Compile Include="Migrations\201706171425104_updateusertable.Designer.cs">
+      <DependentUpon>201706171425104_updateusertable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706171614007_updateusertable2.cs" />
+    <Compile Include="Migrations\201706171614007_updateusertable2.Designer.cs">
+      <DependentUpon>201706171614007_updateusertable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191125595_tagTableEnhancement.cs" />
+    <Compile Include="Migrations\201706191125595_tagTableEnhancement.Designer.cs">
+      <DependentUpon>201706191125595_tagTableEnhancement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706200611404_addUserContactTable.cs" />
+    <Compile Include="Migrations\201706200611404_addUserContactTable.Designer.cs">
+      <DependentUpon>201706200611404_addUserContactTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706201416360_addErrorTable.cs" />
+    <Compile Include="Migrations\201706201416360_addErrorTable.Designer.cs">
+      <DependentUpon>201706201416360_addErrorTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706211138281_updatePost.cs" />
+    <Compile Include="Migrations\201706211138281_updatePost.Designer.cs">
+      <DependentUpon>201706211138281_updatePost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706221704495_addUserRelationTable.cs" />
+    <Compile Include="Migrations\201706221704495_addUserRelationTable.Designer.cs">
+      <DependentUpon>201706221704495_addUserRelationTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706240234330_addTagDescriptionColom.cs" />
+    <Compile Include="Migrations\201706240234330_addTagDescriptionColom.Designer.cs">
+      <DependentUpon>201706240234330_addTagDescriptionColom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alpha.Poco\Alpha.Poco.csproj">
+      <Project>{59031697-a6ff-4c93-bd33-0d91025ba11b}</Project>
+      <Name>Alpha.Poco</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706070942379_init.resx">
+      <DependentUpon>201706070942379_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706070943558_post.resx">
+      <DependentUpon>201706070943558_post.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071000562_userpost.resx">
+      <DependentUpon>201706071000562_userpost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071006146_firstParse.resx">
+      <DependentUpon>201706071006146_firstParse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071059014_addtags.resx">
+      <DependentUpon>201706071059014_addtags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071103172_addtags1.resx">
+      <DependentUpon>201706071103172_addtags1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071134039_userPostCommentEnhance.resx">
+      <DependentUpon>201706071134039_userPostCommentEnhance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071136538_addUserPOstComment.resx">
+      <DependentUpon>201706071136538_addUserPOstComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706161417251_refactor1.resx">
+      <DependentUpon>201706161417251_refactor1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706161419044_refactor2.resx">
+      <DependentUpon>201706161419044_refactor2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706161419550_refactor3.resx">
+      <DependentUpon>201706161419550_refactor3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706171425104_updateusertable.resx">
+      <DependentUpon>201706171425104_updateusertable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706171614007_updateusertable2.resx">
+      <DependentUpon>201706171614007_updateusertable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191125595_tagTableEnhancement.resx">
+      <DependentUpon>201706191125595_tagTableEnhancement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706200611404_addUserContactTable.resx">
+      <DependentUpon>201706200611404_addUserContactTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706201416360_addErrorTable.resx">
+      <DependentUpon>201706201416360_addErrorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211138281_updatePost.resx">
+      <DependentUpon>201706211138281_updatePost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706221704495_addUserRelationTable.resx">
+      <DependentUpon>201706221704495_addUserRelationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706240234330_addTagDescriptionColom.resx">
+      <DependentUpon>201706240234330_addTagDescriptionColom.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

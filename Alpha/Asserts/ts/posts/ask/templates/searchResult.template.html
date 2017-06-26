@@ -1,0 +1,23 @@
+﻿<div id="seachpostresult">
+    <div class="header-title-bg">
+        Search results <b id="searchCount">0</b>
+    </div>
+    <br /><br />
+    <div style="padding:20px; background: #f5f5f5; border-bottom: 1px solid #e1e1e8;" class="row" id="searchpostcontrollers">
+        <div class="col-md-6">
+            <input type="text" name="name" value="" placeholder="Enter part of titile" class="form-control" data-bind="value:Titile" />
+        </div>
+        <div class="col-md-3">
+            <input type="checkbox" class="checkBoxStyle" data-bind="checked:Reason" /> &nbsp; Is Most Reason ?
+        </div>
+        <div class="col-md-3">
+            <input type="button" class="btn btn-primary" name="name" value="Filter posts" data-bind="click:search" />
+            <input type="button" class="btn btn-primary" name="name" value="Reset" data-bind="click:reset" />
+        </div>
+    </div>
+    <div style="padding:0px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px; margin-bottom:20px; padding-top:47px;">
+        <div style="padding:20px;">
+            <div id="searchposts"></div>
+        </div>
+    </div>
+</div>

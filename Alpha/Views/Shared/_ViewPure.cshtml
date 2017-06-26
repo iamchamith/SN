@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Criends</title>
+    <link href="~/Asserts/images/c.ico" rel="shortcut icon" type="image/x-icon" />
+    @Styles.Render("~/bundles/css")
+    <link href="~/Content/kendo/kendo.common-material.min.css" rel="stylesheet" />
+</head>
+<body role="document">
+    <div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container">
+            <span id="notification"></span>
+            <div class="navbar-header pull">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><p style="font-family:Arial; font-size:14px; background:#234763; color:#fff; padding:8px 10px 8px 10px; border-radius:4px; margin-top:-5px; border-radius:4px; line-height:1;"><b>Criends</b></p></a>
+            </div>
+            @if (Alpha.Utility.GCSession.IsSession)
+            {
+                Html.RenderPartial("_TopMenu");
+            }
+            else {
+                Html.RenderPartial("_AuthMenu");
+            }
+
+        </div>
+    </div>
+    <div class="container" style="margin-top:70px; margin-bottom:20px;">
+        <div class="row bs-example bs-example-tabs">
+            <div class="col-md-12">
+                <div id="placeholder" style="padding:20px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px; margin-bottom:20px;">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    @{Html.RenderPartial("models/_HelpModel");}
+    <footer style="background:#c5c5c5; margin-top:50px;">
+        <div class="container" style="padding-top:20px; padding-bottom:10px;">
+            <p style="color:#555555;">@Alpha.Utility.GC.SiteName © @DateTime.Now.Year.</p>
+        </div>
+    </footer>
+    <script src="~/Scripts/kendo/jquery.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Asserts/js/plugin.js"></script>
+    <script src="~/Asserts/utility/ajax.js"></script>
+    <script src="~/Asserts/utility/comman.js"></script>
+    @RenderSection("scripts");
+</body>
+</html>

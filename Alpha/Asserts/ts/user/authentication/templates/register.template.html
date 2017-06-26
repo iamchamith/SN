@@ -1,0 +1,42 @@
+﻿<div id="register">
+    <div class="header-title-bg">
+        Register
+        <span class="pull-right help"
+              data-url="/asserts/ts/help/auth/help.register.template.html"
+              data-caption="Registration | Help"
+              title="Help">?</span>
+    </div>
+    <br><br><br>
+    <div class="form-group">
+        <label>Register with</label>
+        <div class="row">
+            <div class="col-md-3">
+                <img src="/Asserts/images/social/Facebook.png" />
+                <img src="/Asserts/images/social/Google_Plus.png" />
+            </div>
+            <div class="col-md-3">
+                <b> OR </b>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input placeholder="Email" class="form-control" data-toggle="tooltip" required data-placement="top" data-bind="value: Email" name="regEmail"/>
+    </div>
+    <div class="form-group">
+        <label>Full Name</label>
+        <input placeholder="Full name" class="form-control" data-toggle="tooltip" required data-placement="top" data-bind="value: Name" name="regName"/>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input placeholder="Password" type="password" class="form-control" required data-toggle="tooltip" data-placement="top" data-bind="value: Password" name="regPassword"/>
+    </div>
+    <div class="row" style="margin-top:5px;">
+        <div class="col-md-12">
+            <div class="form-group" style="text-align:right;">
+                <button type="button" class="btn btn-primary" data-bind="click: register">Register</button>
+            </div>
+        </div>
+    </div>
+</div>

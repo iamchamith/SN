@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_View.cshtml";
+}
+<ul id="leftmenu" class="list-group" style="margin:0px;">
+    <li class="list-group-item active list-group-edit" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#/preview">  Preview</a>
+    </li>
+    <li class="list-group-item list-group-edit" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#/basic">Basic Info</a>
+    </li>
+    <li class="list-group-item list-group-edit" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#/contacts">Contacts</a>
+    </li>
+    <li class="list-group-item list-group-edit" style="padding:10px; padding-left:20px; border-radius:0px; margin-top:5px;">
+        <a href="#/tags">Tags</a>
+    </li>
+    <li class="list-group-item list-group-edit" style="padding:10px; padding-left:20px; border-radius:0px; margin-top:5px;">
+        <a href="#/changepassword" class="menu">Change Password</a>
+    </li>
+</ul>
+
+@section scripts{
+    <script src="~/Asserts/ts/user/settings/settingsRoute.js"></script>
+    <script src="~/Asserts/ts/user/settings/settingsViewModel.js"></script>
+    <script src="~/Asserts/ts/user/settings/settings.js"></script>
+}
+
