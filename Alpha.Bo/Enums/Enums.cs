@@ -249,5 +249,13 @@ namespace Alpha.Bo.Enums
         {
             No = -1, Following, Follower, Block
         }
+        public enum PostType
+        {
+            Question, Poll, Comment
+        }
+        public enum Imagetype
+        {
+            postimages, profileimages
+        }
     }
 }

@@ -1,0 +1,229 @@
+﻿@*Ask Questions*@
+<div class="modal fade" id="model-askQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:800px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Ask anything</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Ask</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Share Status</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <br />
+                        <div class="col-xs-3">
+                            <!-- required for floating -->
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs tabs-left">
+                                <li class="active"><a href="#question" data-toggle="tab">Ask Question</a></li>
+                                <li><a href="#poll" data-toggle="tab">Ask Poll</a></li>
+                                <li><a href="#comment" data-toggle="tab">Ask Comment</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-9">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="question">
+                                    <br />
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="control-label">Topic:</label>
+                                            <input type="text" class="form-control" data-bind="value:Titile" placeholder="Type and share anything">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="control-label">Someting more:</label>
+                                            <textarea class="form-control" data-bind="value:Description" placeholder="Do you have any more?"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <select data-role="multiselect"
+                                                    data-placeholder="Type a interesting e.g. 'rice'"
+                                                    data-value-primitive="true"
+                                                    data-text-field="TagName"
+                                                    data-value-field="TagId"
+                                                    data-bind="value: Tag,source: Tagss "></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane" id="poll">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="control-label">Topic:</label>
+                                            <input type="text" class="form-control" data-bind="value:Titile" placeholder="Type and share anything">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <img src="~/Asserts/images/dragdrop.png" alt="..." class="img-thumbnail">
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <b>Vs</b>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <img src="~/Asserts/images/dragdrop.png" alt="..." class="img-thumbnail">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <select data-role="multiselect"
+                                                    data-placeholder="Type a interesting e.g. 'rice'"
+                                                    data-value-primitive="true"
+                                                    data-text-field="TagName"
+                                                    data-value-field="TagId"
+                                                    data-bind="value: Tag,source: Tagss "></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane" id="comment">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="control-label">Topic:</label>
+                                            <input type="text" class="form-control" data-bind="value:Titile" placeholder="Type and share anything">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="control-label">Someting more:</label>
+                                            <textarea class="form-control" data-bind="value:Description" placeholder="Do you have any more?"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="files"
+                                                   type="file"
+                                                   data-role="upload">
+                                        </div>
+                                        <div class="form-group">
+                                            <select data-role="multiselect"
+                                                    data-placeholder="Type a interesting e.g. 'rice'"
+                                                    data-value-primitive="true"
+                                                    data-text-field="TagName"
+                                                    data-value-field="TagId"
+                                                    data-bind="value: Tag,source: Tagss "></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <h3>Share status</h3>
+                        <p>Some content in menu 1.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click:ask">Share</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .tabs-left, .tabs-right {
+        border-bottom: none;
+        padding-top: 2px;
+    }
+
+    .tabs-left {
+        border-right: 1px solid #ddd;
+    }
+
+    .tabs-right {
+        border-left: 1px solid #ddd;
+    }
+
+        .tabs-left > li, .tabs-right > li {
+            float: none;
+            margin-bottom: 2px;
+        }
+
+    .tabs-left > li {
+        margin-right: -1px;
+    }
+
+    .tabs-right > li {
+        margin-left: -1px;
+    }
+
+    .tabs-left > li.active > a,
+    .tabs-left > li.active > a:hover,
+    .tabs-left > li.active > a:focus {
+        border-bottom-color: #ddd;
+        border-right-color: transparent;
+    }
+
+    .tabs-right > li.active > a,
+    .tabs-right > li.active > a:hover,
+    .tabs-right > li.active > a:focus {
+        border-bottom: 1px solid #ddd;
+        border-left-color: transparent;
+    }
+
+    .tabs-left > li > a {
+        border-radius: 4px 0 0 4px;
+        margin-right: 0;
+        display: block;
+    }
+
+    .tabs-right > li > a {
+        border-radius: 0 4px 4px 0;
+        margin-right: 0;
+    }
+
+    .vertical-text {
+        margin-top: 50px;
+        border: none;
+        position: relative;
+    }
+
+        .vertical-text > li {
+            height: 20px;
+            width: 120px;
+            margin-bottom: 100px;
+        }
+
+            .vertical-text > li > a {
+                border-bottom: 1px solid #ddd;
+                border-right-color: transparent;
+                text-align: center;
+                border-radius: 4px 4px 0px 0px;
+            }
+
+            .vertical-text > li.active > a,
+            .vertical-text > li.active > a:hover,
+            .vertical-text > li.active > a:focus {
+                border-bottom-color: transparent;
+                border-right-color: #ddd;
+                border-left-color: #ddd;
+            }
+
+        .vertical-text.tabs-left {
+            left: -50px;
+        }
+
+        .vertical-text.tabs-right {
+            right: -50px;
+        }
+
+            .vertical-text.tabs-right > li {
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+
+        .vertical-text.tabs-left > li {
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+</style>

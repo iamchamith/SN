@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Configuration;
+
 namespace Alpha.DbAccess
 {
     public class DatabaseInfo
     {
-        static string cns = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Alpha;Integrated Security=True;Pooling=False";
+        static string cns = Configurations.Conns;
         static SqlConnection cn = new SqlConnection();
         public static SqlConnection Connection
         {

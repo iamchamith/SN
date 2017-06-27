@@ -8,10 +8,11 @@ using Alpha.Poco;
 using Alpha.Service.Infrastructure;
 using Alpha.Bo;
 using AutoMapper;
+using Alpha.Bo.Bo.posts;
 
 namespace Alpha.Service.Services
 {
-    public class PostService : BaseService, IPost
+    public class PostService : BaseService, Interfaces.IPost
     {
         IUnitOfWork uow;
         public PostService(IUnitOfWork _uow)
@@ -19,16 +20,38 @@ namespace Alpha.Service.Services
             this.uow = _uow;
         }
 
-        public async Task<PostBo> Insert(PostBo item)
+        public async Task<Guid> Insert(PostBo item)
         {
             try
             {
-                item.PostId = Guid.NewGuid();
-                var r = Mapper.Map<Post>(item);
-                this.uow.PostRepository.Insert(r);
-                await this.uow.SaveAsync();
-                return Mapper.Map<PostBo>(r);
+                var postid = Guid.NewGuid();
+                item.PostId = postid;
+                uow.PostRepository.Insert(Mapper.Map<Post>(item));
+                if (item is PostQuestionBo)
+                {
+                    var poco = Mapper.Map<PostQuestion>(item);
+                    poco.PostId = postid;
+                    uow.Context.PostQuestion.Add(poco);
+                }
+                else if (item is PostPollBo)
+                {
+                    var poco = Mapper.Map<PostPoll>(item);
+                    poco.PostId = postid;
+                    uow.Context.PostPolls.Add(poco);
+                }
+                else if (item is PostNeedCommentBo)
+                {
+                    var poco = Mapper.Map<PostNeedComment>(item);
+                    poco.PostId = postid;
+                    uow.Context.PostNeedComments.Add(poco);
+                }
+                else
+                {
+                    throw new ArgumentException("invalied type");
+                }
+                return postid;
             }
+
             catch (Exception e)
             {
                 throw ExceptionHandler(e);
@@ -67,6 +90,11 @@ namespace Alpha.Service.Services
         }
 
         public Task Delete(Guid id, Guid userid)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<PostBo> IRepository<PostBo, Guid>.Insert(PostBo item)
         {
             throw new NotImplementedException();
         }

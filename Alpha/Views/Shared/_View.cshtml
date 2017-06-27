@@ -45,6 +45,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" name="userid" value="" id="userid" />
     @*models*@
     @{Html.RenderPartial("models/_AskQuestions");}
     @{Html.RenderPartial("models/_AddRemoveTags");}
@@ -55,6 +56,7 @@
     <script src="~/Asserts/js/plugin.js"></script>
     <script src="~/Asserts/utility/ajax.js"></script>
     <script src="~/Asserts/utility/comman.js"></script>
+    <script src="~/Asserts/ts/posts/createPost.js"></script>
     @RenderSection("scripts");
 </body>
 </html>

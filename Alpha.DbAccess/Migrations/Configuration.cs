@@ -5,7 +5,7 @@ namespace Alpha.DbAccess.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Alpha.DbAccess.AlphaContext>
+    public sealed class Configuration : DbMigrationsConfiguration<Alpha.DbAccess.AlphaContext>
     {
         public Configuration()
         {

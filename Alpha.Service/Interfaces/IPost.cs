@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Alpha.Service.Interfaces
 {
-    public interface IPost:IRepository<PostBo,Guid>
+    public interface IPost  :IRepository<PostBo,Guid>
     {
+        Task<Guid> Insert(PostBo item);
     }
 }

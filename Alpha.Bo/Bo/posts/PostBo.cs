@@ -7,9 +7,10 @@ namespace Alpha.Bo
     {
         public int Id { get; set; }
         public Guid PostId { get; set; }
-        public string Titile { get; set; }
-        public string Description { get; set; }
+        public string Topic { get; set; }
         public string Tags { get; set; }
+        public bool IsAnonymas { get; set; }
+        public Enums.Enums.PostType PostType { get; set; }
         public PostBo()
         {
             Tags = "default";

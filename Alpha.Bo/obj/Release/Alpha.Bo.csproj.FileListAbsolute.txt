@@ -1,0 +1,10 @@
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\bin\Release\Alpha.Bo.dll.config
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\bin\Release\Alpha.Bo.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\bin\Release\Alpha.Bo.pdb
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\bin\Release\EntityFramework.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\bin\Release\EntityFramework.SqlServer.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\bin\Release\EntityFramework.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\bin\Release\EntityFramework.SqlServer.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\obj\Release\Alpha.Bo.csprojResolveAssemblyReference.cache
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\obj\Release\Alpha.Bo.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Bo\obj\Release\Alpha.Bo.pdb

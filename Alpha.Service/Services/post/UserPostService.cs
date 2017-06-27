@@ -11,13 +11,14 @@ using AutoMapper;
 using Alpha.Bo.Exceptions;
 using Dapper;
 using Alpha.DbAccess;
+using Alpha.Bo.Bo.posts;
 
 namespace Alpha.Service.Services
 {
     public class UserPostService : BaseService, IUserPost
     {
         IUnitOfWork uow;
-        IPost servicePost;
+        Interfaces.IPost servicePost;
         public UserPostService(IUnitOfWork _uow)
         {
             this.uow = _uow;
@@ -47,30 +48,70 @@ namespace Alpha.Service.Services
             }
         }
 
-        public async Task<UserPostInfoBo> Insert(UserPostInfoBo item)
+        public async Task<UserPostBo> Insert(PostQuestionBo item, UserPostBo userpostinfo)
         {
             try
             {
-                item.Post.Tags = "0";
-                var r = await servicePost.Insert(item.Post);
-                var up = item.UserPost;
-                up.IsPrimaryUser = Bo.Enums.Enums.YesNo.Yes;
-                up.PostDate = DateTime.UtcNow;
-                up.PostId = r.PostId;
-                up.ParentPostId = Guid.Empty;
+                item.Tags = "0";
+                var postid = await servicePost.Insert(item);
+                var up = GetUserPostShareInfo(userpostinfo, postid);
                 var x = Mapper.Map<UserPost>(up);
                 this.uow.UserPostRepository.Insert(x);
                 await this.uow.SaveAsync();
-                return new UserPostInfoBo
-                {
-                    Post = r,
-                    UserPost = Mapper.Map<UserPostBo>(x)
-                };
+                return null;
             }
             catch (Exception e)
             {
                 throw ExceptionHandler(e);
             }
+        }
+
+        public async Task<UserPostBo> Insert(PostNeedCommentBo item, UserPostBo userpostinfo)
+        {
+            try
+            {
+                item.Tags = "0";
+                var postid = await servicePost.Insert(item);
+                var up = GetUserPostShareInfo(userpostinfo, postid);
+                var x = Mapper.Map<UserPost>(up);
+                this.uow.UserPostRepository.Insert(x);
+                await this.uow.SaveAsync();
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
+        }
+
+        public async Task<UserPostBo> Insert(PostPollBo item, UserPostBo userpostinfo)
+        {
+            try
+            {
+                item.Tags = "0";
+                var postid = await servicePost.Insert(item);
+                var up = GetUserPostShareInfo(userpostinfo, postid);
+                var x = Mapper.Map<UserPost>(up);
+                this.uow.UserPostRepository.Insert(x);
+                await this.uow.SaveAsync();
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
+        }
+        UserPostBo GetUserPostShareInfo(UserPostBo up, Guid postid)
+        {
+            up.IsPrimaryUser = Bo.Enums.Enums.YesNo.Yes;
+            up.PostDate = DateTime.UtcNow;
+            up.PostId = postid;
+            up.ParentPostId = Guid.Empty;
+            return up;
+        }
+        public Task<UserPostInfoBo> Insert(UserPostInfoBo item)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<List<UserPostInfoBo>> Read()

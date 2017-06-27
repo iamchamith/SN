@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlphaContext.cs" />
+    <Compile Include="Configurations.cs" />
     <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Migrations\201706070942379_init.cs" />
     <Compile Include="Migrations\201706070942379_init.Designer.cs">
@@ -128,6 +130,22 @@
     <Compile Include="Migrations\201706240234330_addTagDescriptionColom.Designer.cs">
       <DependentUpon>201706240234330_addTagDescriptionColom.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706260704194_addPostCommentAndPollTables.cs" />
+    <Compile Include="Migrations\201706260704194_addPostCommentAndPollTables.Designer.cs">
+      <DependentUpon>201706260704194_addPostCommentAndPollTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706260725553_postTableEnhancements.cs" />
+    <Compile Include="Migrations\201706260725553_postTableEnhancements.Designer.cs">
+      <DependentUpon>201706260725553_postTableEnhancements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706261113069_posttableenhancement2.cs" />
+    <Compile Include="Migrations\201706261113069_posttableenhancement2.Designer.cs">
+      <DependentUpon>201706261113069_posttableenhancement2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706270432565_posttableenhancement3.cs" />
+    <Compile Include="Migrations\201706270432565_posttableenhancement3.Designer.cs">
+      <DependentUpon>201706270432565_posttableenhancement3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -198,6 +216,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706240234330_addTagDescriptionColom.resx">
       <DependentUpon>201706240234330_addTagDescriptionColom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706260704194_addPostCommentAndPollTables.resx">
+      <DependentUpon>201706260704194_addPostCommentAndPollTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706260725553_postTableEnhancements.resx">
+      <DependentUpon>201706260725553_postTableEnhancements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706261113069_posttableenhancement2.resx">
+      <DependentUpon>201706261113069_posttableenhancement2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706270432565_posttableenhancement3.resx">
+      <DependentUpon>201706270432565_posttableenhancement3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

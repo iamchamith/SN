@@ -1,0 +1,13 @@
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\Alpha.Poco.dll.config
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\Alpha.Poco.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\Alpha.Poco.pdb
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\Alpha.Bo.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\EntityFramework.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\EntityFramework.SqlServer.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\Alpha.Bo.pdb
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\Alpha.Bo.dll.config
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\EntityFramework.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\bin\Release\EntityFramework.SqlServer.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\obj\Release\Alpha.Poco.csprojResolveAssemblyReference.cache
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\obj\Release\Alpha.Poco.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.Poco\obj\Release\Alpha.Poco.pdb

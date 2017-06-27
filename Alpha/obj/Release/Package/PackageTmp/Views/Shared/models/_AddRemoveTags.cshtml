@@ -1,0 +1,46 @@
+﻿@*Add remove tags*@
+<div class="modal fade bs-example-modal-sm" id="addremovetags-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" data-bind="text:modelcaption"></h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <b>Do you need <span data-bind="text:caption"></span></b>
+                </form>
+                <br />
+                <hr />
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Tag Info:</label>
+                    <div class="row">
+                        <div class="col-3">
+                            Tag Owner
+                        </div>
+                        <div class="col-9">
+                            <a data-bind="attr: { href: ProfileRederect}">
+                                <img data-bind="attr: { src: ProfileImage, alt: OwnerName, title: OwnerName }" class="img-thumbnail" />
+                            </a>
+                            <a data-bind="attr: { href: ProfileRederect}"> <b data-bind="text:OwnerName"></b></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            Tag Description
+                        </div>
+                        <div class="col-9">
+                            <p data-bind="text:Description"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click:action">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+

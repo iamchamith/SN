@@ -2,6 +2,7 @@
 using Alpha.Areas.UserAcccount.Models;
 using Alpha.Bo;
 using Alpha.Bo.Bo;
+using Alpha.Bo.Bo.posts;
 using Alpha.Models;
 using Alpha.Poco;
 using AutoMapper;
@@ -38,6 +39,14 @@ namespace Alpha.Utility
             Mapper.CreateMap<PostViewModel, PostBo>().ReverseMap();
             Mapper.CreateMap<Post, PostBo>().ReverseMap();
             Mapper.CreateMap<UserPostBo, UserPost>().ReverseMap();
+
+            Mapper.CreateMap<UserPostPollViewModel, PostPollBo>().ReverseMap();
+            Mapper.CreateMap<UserPostQuestionViewModel, PostQuestionBo>().ReverseMap();
+            Mapper.CreateMap<UserPostNeedCommentViewModel, PostNeedCommentBo>().ReverseMap();
+
+            Mapper.CreateMap<PostPoll, PostPollBo>().ReverseMap();
+            Mapper.CreateMap<PostQuestion, PostQuestionBo>().ReverseMap();
+            Mapper.CreateMap<PostNeedComment, PostNeedCommentBo>().ReverseMap();
         }
     }
 }

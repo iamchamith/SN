@@ -13,6 +13,9 @@ using Alpha.Service.Services;
 using Alpha.Service.Infrastructure;
 using AutoMapper;
 using Alpha.Bo;
+using Alpha.Bo.Bo;
+using Alpha.Bo.Bo.posts;
+using Alpha.Bo.Enums;
 
 namespace Alpha.Areas.Posts.Controllers
 {
@@ -24,20 +27,57 @@ namespace Alpha.Areas.Posts.Controllers
         {
             service = new UserPostService(new UnitOfWork());
         }
-        [Route("post"), HttpPost, Authorized, ValidateModel]
-        public async Task<IHttpActionResult> Create(PostViewModel item)
+        [Route("post/question"), HttpPost, Authorized, ValidateModel]
+        public async Task<IHttpActionResult> Create(UserPostQuestionViewModel item)
         {
             try
             {
-                var r = await this.service.Insert(new Bo.UserPostInfoBo
-                {
-                    Post = Mapper.Map<PostBo>(item),
-                    UserPost = new UserPostBo
+                var r = await this.service.Insert(Mapper.Map<PostQuestionBo>(item)
+                    , new UserPostBo
                     {
                         Anonymous = item.IsAnonymas ? Bo.Enums.Enums.YesNo.Yes : Bo.Enums.Enums.YesNo.No,
                         UserId = GCSession.UserGuid
-                    }
-                });
+                    });
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+        [Route("post/poll"), HttpPost, Authorized, ValidateModel]
+        public async Task<IHttpActionResult> Create(UserPostPollViewModel item)
+        {
+            try
+            {
+                item.Vs1Url = base.UploadImage(item.Vs1Data, Enums.Imagetype.postimages, Guid.NewGuid().ToString());
+                item.Vs2Url = base.UploadImage(item.Vs2Data, Enums.Imagetype.postimages, Guid.NewGuid().ToString());
+                var r = await this.service.Insert(Mapper.Map<PostPollBo>(item)
+                    , new UserPostBo
+                    {
+                        Anonymous = item.IsAnonymas ? Bo.Enums.Enums.YesNo.Yes : Bo.Enums.Enums.YesNo.No,
+                        UserId = GCSession.UserGuid
+                    });
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+        [Route("post/comment"), HttpPost, Authorized, ValidateModel]
+        public async Task<IHttpActionResult> Create(UserPostNeedCommentViewModel item)
+        {
+            try
+            {
+                item.ImageUrl = base.UploadImage(item.AskCommentImage, Enums.Imagetype.postimages, Guid.NewGuid().ToString());
+                var r = await this.service.Insert(Mapper.Map<PostNeedCommentBo>(item)
+                     , new UserPostBo
+                     {
+                         Anonymous = item.IsAnonymas ? Bo.Enums.Enums.YesNo.Yes : Bo.Enums.Enums.YesNo.No,
+                         UserId = GCSession.UserGuid
+                     });
                 return Ok();
             }
             catch (Exception e)
@@ -95,6 +135,11 @@ namespace Alpha.Areas.Posts.Controllers
         }
 
         public Task<IHttpActionResult> Update(PostViewModel item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IHttpActionResult> Create(PostViewModel item)
         {
             throw new NotImplementedException();
         }

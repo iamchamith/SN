@@ -1,0 +1,103 @@
+﻿<script type="text/x-kendo-template" id="posts-template">
+    #
+    var isthere = false;
+    for(var i=0;i< data.length;i++){
+    var post = data[i];
+    #
+    <div class="row">
+        <div class="col-md-12" style="float:left;">
+            <div style="float:left;padding-right:10px">
+                #if(!post.Anonymous){#
+                <a href="/useracccount/userprofile?userid=#=post.UserId#">
+                    <img width="50" height="50" src="#=post.ProfileImage#" style="border-radius:100px;"
+                         title="#=post.Name#">
+                </a>
+                #}else{#
+                <img width="50" height="50" src="/asserts/images/boy.png" style="border-radius:100px;"
+                     title="Anonymas">
+                #}#
+            </div>
+            <div padding-left:10px;">
+                <a href=""><b>#=post.Titile#</b></a>
+                <br>
+                <p class="tags">#=post.Description#</p>
+                <br>
+                <span class="tags"></span>
+            </div>
+        </div>
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-2">
+            <a href="\#." data-userPostId="#=post.UserPostId#" class="like">Like(150)</a>
+        </div>
+        <div class="col-md-2"><a href="\#." data-userPostId="#=post.UserPostId#" class="dislike">Dislike(2000)</a></div>
+        <div class="col-md-2"><a href="\#." data-userPostId="#=post.UserPostId#" class="viewpost">View(115)</a></div>
+    </div>
+    <hr style="margin-top:15px; margin-bottom:15px;">
+    #
+    var isthere = true;
+    }#
+    #if(!isthere){#
+    <p style="padding:15px; margin-bottom:0px; background:\#f5f5f5; border-radius:4px; text-align:center;">Posts do not exist.</p>
+    #}#
+</script>
+<div class="modal fade" id="showpostinfo-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:900px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel" data-bind="text:Titile">Title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12" style="float:left;">
+                                <div style="float:left;padding-right:10px">
+                                    <a href="/useracccount/userprofile?userid=">
+                                        <img width="50" height="50" src="" style="border-radius:100px;"
+                                             title="">
+                                    </a>
+
+                                </div>
+                                <div padding-left:10px;">
+                                    <a href=""><b>sdfgsdfgsdf</b></a>
+                                    <br>
+                                    <p class="tags">sdfgsdfgsdfgsdfgsdfgsdfgsdfgsdf</p>
+                                    <br>
+                                    <span class="tags"></span>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="\#." class="like">Like(150)</a>
+                            </div>
+                            <div class="col-md-4"><a href="\#." class="dislike">Dislike(2000)</a></div>
+                            <div class="col-md-4"><a href="\#." class="viewpost">Share as mine(115)</a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <form>
+                            <textarea class="form-control" placeholder="write someting"></textarea>
+                            <br />
+                            <input type="button" class="btn btn-primary pull-right" name="name" value="Done" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .tags {
+        font-size: 12px;
+        color: #777;
+    }
+</style>

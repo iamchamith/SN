@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Alpha.Poco;
+using System.Configuration;
+
 namespace Alpha.DbAccess
 {
     public interface IAlphaContext
@@ -18,10 +20,14 @@ namespace Alpha.DbAccess
         IDbSet<UserContact> Contacts { get; set; }
         IDbSet<Error> Errors { get; set; }
         IDbSet<UserRelation> UserRelations { get; set; }
+        IDbSet<PostNeedComment> PostNeedComments { get; set; }
+        IDbSet<PostPoll> PostPolls { get; set; }
+        IDbSet<PostQuestion> PostQuestion { get; set; }
     }
     public class AlphaContext : DbContext, IAlphaContext
     {
-        public AlphaContext() : base(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=Alpha;Integrated Security=True;Pooling=False")
+        
+        public AlphaContext() : base(Configurations.Conns)
         {
 
         }
@@ -34,6 +40,9 @@ namespace Alpha.DbAccess
         public IDbSet<UserContact> Contacts { get; set; }
         public IDbSet<Error> Errors { get; set; }
         public IDbSet<UserRelation> UserRelations { get; set; }
+        public IDbSet<PostNeedComment> PostNeedComments { get; set; }
+        public IDbSet<PostPoll> PostPolls { get; set; }
+        public IDbSet<PostQuestion> PostQuestion { get; set; }
     }
 }
 
