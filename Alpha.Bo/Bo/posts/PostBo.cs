@@ -9,7 +9,6 @@ namespace Alpha.Bo
         public Guid PostId { get; set; }
         public string Topic { get; set; }
         public string Tags { get; set; }
-        public bool IsAnonymas { get; set; }
         public Enums.Enums.PostType PostType { get; set; }
         public PostBo()
         {

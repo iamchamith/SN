@@ -6,22 +6,58 @@
     #
     <div class="row">
         <div class="col-md-12" style="float:left;">
-            <div style="float:left;padding-right:10px">
-                #if(!post.Anonymous){#
-                <a href="/useracccount/userprofile?userid=#=post.UserId#">
-                    <img width="50" height="50" src="#=post.ProfileImage#" style="border-radius:100px;"
-                         title="#=post.Name#">
-                </a>
+            <div class="row">
+                <div class="col-md-1">
+                    #if(!post.Anonymous){#
+                    <a href="/useracccount/userprofile?userid=#=post.UserId#">
+                        <img width="50" height="50" src="#=post.ProfileImage#" style="border-radius:100px;"
+                             title="#=post.Name#">
+                    </a>
+                    #}else{#
+                    <img width="50" height="50" src="/asserts/images/boy.png" style="border-radius:100px;"
+                         title="Anonymas">
+                    #}#
+                </div>
+                <div class="col-md-11" style="vertical-align:middle">
+                    <br />
+                    #if(!post.Anonymous){#
+                    <b> <a href="/useracccount/userprofile?userid=#=post.UserId#"> Chamith Sarana </a></b>
                 #}else{#
-                <img width="50" height="50" src="/asserts/images/boy.png" style="border-radius:100px;"
-                     title="Anonymas">
+                   <b>Anonymas</b>   
+                 #}#
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                #if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Question)){#
+                <div class="col-md-11">
+                    <b>#=post.Topic#</b>
+                    <br>
+                    <p class="tags">#=post.PostQuestion.Description#</p>
+                    <br>
+                </div>
+                #}else if(post.PostType=== @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
+                <b>#=post.Topic#</b><br />
+                <div class="col-md-5">
+                    <img src="/images/postimages/#=post.PostPoll.Vs1Url#" class="img-thumbnail" /><br />
+                    <b>This</b>
+                </div>
+                <div class="col-md-5">
+                    <img src="/images/postimages/#=post.PostPoll.Vs2Url#" class="img-thumbnail" /><br />
+                    <b>This</b>
+                </div>
+                <div class="col-md-1"></div>
+                #}else if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Comment)){#
+                <div class="col-md-11">
+                    <a href=""><b>#=post.Topic#</b></a>
+                    <br>
+                    <p class="tags">#=post.PostNeedComment.Description#</p>
+                    <br>
+                </div>
                 #}#
             </div>
             <div padding-left:10px;">
-                <a href=""><b>#=post.Titile#</b></a>
-                <br>
-                <p class="tags">#=post.Description#</p>
-                <br>
+
                 <span class="tags"></span>
             </div>
         </div>

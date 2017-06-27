@@ -37,6 +37,7 @@ namespace Alpha.Poco
         public bool IsValiedEmail { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
         public string Token { get; set; }
+        public string ProfileImage { get; set; }
         public User()
         {
             this.Gender = Gender.None;

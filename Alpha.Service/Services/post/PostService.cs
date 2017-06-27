@@ -25,30 +25,36 @@ namespace Alpha.Service.Services
             try
             {
                 var postid = Guid.NewGuid();
-                item.PostId = postid;
-                uow.PostRepository.Insert(Mapper.Map<Post>(item));
+                Bo.Enums.Enums.PostType posttype;
                 if (item is PostQuestionBo)
                 {
                     var poco = Mapper.Map<PostQuestion>(item);
                     poco.PostId = postid;
+                    posttype = Bo.Enums.Enums.PostType.Question;
                     uow.Context.PostQuestion.Add(poco);
                 }
                 else if (item is PostPollBo)
                 {
                     var poco = Mapper.Map<PostPoll>(item);
                     poco.PostId = postid;
+                    posttype = Bo.Enums.Enums.PostType.Poll;
                     uow.Context.PostPolls.Add(poco);
                 }
                 else if (item is PostNeedCommentBo)
                 {
                     var poco = Mapper.Map<PostNeedComment>(item);
                     poco.PostId = postid;
+                    posttype = Bo.Enums.Enums.PostType.Comment;
                     uow.Context.PostNeedComments.Add(poco);
                 }
                 else
                 {
+                    posttype = Bo.Enums.Enums.PostType.All;
                     throw new ArgumentException("invalied type");
                 }
+                item.PostId = postid;
+                item.PostType = posttype;
+                uow.PostRepository.Insert(Mapper.Map<Post>(item));
                 return postid;
             }
 

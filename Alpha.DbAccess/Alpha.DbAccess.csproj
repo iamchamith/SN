@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201706270432565_posttableenhancement3.Designer.cs">
       <DependentUpon>201706270432565_posttableenhancement3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706270913204_posttableenhancement4.cs" />
+    <Compile Include="Migrations\201706270913204_posttableenhancement4.Designer.cs">
+      <DependentUpon>201706270913204_posttableenhancement4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -228,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706270432565_posttableenhancement3.resx">
       <DependentUpon>201706270432565_posttableenhancement3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706270913204_posttableenhancement4.resx">
+      <DependentUpon>201706270913204_posttableenhancement4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

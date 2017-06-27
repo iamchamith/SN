@@ -12,6 +12,8 @@ using Alpha.Bo.Exceptions;
 using Dapper;
 using Alpha.DbAccess;
 using Alpha.Bo.Bo.posts;
+using System.Data.Common;
+using System.Data;
 
 namespace Alpha.Service.Services
 {
@@ -151,22 +153,53 @@ namespace Alpha.Service.Services
             try
             {
                 var sql = new StringBuilder();
-                sql.Append($@"select userPost.Id as [UserPostId],userPost.PostDate,userPost.Anonymous,
-                    userPost.ParentPostId,post.PostId,post.Tags,post.Titile,post.Description,userPost.UserId,
-					[user].Email,[user].Name
-                    from UserPost as userPost
-                    Inner join  Post as post on userPost.PostId = post.PostId
-					inner join [User] as [user] on [user].UserId = userPost.UserId 
-
-                    where userPost.UserId = '{request.UserId}'
-                    {(!string.IsNullOrEmpty(request.Topic) ? " and post.Titile like '" + request.Topic + "%'" : "")}
-                    order by userPost.PostDate {(request.IsDateDesc ? "Desc" : "Asc")}");
+                var where = new StringBuilder();
+                where.Append(" where ");
+                var isWhere = false;
+                if (!string.IsNullOrEmpty(request.Topic))
+                {
+                    where.Append($"	 Post.Topic Like '{request.Topic}%'   and   ");
+                    isWhere = true;
+                }
+                if (request.PostSearchType != Bo.Enums.Enums.PostSearchType.Feed)
+                {
+                    where.Append($" UserPost.UserId Like '{request.UserId}'   and   ");
+                    isWhere = true;
+                }
+                var _where = string.Empty;
+                if (isWhere)
+                {
+                    _where = where.ToString().Substring(0, where.ToString().Length - 8);
+                }
+                sql.Append($@"select UserPost.Id as [userPostId],UserPost.PostId,[User].Name,
+                    [User].Email,[User].UserId,
+                    UserPost.Anonymous,UserPost.PostDate,Post.PostType,Post.Topic,post.Tags from [User]
+                    inner join UserPost on [User].UserId = UserPost.UserId
+                    inner join Post on Post.PostId = UserPost.PostId {_where}
+                    order by UserPost.PostDate {(request.IsDateDesc ? "Desc" : "Asc")}
+                    OFFSET @Skip ROWS 
+                    FETCH NEXT @Take ROWS ONLY;");
                 using (var cn = DatabaseInfo.Connection)
                 {
-                    var r = cn.Query<UserPostSearchResponse>(sql.ToString()).ToList();
+                    var r = cn.Query<UserPostSearchResponse>(sql.ToString(), new { Skip = request.Skip, Take = request.Take }).ToList();
+                    var postidlist = r.Select(p => p.PostId).ToList();
+                    var askQuestions = await SearchAskQuestion(postidlist, cn);
+                    var askPoll = await SearchAskPoll(postidlist, cn);
+                    var askNeedComment = await SearchAskNeedComment(postidlist, cn);
                     foreach (var item in r)
                     {
-                        item.ProfileImage = $"https://www.gravatar.com/avatar/{Alpha.Bo.Utility.Helper.MD5Hash(item.Email)}";
+                        if (item.PostType == Bo.Enums.Enums.PostType.Question)
+                        {
+                            item.PostQuestion = Mapper.Map<PostQuestionBo>(askQuestions.FirstOrDefault(p => p.PostId == item.PostId) ?? new PostQuestion());
+                        }
+                        else if (item.PostType == Bo.Enums.Enums.PostType.Poll)
+                        {
+                            item.PostPoll = Mapper.Map<PostPollBo>(askPoll.FirstOrDefault(p => p.PostId == item.PostId) ?? new PostPoll());
+                        }
+                        else
+                        {
+                            item.PostNeedComment = Mapper.Map<PostNeedCommentBo>(askNeedComment.FirstOrDefault(p => p.PostId == item.PostId) ?? new PostNeedComment());
+                        }
                     }
                     return r;
                 }
@@ -174,6 +207,44 @@ namespace Alpha.Service.Services
             catch (Exception e)
             {
                 throw ExceptionHandler(e);
+            }
+        }
+
+        async Task<List<PostQuestion>> SearchAskQuestion(List<Guid> postId, IDbConnection cn)
+        {
+            try
+            {
+                return cn.Query<PostQuestion>(@"select  PostId,Topic,Description from PostQuestions where PostId in @PostId", new { PostId = postId }).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<PostPoll>> SearchAskPoll(List<Guid> postId, IDbConnection cn)
+        {
+            try
+            {
+                return cn.Query<PostPoll>(@"select  PostId,Topic,Vs1Url,Vs2Url from PostPolls where PostId in @PostId", new { PostId = postId }).ToList();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<PostNeedComment>> SearchAskNeedComment(List<Guid> postId, IDbConnection cn)
+        {
+            try
+            {
+                return cn.Query<PostNeedComment>(@"select PostId,Topic,Description,ImageUrl from PostNeedComments where PostId in @PostId", new { PostId = postId }).ToList();
+
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

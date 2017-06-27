@@ -23,6 +23,5 @@ namespace Alpha.Poco
         public string Tags { get; set; }
         [Required]
         public string Topic { get; set; }
-        public bool IsAnonymas { get; set; }
     }
 }
