@@ -22,7 +22,6 @@ namespace Alpha.Controllers.Api
         [NonAction]
         protected UserPreviewPageViewModel GetPreviewObject(UserBo item, bool ismine = true)
         {
-
             var result = new UserPreviewPageViewModel();
             result.Bio = item.Bio;
             result.Dob = item.Dob;
@@ -32,6 +31,7 @@ namespace Alpha.Controllers.Api
             result.Gender = ((Enums.Gender)item.Gender).ToString().Replace('_', ' ');
             result.ProfileImage = (ismine) ? GCSession.ProfileImage :
                 $"https://www.gravatar.com/avatar/{Alpha.Bo.Utility.Helper.MD5Hash(item.Email)}";
+            result.IsMine = item.UserId == GCSession.UserGuid;
             return result;
         }
 

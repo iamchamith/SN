@@ -28,7 +28,7 @@
         constructor() { }
         public logout() {
             let ajax = new Alpha.Utility.Ajax();
-            ajax.post('/api/v1/auth/logout', null, null, () => {
+            ajax.post('/api/v1/auth/logout', null, null,'', () => {
                 window.location.href = "/useracccount/authentication";
             });
         }
@@ -56,7 +56,7 @@
         }
         public addRemoveTags(tagId: number, tagName: string, callback: any) {
             let ajax = new Alpha.Utility.Ajax();
-            ajax.get(`/api/v1/tag/read/${tagId}`, null, null, (e) => {
+            ajax.get(`/api/v1/tag/read/${tagId}`, null, null,'', (e) => {
                 var viewModel = kendo.observable({
                     modelcaption: (e.IsTagThere) ? 'Remove Tag' : 'Add Tag',
                     caption: ((e.IsTagThere) ? 'remove ' : 'add ') + tagName,
@@ -68,7 +68,7 @@
                     ProfileImage: e.OwnerProfileImage,
                     OwnerName: e.OwnerName,
                     action: () => {
-                        ajax.post(viewModel.get('Url') + tagId, null, null, () => {
+                        ajax.post(viewModel.get('Url') + tagId, null, null,'', () => {
                             this.pop.show(viewModel.get('IsTagThere') ? 'Tag removed' : 'Tag added', 'success');
                             $('#addremovetags-model').modal('hide');
                             callback();
@@ -218,8 +218,7 @@
                 }
 
             }
-            ajax.post('/api/v1/criends/relationship', searchRequest, null, () => {
-                this.pop.show(' saved', 'success');
+            ajax.post('/api/v1/criends/relationship', searchRequest, null,'saved', () => {
                 changeText(el);
             });
         }

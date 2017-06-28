@@ -31,7 +31,7 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="recipient-name" class="control-label">Topic:</label>
-                                            <input type="text" class="form-control" data-bind="value:Titile" placeholder="Type and share anything">
+                                            <input type="text" class="form-control" data-bind="value:Topic" placeholder="Type and share anything">
                                         </div>
                                         <div class="form-group">
                                             <label for="message-text" class="control-label">Someting more:</label>
@@ -47,6 +47,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                            <input type="button" value="Ask" data-bind="click:askquestion" class="btn btn-primary pull-right"/>
                                         </div>
                                     </form>
                                 </div>
@@ -54,17 +55,19 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="recipient-name" class="control-label">Topic:</label>
-                                            <input type="text" class="form-control" data-bind="value:Titile" placeholder="Type and share anything">
+                                            <input type="text" class="form-control" data-bind="value:Topic" placeholder="Type and share anything">
                                         </div>
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <img src="~/Asserts/images/dragdrop.png" alt="..." class="img-thumbnail">
+                                                <img data-bind="attr: { src: Vs1Data}" class="img-thumbnail">
+                                                <input type="file" name="name" value=""  id="pollImgVs1" />
                                             </div>
                                             <div class="col-md-2 text-center">
                                                 <b>Vs</b>
                                             </div>
                                             <div class="col-md-5">
-                                                <img src="~/Asserts/images/dragdrop.png" alt="..." class="img-thumbnail">
+                                                <img data-bind="attr: { src: Vs2Data}" class="img-thumbnail">
+                                                <input type="file" name="name" value="" id="pollImgVs2"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -77,6 +80,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                            <input type="button" value="Ask" data-bind="click:askpoll" class="btn btn-primary pull-right" />
                                         </div>
                                     </form>
                                 </div>
@@ -84,16 +88,15 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="recipient-name" class="control-label">Topic:</label>
-                                            <input type="text" class="form-control" data-bind="value:Titile" placeholder="Type and share anything">
+                                            <input type="text" class="form-control" data-bind="value:Topic" placeholder="Type and share anything">
                                         </div>
                                         <div class="form-group">
                                             <label for="message-text" class="control-label">Someting more:</label>
                                             <textarea class="form-control" data-bind="value:Description" placeholder="Do you have any more?"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input name="files"
-                                                   type="file"
-                                                   data-role="upload">
+                                            <img data-bind="attr: { src: AskCommentImage}" class="img-thumbnail">
+                                            <input name="files" type="file" id="askcommentImg">
                                         </div>
                                         <div class="form-group">
                                             <select data-role="multiselect"
@@ -105,6 +108,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                            <input type="button" value="Ask" data-bind="click:askcomment" class="btn btn-primary pull-right" />
                                         </div>
                                     </form>
                                 </div>
@@ -117,9 +121,6 @@
                         <p>Some content in menu 1.</p>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bind="click:ask">Share</button>
             </div>
         </div>
     </div>

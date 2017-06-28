@@ -235,6 +235,8 @@
     <Compile Include="Areas\Posts\Models\type\UserPostQuestionViewModel.cs" />
     <Compile Include="Areas\Posts\PostsAreaRegistration.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\api\AuthenticationApiController.cs" />
+    <Compile Include="Areas\UserAcccount\Controllers\api\UserMessagesApiController.cs" />
+    <Compile Include="Areas\UserAcccount\Controllers\api\UserPreferencesApiController.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\api\UserProfileController.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\UserProfileController.cs" />
     <Compile Include="Areas\UserAcccount\Models\criends\CriendsRelationsViewModel.cs" />
@@ -243,18 +245,20 @@
     <Compile Include="Areas\UserAcccount\Models\criends\SearchCriendsRequestViewModel.cs" />
     <Compile Include="Areas\UserAcccount\Models\profile\CriendProfilePreviewViewModel.cs" />
     <Compile Include="Areas\UserAcccount\Models\tags\TagInfoViewModel.cs" />
+    <Compile Include="Areas\UserAcccount\Models\user\UserMessageViewModel.cs" />
+    <Compile Include="Areas\UserAcccount\Models\user\UserPreferencesViewModel.cs" />
     <Compile Include="Controllers\Api\IApiService.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\api\ConnectCriendsController.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\api\SettingsApiController.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\api\TagsApiController.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\AuthenticationController.cs" />
     <Compile Include="Areas\UserAcccount\Controllers\SettingsController.cs" />
-    <Compile Include="Areas\UserAcccount\Models\ChangePasswordViewModel.cs" />
-    <Compile Include="Areas\UserAcccount\Models\LoginViewModel.cs" />
-    <Compile Include="Areas\UserAcccount\Models\RegisterViewModel.cs" />
+    <Compile Include="Areas\UserAcccount\Models\user\ChangePasswordViewModel.cs" />
+    <Compile Include="Areas\UserAcccount\Models\user\LoginViewModel.cs" />
+    <Compile Include="Areas\UserAcccount\Models\user\RegisterViewModel.cs" />
     <Compile Include="Areas\UserAcccount\Models\tags\TagViewModel.cs" />
-    <Compile Include="Areas\UserAcccount\Models\UserBasicViewModel.cs" />
-    <Compile Include="Areas\UserAcccount\Models\UserContactsViewModel.cs" />
+    <Compile Include="Areas\UserAcccount\Models\user\UserBasicViewModel.cs" />
+    <Compile Include="Areas\UserAcccount\Models\user\UserContactsViewModel.cs" />
     <Compile Include="Areas\UserAcccount\Models\tags\UserTagsViewModel.cs" />
     <Compile Include="Areas\UserAcccount\UserAcccountAreaRegistration.cs" />
     <Compile Include="Areas\Wall\WallAreaRegistration.cs" />
@@ -319,6 +323,8 @@
     <Content Include="Asserts\ts\user\profile\templatesx\askAndAnswers.template.html" />
     <Content Include="Asserts\ts\user\profile\templatesx\criends.template.html" />
     <Content Include="Asserts\ts\user\profile\templatesx\preview.template.html" />
+    <Content Include="Asserts\ts\user\settings\templates\message.template.html" />
+    <Content Include="Asserts\ts\user\settings\templates\userpreferences.template.html" />
     <Content Include="Asserts\ts\user\settings\templates\changeprofileimage.template.html" />
     <Content Include="Asserts\ts\user\settings\templates\basic.template.html" />
     <Content Include="Asserts\ts\user\settings\templates\changepassword.template.html" />
@@ -396,6 +402,7 @@
     <Content Include="Areas\UserAcccount\Views\UserProfile\Index.cshtml" />
     <Content Include="Areas\Posts\Views\Post\index.cshtml" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <Content Include="Asserts\resources\emailtemplate.html" />
     <None Include="Properties\PublishProfiles\criends - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -436,6 +443,7 @@
     <Content Include="Views\Shared\models\_AddRemoveTags.cshtml" />
     <Content Include="Views\Shared\models\_AskQuestions.cshtml" />
     <Content Include="Views\Shared\models\_HelpModel.cshtml" />
+    <Content Include="Views\Shared\_GoogleTranslateCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Posts\Views\Shared\" />

@@ -42,8 +42,8 @@
             });
         }
         private bindViewModel() {
-            this.ajax.get('/api/v1/user/settings/looksup', null, null, (e1) => {
-                this.ajax.get('/api/v1/user/settings/basic', null, null, (e2: user) => {
+            this.ajax.get('/api/v1/user/settings/looksup', null, null, "", (e1) => {
+                this.ajax.get('/api/v1/user/settings/basic', null, null, "", (e2: user) => {
                     var viewModel = kendo.observable({
                         Email: e2.Email,
                         Bio: e2.Bio,
@@ -59,10 +59,10 @@
                         Genders: e1.Genders,
                         EmailValidationToken: '',
                         IsInvaliedEmail: !e2.IsValiedEmail,
+                        Employeement: e2.Employeement,
                         save: (el) => {
                             if ($("#basic").data("kendoValidator").validate()) {
-                                this.ajax.post('/api/v1/user/settings/basic', viewModel, el, (e) => {
-                                    this.pop.show('saved', 'success');
+                                this.ajax.post('/api/v1/user/settings/basic', viewModel, el, "Saved", (e) => {
                                 });
                             }
                         },
@@ -72,15 +72,14 @@
                         },
                         sendEmailValidationToken: (el) => {
                             this.pop.show(' please wait for email', 'info');
-                            this.ajax.post('/api/v1/user/settings/requestvalidateemailtoken', null, el, () => {
-                                this.pop.show(' Token sent success.please insert the token', 'success');
-                                $('.nav-tabs li:eq(1) a').tab('show');
-                            });
+                            this.ajax.post('/api/v1/user/settings/requestvalidateemailtoken', null, el,
+                                'Token sent success.please insert the token', () => {
+                                    $('.nav-tabs li:eq(1) a').tab('show');
+                                });
                         },
                         validateEmailToken: (el) => {
                             this.ajax.get('/api/v1/user/settings/validateemailvalidationtoken?token=' + viewModel.get('EmailValidationToken'),
-                                null, el, () => {
-                                    this.pop.show('valied email', 'success');
+                                null, el, 'validate email', () => {
                                     window.location.reload(true);
                                 });
                         }
@@ -103,7 +102,7 @@
             this.cm.bindFunctions();
         }
         private search(q: string) {
-            this.ajax.get(`/api/v1/tag/search?q=${q}`, null, null, (e) => {
+            this.ajax.get(`/api/v1/tag/search?q=${q}`, null, null, '', (e) => {
                 let $addTag = $('#addTag');
                 let $createandaddTag = $('#crateAndAddTag');
                 let $tagDescription = $('#tagDescription');
@@ -141,7 +140,7 @@
             $("#tags").data('kendoComboBox').value('');
         }
         private renderUserTags() {
-            this.ajax.get('/api/v1/tag/read', null, null, (r) => {
+            this.ajax.get('/api/v1/tag/read', null, null, '', (r) => {
                 var d = [];
                 d.push(r);
                 var templateContent = $("#userTags-template").html();
@@ -166,8 +165,7 @@
             });
             $('#addTag').off('click').on('click', (el) => {
                 var tagid = $("#tags").data('kendoComboBox').value();
-                this.ajax.post('/api/v1/tag/add/' + tagid, null, el, () => {
-                    this.pop.show('saved', 'success');
+                this.ajax.post('/api/v1/tag/add/' + tagid, null, el, 'Saved', () => {
                     this.reset();
                     this.renderUserTags();
                 });
@@ -178,8 +176,7 @@
                     {
                         TagName: tagid,
                         Description: $('#tagDescription').val()
-                    }, el, () => {
-                        this.pop.show('saved', 'success');
+                    }, el, 'Saved', () => {
                         this.reset();
                         this.renderUserTags();
                     });
@@ -234,11 +231,10 @@
                 ConfirmNewPassword: '',
                 saved: (el) => {
                     if ($("#changepassword").data("kendoValidator").validate()) {
-                        this.ajax.post('/api/v1/user/settings/ChangePassword', viewModel, el, (e) => {
+                        this.ajax.post('/api/v1/user/settings/ChangePassword', viewModel, el, 'Saved', (e) => {
                             viewModel.set('CurrentPassword', '');
                             viewModel.set('NewPassword', '');
                             viewModel.set('ConfirmNewPassword', '');
-                            this.pop.show('saved', 'success');
                         });
                     }
                 }
@@ -255,7 +251,7 @@
         }
         private renderUserTags() {
             $("#usertags_preview").html(Alpha.Utility.comman.loading);
-            this.ajax.get('/api/v1/tag/read', null, null, (r) => {
+            this.ajax.get('/api/v1/tag/read', null, null, '', (r) => {
                 var d = [];
                 d.push(r);
                 var templateContent = $("#userTags-template").html();
@@ -272,7 +268,7 @@
         }
         private renderUserContacts() {
             $("#contactinfopreview").html(Alpha.Utility.comman.loading);
-            this.ajax.get('/api/v1/user/settings/contactdetailssummery', null, null, (r) => {
+            this.ajax.get('/api/v1/user/settings/contactdetailssummery', null, null, '', (r) => {
                 var d = [];
                 d.push(r);
                 var templateContent = $("#userContact-template").html();
@@ -282,7 +278,7 @@
             });
         }
         private bindViewModel() {
-            this.ajax.get('/api/v1/user/settings/priviewpage', null, null, (e) => {
+            this.ajax.get('/api/v1/user/settings/priviewpage', null, null, '', (e) => {
                 var viewModel = kendo.observable({
                     Followings: e.Followings,
                     Followers: e.Followings,
@@ -296,6 +292,7 @@
                     Dob: kendo.toString(new Date(e.Dob), 'd'),
                     Bio: e.Bio,
                     ProfileImage: e.ProfileImage,
+                    IsMine: !e.IsMine
                 });
                 kendo.bind($("#priviewpage"), viewModel);
             });
@@ -316,7 +313,7 @@
         }
         private renderContactTemplate() {
             $("#contactinfo").html(Alpha.Utility.comman.loading);
-            this.ajax.get('/api/v1/user/settings/contactdetailssummery', null, null, (r) => {
+            this.ajax.get('/api/v1/user/settings/contactdetailssummery', null, null, '', (r) => {
                 var d = [];
                 d.push(r);
                 var templateContent = $("#userContact-template").html();
@@ -326,7 +323,7 @@
             });
         }
         private bindViewModel() {
-            this.ajax.get('/api/v1/user/settings/usercontactslooksup', null, null, (e) => {
+            this.ajax.get('/api/v1/user/settings/usercontactslooksup', null, null, '', (e) => {
                 var viewModel = kendo.observable({
                     Contacts: e,
                     SocialNetwork: -1,
@@ -343,7 +340,7 @@
                             return;
                         }
                         viewModel.set('IsSaveVisible', true);
-                        this.ajax.get('/api/v1/user/settings/contactdetails/' + viewModel.get('SocialNetwork'), null, null, (e2: userContacts) => {
+                        this.ajax.get('/api/v1/user/settings/contactdetails/' + viewModel.get('SocialNetwork'), null, null, '', (e2: userContacts) => {
                             if (e2.Key == null) {
                                 viewModel.set("Key", arg.sender._prev);
                                 // there is no recode
@@ -356,15 +353,13 @@
                         });
                     },
                     add: (e) => {
-                        this.ajax.post('/api/v1/user/settings/contactdetails', viewModel, e, (e2: userContacts) => {
-                            this.pop.show('saved', 'success');
+                        this.ajax.post('/api/v1/user/settings/contactdetails', viewModel, e, 'saved', (e2: userContacts) => {
                             this.renderContactTemplate();
                             $('#contacts').animateCss(Alpha.Utility.comman.animateTypeAfterSave);
                         });
                     },
                     remove: (e) => {
-                        this.ajax.post('/api/v1/user/settings/contactdetails/' + viewModel.get('SocialNetwork'), null, e, (e2: userContacts) => {
-                            this.pop.show('removed', 'success');
+                        this.ajax.post('/api/v1/user/settings/contactdetails/' + viewModel.get('SocialNetwork'), null, e, 'removed', (e2: userContacts) => {
                             this.renderContactTemplate();
                             $('#contacts').animateCss(Alpha.Utility.comman.animateTypeAfterSave);
                         });
@@ -374,7 +369,7 @@
             })
         }
     }
-    export class changeProfileImage {
+    export class changeProfileImage implements settings {
         constructor() { }
         public execute() {
             this.initControllers();
@@ -402,5 +397,38 @@
                 });
             })
         }
+    }
+
+    export class preferences implements settings {
+        private ajax = new Alpha.Utility.Ajax();
+        execute() {
+            this.bindViewModel();
+        }
+        private bindViewModel() {
+            this.ajax.get('/api/v1/user/preferences', null, null, '', (e) => {
+                var viewModel = kendo.observable({
+                    SendNotificationEmail: e.SendNotificationEmail,
+                    ShowAnonymas: e.ShowAnonymas,
+                    ShowMyAsk: e.ShowMyAsk,
+                    ShowMyContacts: e.ShowMyContacts,
+                    ShowMyAnswers: e.ShowMyAnswers,
+                    save: (el) => {
+                        this.ajax.post('/api/v1/user/preferences', viewModel, el, 'Saved', () => {
+                            //empty
+                        });
+                    }
+                });
+                kendo.bind($("#preferences"), viewModel);
+            });
+        }
+
+        constructor() { }
+    }
+
+    export class messages implements settings {
+        execute() {
+            throw new Error("Method not implemented.");
+        }
+        constructor() { }
     }
 }

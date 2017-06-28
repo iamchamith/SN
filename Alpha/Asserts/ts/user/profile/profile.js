@@ -86,7 +86,7 @@ var Alpha;
                 };
                 previewPage.prototype.bindViewModel = function () {
                     var _this = this;
-                    this.ajax.get("/api/v1/userprofile/preview?guid=" + this.userid, null, null, function (re) {
+                    this.ajax.get("/api/v1/userprofile/preview?guid=" + this.userid, null, null, '', function (re) {
                         var e = re.BasicInfo;
                         var viewModel = kendo.observable({
                             Followings: e.Followings,
@@ -101,6 +101,7 @@ var Alpha;
                             Dob: kendo.toString(new Date(e.Dob), 'd'),
                             Bio: e.Bio,
                             ProfileImage: e.ProfileImage,
+                            IsMine: !e.IsMine
                         });
                         kendo.bind($("#priviewpage"), viewModel);
                         _this.renderUserTags(re.UserTags);

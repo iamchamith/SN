@@ -54,11 +54,15 @@
     <Compile Include="Bo\criends\SearchCriendsResultBo.cs" />
     <Compile Include="Bo\DropDownBo.cs" />
     <Compile Include="Bo\IBo.cs" />
+    <Compile Include="Bo\PaginBo.cs" />
     <Compile Include="Bo\posts\IPost.cs" />
     <Compile Include="Bo\posts\PostBo.cs" />
     <Compile Include="Bo\posts\type\UserPostNeedCommentBo.cs" />
     <Compile Include="Bo\posts\type\UserPostPollBo.cs" />
     <Compile Include="Bo\posts\type\UserPostQuestionBo.cs" />
+    <Compile Include="Bo\settings\UserMessageBo.cs" />
+    <Compile Include="Bo\settings\UserMessageSendRequestBo.cs" />
+    <Compile Include="Bo\settings\UserPreferencesBo.cs" />
     <Compile Include="Bo\tags\TagBo.cs" />
     <Compile Include="Bo\settings\UserBo.cs" />
     <Compile Include="Bo\auth\UserLoginBo.cs" />

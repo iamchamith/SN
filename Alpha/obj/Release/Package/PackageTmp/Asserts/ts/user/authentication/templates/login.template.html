@@ -10,14 +10,15 @@
     <div class="form-group">
         <label>Login with</label>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <img src="/Asserts/images/social/Facebook.png" />
-                <img src="/Asserts/images/social/Google_Plus.png" />
+            </div>
+            <div class="col-md-2">
+                <div class="g-signin2" data-onsuccess="onSignIn" id="div_tag_id"></div>
             </div>
             <div class="col-md-3">
-               <b> OR </b>
             </div>
-            <div class="col-md-6"></div>
+            <div class="col-md-5"><b> OR </b></div>
         </div>
     </div>
     <hr style="margin-top:15px; margin-bottom:15px;">
@@ -105,3 +106,28 @@
         </div>
     </div>
 </div>
+ <script>
+       $(document).ready(() => {
+        gapi.signin2.render("div_tag_id", {
+            "scope": "profile email openid",
+            "width": 200,
+            "height": 40,
+            "longtitle": true,
+            "theme": "dark",
+            "onsuccess": function (googleUser) {
+                onSignIn(googleUser);
+            },
+            "onfailure": function (e) {
+                console.warn("Google Sign-In failure: " + e.error);
+            }
+        });
+        function onSignIn(googleUser) {
+            alert(profile.getId());
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+    });
+ </script>

@@ -39,3 +39,7 @@ D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAc
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.csproj.GenerateResource.Cache
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.dll
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.pdb
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.posttableenhancement2.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.posttableenhancement3.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.posttableenhancement4.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addProfileImageUrlToUsertable.resources

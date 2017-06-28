@@ -1,0 +1,48 @@
+﻿<div id="preferences">
+    <div class="header-title-bg">
+        User Preferences
+        <span class="pull-right help"
+              data-url="/asserts/ts/help/settings/help.basic.template.html"
+              data-caption="User Preferences | Help"
+              title="Help">?</span>
+    </div>
+    <br><br><br>
+    <div class="row" style="padding-left:10px">
+        <ul class="fieldlist">
+            <li>
+                <input type="checkbox" id="eq1" class="k-checkbox" checked="checked" data-bind="checked: SendNotificationEmail">
+                <label class="k-checkbox-label" for="eq1">Send Notification Email</label>
+            </li>
+            <li>
+                <input type="checkbox" class="k-checkbox" id="eq2" checked="checked" data-bind="checked: ShowAnonymas" />
+                <label class="k-checkbox-label" for="eq2">Show Anonymas Message</label>
+            </li>
+            <li>
+                <input type="checkbox" class="k-checkbox" data-bind="checked: ShowMyAsk"  id="eq3" />
+                <label class="k-checkbox-label" for="eq3">Show My Ask</label>
+            </li>
+            <li>
+                <input type="checkbox" class="k-checkbox" data-bind="checked: ShowMyContacts"   id="eq4"/>
+                <label class="k-checkbox-label" for="eq4">Show My Contacts</label>
+            </li>
+            <li>
+                <input type="checkbox" class="k-checkbox" data-bind="checked: ShowMyAnswers"   id="eq5"/>
+                <label class="k-checkbox-label" for="eq5">Show My Answers</label>
+            </li>
+            <li>
+                <input type="button" name="name" value="Save" data-bind="click:save" class="btn btn-primary pull-left" />
+            </li>
+        </ul>
+    </div>
+</div>
+<style>
+    .fieldlist {
+        margin: 0 0 -1em;
+        padding: 0;
+    }
+
+        .fieldlist li {
+            list-style: none;
+            padding-bottom: 1em;
+        }
+</style>

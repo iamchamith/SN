@@ -251,14 +251,20 @@ namespace Alpha.Bo.Enums
         }
         public enum PostType
         {
-            Question, Poll, Comment,All
+            Question, Poll, Comment, All
         }
         public enum Imagetype
         {
             postimages, profileimages
         }
-        public enum PostSearchType {
-            Ask,Question,Feed
+        public enum PostSearchType
+        {
+            Ask, Question, Feed
+        }
+        public enum UserPreferencesInfo
+        {
+            SendNotificationEmail, ShowAnonymas, ShowMyAsk, ShowMyContacts,
+            ShowMyAnswers
         }
     }
 }

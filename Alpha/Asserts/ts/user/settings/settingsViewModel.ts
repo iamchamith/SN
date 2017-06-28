@@ -13,6 +13,7 @@
         Language: number;
         MaritalStatus: number;
         ProfileImage: string;
+        Employeement: string;
     }
 
     export interface register {

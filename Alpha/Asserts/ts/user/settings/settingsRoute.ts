@@ -18,57 +18,71 @@
         };
     })(jQuery, document);
     $(document).ready(() => {
-        let routeurl: Alpha.User.Settings.settings;
+        let obj: Alpha.User.Settings.settings;
         var router = new kendo.Router({});
         router.route("/", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/preview.template.html", () => {
                 $('#leftmenu').animateCss(Alpha.Utility.comman.animateTypeLeftMenu);
                 $('#priviewpage').animateCss(Alpha.Utility.comman.animateType);
-                routeurl = new Alpha.User.Settings.previewPage();
-                routeurl.execute();
+                obj = new Alpha.User.Settings.previewPage();
+                obj.execute();
                 $('#priviewpage').animateCss('pulse');
             });
         });
         router.route("/preview", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/preview.template.html", () => {
-                routeurl = new Alpha.User.Settings.previewPage();
-                routeurl.execute();
+                obj = new Alpha.User.Settings.previewPage();
+                obj.execute();
                 $('#priviewpage').animateCss('pulse');
             });
         });
         router.route("/basic", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/basic.template.html", () => {
-                routeurl = new Alpha.User.Settings.basic();
-                routeurl.execute();
+                obj = new Alpha.User.Settings.basic();
+                obj.execute();
                 $('#basic').animateCss(Alpha.Utility.comman.animateType);
             });
         });
         router.route("/contacts", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/userContacts.template.html", () => {
-                routeurl = new Alpha.User.Settings.userContact();
-                routeurl.execute();
+                obj = new Alpha.User.Settings.userContact();
+                obj.execute();
                 $('#contacts').animateCss(Alpha.Utility.comman.animateType);
             });
         });
         router.route("/tags", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/tags.template.html", () => {
-                routeurl = new Alpha.User.Settings.tags();
-                routeurl.execute();
+                obj = new Alpha.User.Settings.tags();
+                obj.execute();
                 $('#usertags').animateCss(Alpha.Utility.comman.animateType);
             });
         });
         router.route("/changepassword", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/changepassword.template.html", () => {
-                routeurl = new Alpha.User.Settings.changePassword();
-                routeurl.execute();
+                obj = new Alpha.User.Settings.changePassword();
+                obj.execute();
                 $('#changepassword').animateCss(Alpha.Utility.comman.animateType);
             });
         });
         router.route("/image", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/changeprofileimage.template.html", () => {
-                routeurl = new Alpha.User.Settings.changeProfileImage();
-                routeurl.execute();
+                obj = new Alpha.User.Settings.changeProfileImage();
+                obj.execute();
                 $('#profileImage').animateCss(Alpha.Utility.comman.animateType);
+            });
+        });
+        router.route("/preferences", function () {
+            templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/userpreferences.template.html", () => {
+                obj = new Alpha.User.Settings.preferences();
+                obj.execute();
+                $('#preferences').animateCss(Alpha.Utility.comman.animateType);
+            });
+        });
+        router.route("/sendmessage", function () {
+            templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/message.template.html", () => {
+                obj = new Alpha.User.Settings.messages();
+                obj.execute();
+                $('#messaging').animateCss(Alpha.Utility.comman.animateType);
             });
         });
         router.start();

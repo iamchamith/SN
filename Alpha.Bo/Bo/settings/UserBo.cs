@@ -19,5 +19,7 @@ namespace Alpha.Bo
         public int Language { get; set; }
         public int MaritalStatus { get; set; }
         public bool IsValiedEmail { get; set; }
+        public string ProfileImage { get; set; }
+        public string Employeement { get; set; }
     }
 }

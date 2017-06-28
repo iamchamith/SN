@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-signin-client_id" content="730509079120-1pdqhn0uapkjls148doriq4a0k4rtisc.apps.googleusercontent.com">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Criends</title>
     <link href="~/Asserts/images/c.ico" rel="shortcut icon" type="image/x-icon" />
@@ -46,9 +47,10 @@
     @{Html.RenderPartial("models/_HelpModel");}
     <footer style="background:#c5c5c5; margin-top:50px;">
         <div class="container" style="padding-top:20px; padding-bottom:10px;">
-            <p style="color:#555555;">@Alpha.Utility.GC.SiteName © @DateTime.Now.Year.</p>
+            <p style="color:#555555;">@Alpha.Utility.GCInfo.SiteName © @DateTime.Now.Year.</p>
         </div>
     </footer>
+    <script src="https://apis.google.com/js/platform.js"></script>
     <script src="~/Scripts/kendo/jquery.min.js"></script>
     <script src="~/Scripts/kendo/kendo.all.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -56,5 +58,6 @@
     <script src="~/Asserts/utility/ajax.js"></script>
     <script src="~/Asserts/utility/comman.js"></script>
     @RenderSection("scripts");
+  
 </body>
 </html>

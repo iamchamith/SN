@@ -16,7 +16,8 @@ var Alpha;
                 var search = {
                     Topic: '',
                     IsDateDesc: true,
-                    UserId: this.userid
+                    UserId: this.userid,
+                    Skip: 0, Take: 10
                 };
                 this.bindSearchData(search);
             };
@@ -29,13 +30,14 @@ var Alpha;
                         var search = {
                             Topic: viewModel.get('Titile'),
                             IsDateDesc: viewModel.get('Reason'),
-                            UserId: _this.userid
+                            UserId: _this.userid,
+                            Skip: 0, Take: 10
                         };
                         _this.bindSearchData(search);
                     }, reset: function () {
                         var search = {
                             Topic: '',
-                            IsDateDesc: true
+                            IsDateDesc: true, Skip: 0, Take: 10
                         };
                         _this.bindSearchData(search);
                         viewModel.set('Titile', '');

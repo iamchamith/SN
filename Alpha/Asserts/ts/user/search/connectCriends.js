@@ -48,8 +48,8 @@ var Alpha;
                 };
                 searchCriends.prototype.bindSearchData = function () {
                     var _this = this;
-                    this.ajax.get('/api/v1/criends/search/looksup', null, null, function (e) {
-                        _this.ajax.get('/api/v1/tag/read', null, null, function (e1) {
+                    this.ajax.get('/api/v1/criends/search/looksup', null, null, "", function (e) {
+                        _this.ajax.get('/api/v1/tag/read', null, null, "", function (e1) {
                             _this.mvvm = kendo.observable({
                                 Countries: e.Countries,
                                 Country: e.Country,
@@ -95,7 +95,7 @@ var Alpha;
                     if ($searchmore.hasClass('hidden')) {
                         $searchmore.removeClass('hidden');
                     }
-                    this.ajax.post('/api/v1/criends/search', search, el, function (r) {
+                    this.ajax.post('/api/v1/criends/search', search, el, "", function (r) {
                         var d = [];
                         d.push(r);
                         var templateContent = $("#searchCriends-template").html();

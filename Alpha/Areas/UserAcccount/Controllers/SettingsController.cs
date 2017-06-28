@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.UserAcccount.Controllers
 {
+    [OutputCache(Duration = int.MaxValue)]
     public class SettingsController : Controller
     {
         [HttpGet, Compress]

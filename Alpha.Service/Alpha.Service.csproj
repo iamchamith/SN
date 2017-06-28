@@ -59,11 +59,12 @@
     <Compile Include="Interfaces\IConnectCriends.cs" />
     <Compile Include="Interfaces\IPost.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IRepository1.cs" />
     <Compile Include="Interfaces\ITags.cs" />
     <Compile Include="Interfaces\IUserComments.cs" />
     <Compile Include="Interfaces\IUserContact.cs" />
+    <Compile Include="Interfaces\IUserMessageService.cs" />
     <Compile Include="Interfaces\IUserPost.cs" />
+    <Compile Include="Interfaces\IUserPreferencesService.cs" />
     <Compile Include="Interfaces\IUserSettings.cs" />
     <Compile Include="Interfaces\IUserTags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="Services\settings\TagService.cs" />
     <Compile Include="Services\settings\UserContactService.cs" />
     <Compile Include="Services\post\UserPostService.cs" />
+    <Compile Include="Services\settings\UserMessageService.cs" />
+    <Compile Include="Services\settings\UserPreferencesService.cs" />
     <Compile Include="Services\settings\UserTagsService.cs" />
     <Compile Include="Services\settings\UserSettingService.cs" />
   </ItemGroup>

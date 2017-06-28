@@ -62,6 +62,7 @@ namespace Alpha.Service.Services
                 user.Bio = item.Bio;
                 user.Dob = item.Dob;
                 user.IsValiedEmail = item.IsValiedEmail;
+                user.Employeement = item.Employeement;
                 await this.uow.SaveAsync();
             }
             catch (Exception e)

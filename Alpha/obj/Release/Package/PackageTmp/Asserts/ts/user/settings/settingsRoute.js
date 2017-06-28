@@ -69,6 +69,13 @@ var Alpha;
                         $('#changepassword').animateCss(Alpha.Utility.comman.animateType);
                     });
                 });
+                router.route("/image", function () {
+                    templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/changeprofileimage.template.html", function () {
+                        routeurl = new Alpha.User.Settings.changeProfileImage();
+                        routeurl.execute();
+                        $('#profileImage').animateCss(Alpha.Utility.comman.animateType);
+                    });
+                });
                 router.start();
             });
         })(Settings = User.Settings || (User.Settings = {}));

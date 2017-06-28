@@ -27,7 +27,7 @@ var Alpha;
             }
             comman.prototype.logout = function () {
                 var ajax = new Alpha.Utility.Ajax();
-                ajax.post('/api/v1/auth/logout', null, null, function () {
+                ajax.post('/api/v1/auth/logout', null, null, '', function () {
                     window.location.href = "/useracccount/authentication";
                 });
             };
@@ -55,7 +55,7 @@ var Alpha;
             comman.prototype.addRemoveTags = function (tagId, tagName, callback) {
                 var _this = this;
                 var ajax = new Alpha.Utility.Ajax();
-                ajax.get("/api/v1/tag/read/" + tagId, null, null, function (e) {
+                ajax.get("/api/v1/tag/read/" + tagId, null, null, '', function (e) {
                     var viewModel = kendo.observable({
                         modelcaption: (e.IsTagThere) ? 'Remove Tag' : 'Add Tag',
                         caption: ((e.IsTagThere) ? 'remove ' : 'add ') + tagName,
@@ -67,7 +67,7 @@ var Alpha;
                         ProfileImage: e.OwnerProfileImage,
                         OwnerName: e.OwnerName,
                         action: function () {
-                            ajax.post(viewModel.get('Url') + tagId, null, null, function () {
+                            ajax.post(viewModel.get('Url') + tagId, null, null, '', function () {
                                 _this.pop.show(viewModel.get('IsTagThere') ? 'Tag removed' : 'Tag added', 'success');
                                 $('#addremovetags-model').modal('hide');
                                 callback();
@@ -113,7 +113,6 @@ var Alpha;
                 });
             };
             comman.prototype.sendRelationshipRequest = function (searchRequest, el) {
-                var _this = this;
                 var ajax = new Alpha.Utility.Ajax();
                 function changeText(el) {
                     var $ele = $(el.target);
@@ -223,8 +222,7 @@ var Alpha;
                         }
                     }
                 }
-                ajax.post('/api/v1/criends/relationship', searchRequest, null, function () {
-                    _this.pop.show(' saved', 'success');
+                ajax.post('/api/v1/criends/relationship', searchRequest, null, 'saved', function () {
                     changeText(el);
                 });
             };

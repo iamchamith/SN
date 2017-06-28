@@ -23,10 +23,11 @@ namespace Alpha.DbAccess
         IDbSet<PostNeedComment> PostNeedComments { get; set; }
         IDbSet<PostPoll> PostPolls { get; set; }
         IDbSet<PostQuestion> PostQuestion { get; set; }
+        IDbSet<UserPreferences> UserPreferences { get; set; }
+        IDbSet<UserMessage> UserMessages { get; set; }
     }
     public class AlphaContext : DbContext, IAlphaContext
     {
-        
         public AlphaContext() : base(Configurations.Conns)
         {
 
@@ -43,6 +44,8 @@ namespace Alpha.DbAccess
         public IDbSet<PostNeedComment> PostNeedComments { get; set; }
         public IDbSet<PostPoll> PostPolls { get; set; }
         public IDbSet<PostQuestion> PostQuestion { get; set; }
+        public IDbSet<UserPreferences> UserPreferences { get; set; }
+        public IDbSet<UserMessage> UserMessages { get; set; }
     }
 }
 

@@ -150,6 +150,22 @@
     <Compile Include="Migrations\201706270913204_posttableenhancement4.Designer.cs">
       <DependentUpon>201706270913204_posttableenhancement4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706271040478_addProfileImageUrlToUsertable.cs" />
+    <Compile Include="Migrations\201706271040478_addProfileImageUrlToUsertable.Designer.cs">
+      <DependentUpon>201706271040478_addProfileImageUrlToUsertable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706280505571_addUserEmployeementToUserTable.cs" />
+    <Compile Include="Migrations\201706280505571_addUserEmployeementToUserTable.Designer.cs">
+      <DependentUpon>201706280505571_addUserEmployeementToUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706280619343_addUserPreferencesTable.cs" />
+    <Compile Include="Migrations\201706280619343_addUserPreferencesTable.Designer.cs">
+      <DependentUpon>201706280619343_addUserPreferencesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706281025401_addUserMessagetable.cs" />
+    <Compile Include="Migrations\201706281025401_addUserMessagetable.Designer.cs">
+      <DependentUpon>201706281025401_addUserMessagetable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -235,6 +251,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706270913204_posttableenhancement4.resx">
       <DependentUpon>201706270913204_posttableenhancement4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706271040478_addProfileImageUrlToUsertable.resx">
+      <DependentUpon>201706271040478_addProfileImageUrlToUsertable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280505571_addUserEmployeementToUserTable.resx">
+      <DependentUpon>201706280505571_addUserEmployeementToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280619343_addUserPreferencesTable.resx">
+      <DependentUpon>201706280619343_addUserPreferencesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706281025401_addUserMessagetable.resx">
+      <DependentUpon>201706281025401_addUserMessagetable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

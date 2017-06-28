@@ -10,6 +10,8 @@ using Alpha.Poco;
 using AutoMapper;
 using Alpha.Bo.Exceptions;
 using Alpha.Bo.Enums;
+using Dapper;
+using Alpha.DbAccess;
 
 namespace Alpha.Service.Services
 {
@@ -52,21 +54,25 @@ namespace Alpha.Service.Services
         {
             try
             {
-                var res = this.uow.Context.Users.FirstOrDefault(p => p.Email == item.Email.ToLower().Trim() && p.Password == item.Password);
-                if (res is null)
+                using (var cn = DatabaseInfo.Connection)
                 {
-                    throw new InvaliedUserInputsException("invalied login");
+                    var res = cn.Query<User>(@"select * from [User] where Email = @Email and Password = @Password",
+                        new { Email = item.Email.Trim().ToLower(), Password = item.Password }).FirstOrDefault();
+                    if (res is null)
+                    {
+                        throw new InvaliedUserInputsException("invalied login");
+                    }
+                    return new SessionBo
+                    {
+                        Id = res.Id,
+                        Name = res.Name,
+                        UserId = res.UserId,
+                        Email = res.Email,
+                        Country = res.Country,
+                        Sex = (int)res.Gender,
+                        MaritalStatus = (int)res.MaritalStatus
+                    };
                 }
-                return new SessionBo
-                {
-                    Id = res.Id,
-                    Name = res.Name,
-                    UserId = res.UserId,
-                    Email = res.Email,
-                    Country = res.Country,
-                    Sex = (int)res.Gender,
-                    MaritalStatus = (int)res.MaritalStatus
-                };
             }
             catch (Exception e)
             {

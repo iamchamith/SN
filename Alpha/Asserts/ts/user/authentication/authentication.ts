@@ -41,9 +41,7 @@ module Alpha.User.Authentication {
                 Password: '',
                 login: (el) => {
                     if ($("#login").data("kendoValidator").validate()) {
-                        this.popupNotification.show(' sending request...', 'info');
-                        this.ajax.post('/api/v1/auth/login', viewModel, el, (e) => {
-                            this.popupNotification.show('loging is success', 'success');
+                        this.ajax.post('/api/v1/auth/login', viewModel, el,'login is success', (e) => {
                             window.location.href = "/useracccount/settings";
                         });
                     }
@@ -108,8 +106,7 @@ module Alpha.User.Authentication {
                 register: (el) => {
                     if ($("#register").data("kendoValidator").validate()) {
                         this.popupNotification.show(' sending request...', 'info');
-                        this.ajax.post('/api/v1/auth/register', viewModel, el, (e) => {
-                            this.popupNotification.show('registration success', "success");
+                        this.ajax.post('/api/v1/auth/register', viewModel, el,'registration success', (e) => {
                             window.location.href = "/useracccount/settings";
                         });
                     }
@@ -169,24 +166,22 @@ module Alpha.User.Authentication {
                 sendForgetPasswordRecoveryRequest: (el) => {
                     if ($("#model-forgegtPassword").data("kendoValidator").validate()) {
                         this.pop.show('wait for sending email', 'info');
-                        this.ajax.get('/api/v1/auth/forgetpasswordrequest?email=' + viewModel.get("Email"), null, el, (e) => {
+                        this.ajax.get('/api/v1/auth/forgetpasswordrequest?email=' + viewModel.get("Email"), null, el,'email sent.please type the token', (e) => {
                             $('.nav-tabs li:eq(1) a').tab('show');
                             this.pop.hide();
-                            this.pop.show('email sent.please type the token', 'success');
                         });
                     }
                 },
                 validateForgetPasswordToken: (el) => {
                     this.pop.show('wait for validate forget password token', 'info');
                     this.ajax.get('/api/v1/auth/forgetpasswordrequesttokenvalidate?email=' + viewModel.get("Email") + '&token=' + viewModel.get("Token"),
-                        null, el, (e) => {
+                        null, el,'token validation success.please enter new password', (e) => {
                             $('.nav-tabs li:eq(2) a').tab('show');
                             this.pop.hide();
-                            this.pop.show('token validation success.please enter new password', 'success');
                         });
                 },
                 changePassword: (el) => {
-                    this.ajax.post('/api/v1/auth/changepassword', viewModel, el, (e) => {
+                    this.ajax.post('/api/v1/auth/changepassword', viewModel, el,'', (e) => {
                         window.location.href = '/useracccount/settings';
                     });
                 },

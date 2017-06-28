@@ -14,9 +14,9 @@ namespace Alpha
     {
         protected void Application_Start()
         {
-            //var configuration = new Alpha.DbAccess.Migrations.Configuration();
-            //var migrator = new DbMigrator(configuration);
-            //migrator.Update();
+            var configuration = new Alpha.DbAccess.Migrations.Configuration();
+            var migrator = new DbMigrator(configuration);
+            migrator.Update();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

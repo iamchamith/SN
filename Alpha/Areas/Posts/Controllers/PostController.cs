@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.Posts.Controllers
 {
+    [OutputCache(Duration = int.MaxValue)]
     public class PostController : Controller
     {
         [HttpGet, Compress]
@@ -18,6 +19,6 @@ namespace Alpha.Areas.Posts.Controllers
             }
             return View();
         }
-        
+
     }
 }

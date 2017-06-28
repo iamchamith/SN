@@ -23,7 +23,7 @@
                 };
             }
             $('.askQuestionMenu').off('click').on('click', () => {
-                this.ajax.get('/api/v1/tag/read', null, null, (e) => {
+                this.ajax.get('/api/v1/tag/read', null, null, "", (e) => {
                     $('#model-askQuestion').modal('show').appendTo('body');
                     this.viewModel = kendo.observable({
                         Topic: '',
@@ -35,20 +35,17 @@
                         Vs2Data: '/asserts/images/dragdrop.png',
                         AskCommentImage: '/asserts/images/dragdrop.png',
                         askcomment: (el) => {
-                            this.ajax.post('/api/v1/post/comment', this.viewModel, el, () => {
-                                this.pop.show(' success share', 'success');
+                            this.ajax.post('/api/v1/post/comment', this.viewModel, el,"success share", () => {
                                 $('#model-askQuestion').modal('hide');
                             });
                         },
                         askpoll: (el) => {
-                            this.ajax.post('/api/v1/post/poll', this.viewModel, el, () => {
-                                this.pop.show(' success share', 'success');
+                            this.ajax.post('/api/v1/post/poll', this.viewModel, el,"success share", () => {
                                 $('#model-askQuestion').modal('hide');
                             });
                         },
                         askquestion: (el) => {
-                            this.ajax.post('/api/v1/post/question', this.viewModel, el, () => {
-                                this.pop.show(' success share', 'success');
+                            this.ajax.post('/api/v1/post/question', this.viewModel, el,"success share", () => {
                                 $('#model-askQuestion').modal('hide');
                             });
                         }

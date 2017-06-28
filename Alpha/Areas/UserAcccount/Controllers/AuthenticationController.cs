@@ -7,9 +7,9 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.UserAcccount.Controllers
 {
+    [OutputCache(Duration = int.MaxValue)]
     public class AuthenticationController : Controller
     {
-        // GET: UserAcccount/Authontication
         public ActionResult Index()
         {
             if (GCSession.IsSession)

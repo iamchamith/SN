@@ -54,7 +54,7 @@ module Alpha.Post {
             });
         }
         private bindSearchData(e) {
-            this.ajax.post('/api/v1/post/search', e, null, (r) => {
+            this.ajax.post('/api/v1/post/search', e, null, "search is complete", (r) => {
                 var d = [];
                 d.push(r);
                 var templateContent = $("#posts-template").html();
@@ -63,7 +63,6 @@ module Alpha.Post {
                 $("#searchposts").html(result);
                 $('#seachpostresult').animateCss(Alpha.Utility.comman.animateTypeAfterSearch);
                 this.initController();
-                this.pop.show('search is complete', 'success');
             });
         }
     }
@@ -82,8 +81,8 @@ module Alpha.Post {
             });
         }
         private bindSearchData() {
-            this.ajax.get('/api/v1/criends/search/looksup', null, null, (e) => {
-                this.ajax.get('/api/v1/tag/read', null, null, (e1) => {
+            this.ajax.get('/api/v1/criends/search/looksup', null, null, "", (e) => {
+                this.ajax.get('/api/v1/tag/read', null, null, "", (e1) => {
                     console.log(e1);
                     var viewModel = kendo.observable({
                         Countries: e.Countries,
@@ -103,7 +102,7 @@ module Alpha.Post {
                                 Sex: viewModel.get('Gender'),
                                 MaritalStatus: viewModel.get('MaritalStatus'),
                             };
-                            this.ajax.post('/api/v1/criends/search', search, el, (r) => {
+                            this.ajax.post('/api/v1/criends/search', search, el, "", (r) => {
                                 console.log(r);
                                 var d = [];
                                 d.push(r);

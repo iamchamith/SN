@@ -83,7 +83,7 @@
                 $("#contactinfopreview").html(result);
         }
         private bindViewModel() {
-            this.ajax.get(`/api/v1/userprofile/preview?guid=${this.userid}`, null, null, (re) => {
+            this.ajax.get(`/api/v1/userprofile/preview?guid=${this.userid}`, null, null,'', (re) => {
                 var e = re.BasicInfo;
                 var viewModel = kendo.observable({
                     Followings: e.Followings,
@@ -98,6 +98,7 @@
                     Dob: kendo.toString(new Date(e.Dob), 'd'),
                     Bio: e.Bio,
                     ProfileImage: e.ProfileImage,
+                    IsMine: !e.IsMine
                 });
                 kendo.bind($("#priviewpage"), viewModel);
                 this.renderUserTags(re.UserTags);

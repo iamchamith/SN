@@ -88,25 +88,6 @@ var Alpha;
                 $('#logout').on('click', function () {
                     _this.logout();
                 });
-                $('.askQuestionMenu').off('click').on('click', function () {
-                    var ajax = new Alpha.Utility.Ajax();
-                    ajax.get('/api/v1/tag/read', null, null, function (e) {
-                        $('#model-askQuestion').modal('show').appendTo('body');
-                        var viewModel = kendo.observable({
-                            Titile: '',
-                            Description: '',
-                            Tagss: e,
-                            Tag: '',
-                            IsAnonymas: false,
-                            ask: function (el) {
-                                ajax.post('/api/v1/post', viewModel, el, function () {
-                                    _this.pop.show(' success share', 'success');
-                                });
-                            }
-                        });
-                        kendo.bind($("#model-askQuestion"), viewModel);
-                    });
-                });
             };
             comman.prototype.getQueryString = function (name) {
                 var url = window.location.href;

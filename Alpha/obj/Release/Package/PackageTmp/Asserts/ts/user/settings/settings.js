@@ -393,6 +393,37 @@ var Alpha;
                 return userContact;
             }());
             Settings.userContact = userContact;
+            var changeProfileImage = (function () {
+                function changeProfileImage() {
+                }
+                changeProfileImage.prototype.execute = function () {
+                    this.initControllers();
+                };
+                changeProfileImage.prototype.initControllers = function () {
+                    $('#saveImage').off('click').on('click', function () {
+                        var data = new FormData();
+                        var d = $("#fileProfileImage").get(0);
+                        var files = d.files;
+                        // Add the uploaded image content to the form data collection
+                        if (files.length > 0) {
+                            data.append("UploadedImage", files[0]);
+                        }
+                        // Make Ajax request with the contentType = false, and procesDate = false
+                        var ajaxRequest = $.ajax({
+                            type: "POST",
+                            url: "/api/v1/base/image",
+                            contentType: false,
+                            processData: false,
+                            data: data
+                        });
+                        ajaxRequest.done(function (xhr, textStatus) {
+                            // Do other operation
+                        });
+                    });
+                };
+                return changeProfileImage;
+            }());
+            Settings.changeProfileImage = changeProfileImage;
         })(Settings = User.Settings || (User.Settings = {}));
     })(User = Alpha.User || (Alpha.User = {}));
 })(Alpha || (Alpha = {}));
