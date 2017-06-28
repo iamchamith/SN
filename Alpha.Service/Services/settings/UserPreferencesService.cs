@@ -11,6 +11,8 @@ using Alpha.DbAccess;
 using Alpha.Poco;
 using Alpha.Bo.Enums;
 using AutoMapper;
+using System.Data.SqlClient;
+
 namespace Alpha.Service.Services
 {
     public class UserPreferencesService : BaseService, IUserPreferencesService
@@ -30,11 +32,8 @@ namespace Alpha.Service.Services
         {
             try
             {
-                using (var cn = DatabaseInfo.Connection)
-                {
-                    cn.Execute(@"delete from UserPreferences where UserId = @UserId",
-                        new { UserId = userid });
-                }
+                await this.uow.Context.Database.ExecuteSqlCommandAsync(@"delete from UserPreferences where UserId = @UserId",
+                    new SqlParameter("UserId", userid));
             }
             catch (Exception e)
             {
@@ -107,10 +106,11 @@ namespace Alpha.Service.Services
         {
             try
             {
+                await this.Delete(0, userid);
                 var r = item.Select(x => AutoMapper.Mapper.Map<UserPreferences>(x)).ToList();
                 foreach (var obj in r)
                 {
-                    this.uow.UserPreferencesRepository.Update(obj);
+                    this.uow.UserPreferencesRepository.Insert(obj);
                 }
                 await this.uow.SaveAsync();
             }

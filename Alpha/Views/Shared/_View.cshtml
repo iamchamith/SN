@@ -36,6 +36,13 @@
             <div class="col-md-3">
                 <div style="padding-top:5px; padding-bottom:5px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px; margin-bottom:20px;">
                     @RenderBody()
+                    <ul class="list-group" style="margin:0px;">
+                        <li class="list-group-item list-group-edit" style="padding:10px; padding-left:20px; border-radius:0px;">
+                        <span style="padding-left:10px">
+                            @{Html.RenderPartial("_GoogleTranslateCode"); }
+                        </span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-9">

@@ -150,7 +150,7 @@ module Alpha.User.Authentication {
             });
         }
         private initContollers(): void {
-            $(".nav-tabs a[data-toggle=tab]").on("click", function (e) {
+            $("#forgetpasswordwizard .nav-tabs a[data-toggle=tab]").on("click", function (e) {
                 let pop2 = $("#notification").kendoNotification().data("kendoNotification");
                 pop2.show('please enter email', 'info');
                 e.preventDefault();

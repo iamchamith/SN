@@ -67,14 +67,14 @@
                             }
                         },
                         viewValidateEmailModel: () => {
-                            $('.nav-tabs li:eq(0) a').tab('show');
+                            $('#validateemail .nav-tabs li:eq(0) a').tab('show');
                             $('#model-validateEmail').modal('show').appendTo('body');
                         },
                         sendEmailValidationToken: (el) => {
                             this.pop.show(' please wait for email', 'info');
                             this.ajax.post('/api/v1/user/settings/requestvalidateemailtoken', null, el,
                                 'Token sent success.please insert the token', () => {
-                                    $('.nav-tabs li:eq(1) a').tab('show');
+                                    $('#validateemail .nav-tabs li:eq(1) a').tab('show');
                                 });
                         },
                         validateEmailToken: (el) => {
