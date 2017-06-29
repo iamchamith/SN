@@ -16,7 +16,15 @@
     <li class="list-group-item list-group-edit menu" data-menu="criends" style="padding:10px; padding-left:20px; border-radius:0px; margin-top:5px;">
         <a href="#" data-toggle="tab" data-menu="criends" class="menu">Criends</a>
     </li>
+    <li class="list-group-item list-group-edit menu" data-menu="chat" style="padding:10px; padding-left:20px; border-radius:0px; margin-top:5px;">
+        <a href="#" data-toggle="tab" data-menu="chat" class="menu">Send Message</a>
+    </li>
 </ul>
+<input type="hidden" name="crienduserid" value="" id="crienduserid" />
+<input type="hidden" name="criendname" value="" id="criendname" />
+<input type="hidden" name="criendprofileimage" value="" id="criendprofileimage" />
+<input type="hidden" name="meemail" value="" id="meemail" />
+
 @{Html.RenderPartial("_Posts"); }
 @section scripts{
 <script src="~/Asserts/ts/user/profile/profileRoute.js"></script>

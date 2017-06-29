@@ -1,6 +1,7 @@
 ﻿using Alpha.Areas.UserAcccount.Models;
 using Alpha.Bo;
 using Alpha.Bo.Enums;
+using Alpha.DbAccess;
 using Alpha.Utility;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -29,14 +30,13 @@ namespace Alpha.Controllers.Api
             result.Name = item.Name;
             result.MaritalStatus = ((Enums.MaritalStatus)item.MaritalStatus).ToString().Replace('_', ' ');
             result.Gender = ((Enums.Gender)item.Gender).ToString().Replace('_', ' ');
-            result.ProfileImage = (ismine) ? GCSession.ProfileImage :
-                $"https://www.gravatar.com/avatar/{Alpha.Bo.Utility.Helper.MD5Hash(item.Email)}";
+            result.ProfileImage = (ismine) ? GCSession.ProfileImage : item.ProfileImage;
             result.IsMine = item.UserId == GCSession.UserGuid;
             return result;
         }
 
 
-        public string UploadImage(string imagedata,Enums.Imagetype imgtype,string imagename)
+        public string UploadImage(string imagedata, Enums.Imagetype imgtype, string imagename)
         {
             string data = string.Empty;
             try
@@ -53,37 +53,28 @@ namespace Alpha.Controllers.Api
             try
             {
                 byte[] bytes = Convert.FromBase64String(data);
-                Image image;
                 using (MemoryStream ms = new MemoryStream(bytes))
                 {
-                    image = Image.FromStream(ms);
-                    image.Save(HttpContext.Current.Server.MapPath($"~/images/{imgtype}/{imagename}"));
+                    UploadImageBlob(ms, imgtype, imagename);
                 }
             }
-            catch {
+            catch
+            {
                 throw new BadImageFormatException();
             }
             return imagename;
         }
 
         [NonAction]
-        protected void UploadImage(Stream fileStream, Enums.Imagetype imagetype, string fileName)
+        void UploadImageBlob(Stream fileStream, Enums.Imagetype imagetype, string fileName)
         {
             try
             {
-                // Retrieve storage account from connection string.
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(@"DefaultEndpointsProtocol=https;AccountName=criends;AccountKey=7MVUq2WYHnTupLLTADAoqsJlz69n1uIlGncz8dN7yRyeC4Kru8e9wV1Wx7AKjRfs1u0C90sY5CDgxyMyAUjjbw==;EndpointSuffix=core.windows.net");
-
-                // Create the blob client.
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Configs.BlobConnectionString);
                 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-                // Retrieve reference to a previously created container.
-                CloudBlobContainer container = blobClient.GetContainerReference("profileImage");
+                CloudBlobContainer container = blobClient.GetContainerReference(imagetype.ToString());
                 container.CreateIfNotExists();
-                // Retrieve reference to a blob named "myblob".
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
-
-                // Create or overwrite the "myblob" blob with contents from a local file.
                 blockBlob.UploadFromStream(fileStream);
             }
             catch (Exception e) { throw e; }

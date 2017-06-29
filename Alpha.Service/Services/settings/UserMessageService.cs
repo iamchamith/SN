@@ -23,8 +23,9 @@ namespace Alpha.Service.Services.settings
         {
             try
             {
-                return this.uow.UserMessageRepository.Get(p => p.FromUser == item.FromUser &&
-                p.ToUser == item.ToUser).OrderByDescending(p => p.SendDate).Skip(item.Skip)
+                return this.uow.Context.UserMessages.Where(p => (p.FromUser == item.FromUser &&
+                p.ToUser == item.ToUser) || (p.FromUser == item.ToUser && p.ToUser == item.FromUser))
+                .OrderBy(p => p.SendDate).Skip(item.Skip)
                 .Take(item.Take).ToList()
                 .Select(x => Mapper.Map<UserMessageBo>(x)).ToList();
             }

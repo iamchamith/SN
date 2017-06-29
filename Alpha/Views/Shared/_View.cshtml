@@ -36,13 +36,6 @@
             <div class="col-md-3">
                 <div style="padding-top:5px; padding-bottom:5px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px; margin-bottom:20px;">
                     @RenderBody()
-                    <ul class="list-group" style="margin:0px;">
-                        <li class="list-group-item list-group-edit" style="padding:10px; padding-left:20px; border-radius:0px;">
-                        <span style="padding-left:10px">
-                            @{Html.RenderPartial("_GoogleTranslateCode"); }
-                        </span>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <div class="col-md-9">
@@ -52,7 +45,21 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="userid" value="" id="userid" />
+    <input type="hidden" name="meuserid" value="@Alpha.Utility.GCSession.UserGuid.ToString()" id="meuserid" />
+    <input type="hidden" name="mename" value="@Alpha.Utility.GCSession.UserDisplayName" id="mename" />
+    <input type="hidden" name="meprofileimage" value="@Alpha.Utility.GCSession.ProfileImageName" id="meprofileimage" />
+    <input type="hidden" name="meemail" value="@Alpha.Utility.GCSession.Email" id="meemail" />
+    <input type="hidden" name="blob" value="@Alpha.Bo.Utility.Configs.ImagePrefixBlob" id="blob" />
+    <input type="hidden" name="blobprofile" value="@Alpha.Bo.Enums.Enums.Imagetype.profileimages.ToString()" id="blobprofile" />
+    <input type="hidden" name="blobpost" value="@Alpha.Bo.Enums.Enums.Imagetype.postimages.ToString()" id="blobpost" />
+
+    <div id="google_translate_element" class="hidden"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     @*models*@
     @{Html.RenderPartial("models/_AskQuestions");}
     @{Html.RenderPartial("models/_AddRemoveTags");}

@@ -46,9 +46,7 @@ var Alpha;
                         Password: '',
                         login: function (el) {
                             if ($("#login").data("kendoValidator").validate()) {
-                                _this.popupNotification.show(' sending request...', 'info');
-                                _this.ajax.post('/api/v1/auth/login', viewModel, el, function (e) {
-                                    _this.popupNotification.show('loging is success', 'success');
+                                _this.ajax.post('/api/v1/auth/login', viewModel, el, 'login is success', function (e) {
                                     window.location.href = "/useracccount/settings";
                                 });
                             }
@@ -115,8 +113,7 @@ var Alpha;
                         register: function (el) {
                             if ($("#register").data("kendoValidator").validate()) {
                                 _this.popupNotification.show(' sending request...', 'info');
-                                _this.ajax.post('/api/v1/auth/register', viewModel, el, function (e) {
-                                    _this.popupNotification.show('registration success', "success");
+                                _this.ajax.post('/api/v1/auth/register', viewModel, el, 'registration success', function (e) {
                                     window.location.href = "/useracccount/settings";
                                 });
                             }
@@ -161,7 +158,7 @@ var Alpha;
                     });
                 };
                 changePasswordRequest.prototype.initContollers = function () {
-                    $(".nav-tabs a[data-toggle=tab]").on("click", function (e) {
+                    $("#forgetpasswordwizard .nav-tabs a[data-toggle=tab]").on("click", function (e) {
                         var pop2 = $("#notification").kendoNotification().data("kendoNotification");
                         pop2.show('please enter email', 'info');
                         e.preventDefault();
@@ -178,23 +175,21 @@ var Alpha;
                         sendForgetPasswordRecoveryRequest: function (el) {
                             if ($("#model-forgegtPassword").data("kendoValidator").validate()) {
                                 _this.pop.show('wait for sending email', 'info');
-                                _this.ajax.get('/api/v1/auth/forgetpasswordrequest?email=' + viewModel.get("Email"), null, el, function (e) {
+                                _this.ajax.get('/api/v1/auth/forgetpasswordrequest?email=' + viewModel.get("Email"), null, el, 'email sent.please type the token', function (e) {
                                     $('.nav-tabs li:eq(1) a').tab('show');
                                     _this.pop.hide();
-                                    _this.pop.show('email sent.please type the token', 'success');
                                 });
                             }
                         },
                         validateForgetPasswordToken: function (el) {
                             _this.pop.show('wait for validate forget password token', 'info');
-                            _this.ajax.get('/api/v1/auth/forgetpasswordrequesttokenvalidate?email=' + viewModel.get("Email") + '&token=' + viewModel.get("Token"), null, el, function (e) {
+                            _this.ajax.get('/api/v1/auth/forgetpasswordrequesttokenvalidate?email=' + viewModel.get("Email") + '&token=' + viewModel.get("Token"), null, el, 'token validation success.please enter new password', function (e) {
                                 $('.nav-tabs li:eq(2) a').tab('show');
                                 _this.pop.hide();
-                                _this.pop.show('token validation success.please enter new password', 'success');
                             });
                         },
                         changePassword: function (el) {
-                            _this.ajax.post('/api/v1/auth/changepassword', viewModel, el, function (e) {
+                            _this.ajax.post('/api/v1/auth/changepassword', viewModel, el, '', function (e) {
                                 window.location.href = '/useracccount/settings';
                             });
                         },

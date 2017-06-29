@@ -70,7 +70,8 @@ namespace Alpha.Service.Services
                         Email = res.Email,
                         Country = res.Country,
                         Sex = (int)res.Gender,
-                        MaritalStatus = (int)res.MaritalStatus
+                        MaritalStatus = (int)res.MaritalStatus,
+                        ProfileImage = res.ProfileImage
                     };
                 }
             }
@@ -92,6 +93,7 @@ namespace Alpha.Service.Services
                 item.MaritalStatus = (int)Enums.MaritalStatus.Not_selected;
                 item.Country = -1;//not mention
                 item.Dob = DateTime.Now.AddYears(-18);
+                item.ProfileImage = "no.jpg";
                 var user = Mapper.Map<User>(item);
                 this.uow.Context.Users.Add(user);
                 await this.uow.SaveAsync();

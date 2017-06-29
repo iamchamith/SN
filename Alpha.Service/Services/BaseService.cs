@@ -31,9 +31,5 @@ namespace Alpha.Service.Services
                 return ex;
             }
         }
-
-        public string ProfileImage(string email) {
-               return $"https://www.gravatar.com/avatar/{Alpha.Bo.Utility.Helper.MD5Hash(email)}";
-        }
     }
 }

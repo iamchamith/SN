@@ -4,18 +4,25 @@ var Alpha;
     (function (Utility) {
         var Ajax = (function () {
             function Ajax() {
-                this.popupNotification = $("#notification").kendoNotification().data("kendoNotification");
+                this.popupNotification = $("#notification").kendoNotification({ position: { top: 0, bottom: 20, right: 10 } }).data("kendoNotification");
                 this.cm = new Alpha.Utility.comman();
             }
-            Ajax.prototype.get = function (url, data, element, callback) {
+            Ajax.prototype.get = function (url, data, element, successmessage, callback) {
                 var _this = this;
                 if (element === void 0) { element = null; }
+                if (successmessage === void 0) { successmessage = ""; }
                 if (element != null) {
                     $(element.target).attr('disabled', 'disabled');
                 }
                 $.ajax({
-                    url: url, method: 'get', data: JSON.parse(data), contentType: 'application/json; charset=utf-8'
+                    url: url, method: 'get', data: JSON.parse(data), contentType: 'application/json; charset=utf-8',
+                    beforeSend: function () {
+                        //  this.popupNotification.show('sending...', 'info');
+                    }
                 }).done(function (e) {
+                    if ($.trim(successmessage) != '') {
+                        _this.popupNotification.show(successmessage, 'success');
+                    }
                     callback(e);
                 }).fail(function (e) {
                     if (e.status === 400) {
@@ -38,15 +45,22 @@ var Alpha;
                     }
                 });
             };
-            Ajax.prototype.post = function (url, data, element, callback) {
+            Ajax.prototype.post = function (url, data, element, successmessage, callback) {
                 var _this = this;
                 if (element === void 0) { element = null; }
+                if (successmessage === void 0) { successmessage = ""; }
                 if (element != null) {
                     $(element.target).removeAttr('disabled');
                 }
                 $.ajax({
-                    url: url, method: 'post', data: JSON.stringify(data), contentType: 'application/json; charset=utf-8'
+                    url: url, method: 'post', data: JSON.stringify(data), contentType: 'application/json; charset=utf-8',
+                    beforeSend: function () {
+                        //this.popupNotification.show('sending...', 'info');
+                    }
                 }).done(function (e) {
+                    if ($.trim(successmessage) != '') {
+                        _this.popupNotification.show(successmessage, 'success');
+                    }
                     callback(e);
                 }).fail(function (e) {
                     if (e.status === 400) {

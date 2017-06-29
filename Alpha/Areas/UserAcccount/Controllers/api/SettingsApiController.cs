@@ -147,7 +147,7 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
                 return InternalServerError(e);
             }
         }
-      
+
         #endregion
 
         [HttpPost, Route("changepassword"), Authorized, ValidateModel]
@@ -252,5 +252,20 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
             }
         }
         #endregion
+        [HttpPost, Authorize, Route("profileimage")]
+        public async Task<IHttpActionResult> ChangeProfileImage(string profileimage)
+        {
+            try
+            {
+                var profileimagex = UploadImage(profileimage, Enums.Imagetype.profileimages, Guid.NewGuid().ToString());
+                await this.service.UpdateProfileImage(GCSession.UserGuid, profileimagex);
+                GCSession.ProfileImageName = profileimagex;
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
     }
 }

@@ -91,7 +91,7 @@ namespace Alpha.Service.Services
             try
             {
                 var sql = new StringBuilder();
-                sql.Append("select UserId,Email,Name from [User]    WHERE  UserId <> @UserId   AND   ");
+                sql.Append("select UserId,Email,Name,ProfileImage from [User]    WHERE  UserId <> @UserId   AND   ");
                 if (!string.IsNullOrEmpty(item.Name))
                 {
                     sql.Append($" Name like '{item.Name}%' AND");
@@ -135,7 +135,7 @@ namespace Alpha.Service.Services
                     var relations = result.Read<CriendsRelationsBo>();
                     foreach (var obj in r)
                     {
-                        obj.ProfileImage = ProfileImage(obj.Email);
+                        obj.ProfileImage = $"{Bo.Utility.Configs.ImagePrefixBlob}{Bo.Enums.Enums.Imagetype.profileimages}/{obj.ProfileImage}";
                         obj.UserTags = userTags.Where(p => p.UserId == obj.UserId).ToList() ?? new List<UserTagBo>();
                         obj.Relationships = relations.FirstOrDefault(p => p.UserId == obj.UserId) ?? new CriendsRelationsBo();
                     }

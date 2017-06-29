@@ -30,7 +30,7 @@ var Alpha;
                     };
                 }
                 $('.askQuestionMenu').off('click').on('click', function () {
-                    _this.ajax.get('/api/v1/tag/read', null, null, function (e) {
+                    _this.ajax.get('/api/v1/tag/read', null, null, "", function (e) {
                         $('#model-askQuestion').modal('show').appendTo('body');
                         _this.viewModel = kendo.observable({
                             Topic: '',
@@ -42,20 +42,17 @@ var Alpha;
                             Vs2Data: '/asserts/images/dragdrop.png',
                             AskCommentImage: '/asserts/images/dragdrop.png',
                             askcomment: function (el) {
-                                _this.ajax.post('/api/v1/post/comment', _this.viewModel, el, function () {
-                                    _this.pop.show(' success share', 'success');
+                                _this.ajax.post('/api/v1/post/comment', _this.viewModel, el, "success share", function () {
                                     $('#model-askQuestion').modal('hide');
                                 });
                             },
                             askpoll: function (el) {
-                                _this.ajax.post('/api/v1/post/poll', _this.viewModel, el, function () {
-                                    _this.pop.show(' success share', 'success');
+                                _this.ajax.post('/api/v1/post/poll', _this.viewModel, el, "success share", function () {
                                     $('#model-askQuestion').modal('hide');
                                 });
                             },
                             askquestion: function (el) {
-                                _this.ajax.post('/api/v1/post/question', _this.viewModel, el, function () {
-                                    _this.pop.show(' success share', 'success');
+                                _this.ajax.post('/api/v1/post/question', _this.viewModel, el, "success share", function () {
                                     $('#model-askQuestion').modal('hide');
                                 });
                             }

@@ -15,6 +15,7 @@ namespace Alpha.Bo
         public int Country { get; set; }
         public int Sex { get; set; }
         public int MaritalStatus { get; set; }
+        public string ProfileImage { get; set; }
         public List<int> Tags { get; set; }
     }
 }

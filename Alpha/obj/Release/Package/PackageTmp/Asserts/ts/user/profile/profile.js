@@ -86,7 +86,7 @@ var Alpha;
                 };
                 previewPage.prototype.bindViewModel = function () {
                     var _this = this;
-                    this.ajax.get("/api/v1/userprofile/preview?guid=" + this.userid, null, null, function (re) {
+                    this.ajax.get("/api/v1/userprofile/preview?guid=" + this.userid, null, null, '', function (re) {
                         var e = re.BasicInfo;
                         var viewModel = kendo.observable({
                             Followings: e.Followings,
@@ -101,8 +101,12 @@ var Alpha;
                             Dob: kendo.toString(new Date(e.Dob), 'd'),
                             Bio: e.Bio,
                             ProfileImage: e.ProfileImage,
+                            IsMine: !e.IsMine
                         });
                         kendo.bind($("#priviewpage"), viewModel);
+                        $('#crienduserid').val(_this.userid);
+                        $('#criendname').val(e.Name);
+                        $('#criendprofileimage').val(e.ProfileImage);
                         _this.renderUserTags(re.UserTags);
                         _this.renderUserContacts(re.UserContacts);
                     });
@@ -120,6 +124,60 @@ var Alpha;
                 return profileAskPost;
             }());
             Profile.profileAskPost = profileAskPost;
+            var messages = (function () {
+                function messages() {
+                    this.ajax = new Alpha.Utility.Ajax();
+                    this.cm = new Alpha.Utility.comman();
+                }
+                messages.prototype.execute = function () {
+                    this.userid = this.cm.getQueryString('userid');
+                    this.bindViewModel();
+                    this.loadChats();
+                };
+                messages.prototype.loadChats = function () {
+                    var search = {
+                        ToUser: this.userid,
+                        Skip: 0,
+                        Take: 20
+                    };
+                    this.ajax.post('/api/v1/user/message/read', search, null, 'chat loaded', function (e) {
+                        console.log(e);
+                        var template = kendo.template($("#chats-template").html());
+                        var result = template(e);
+                        $("#chatContent").html(result);
+                    });
+                };
+                messages.prototype.bindViewModel = function () {
+                    var _this = this;
+                    var viewModel = kendo.observable({
+                        ChatWith: 'Chamith',
+                        Message: '',
+                        ProfileImage: '',
+                        ToUser: this.userid,
+                        send: function (el) {
+                            _this.ajax.post('/api/v1/user/message', viewModel, el, 'sent', function (e) {
+                                var chat = {
+                                    FromUser: $('#meuserid').val(),
+                                    ToUser: _this.userid,
+                                    Message: viewModel.get('Message'),
+                                    SendDate: Date.now,
+                                    ProfileImage: $('meprofileimage').val(),
+                                    IsMyChat: true
+                                };
+                                var data = [];
+                                data.push(chat);
+                                var template = kendo.template($("#chats-template").html());
+                                var result = template(data);
+                                $("#chatContent").append(result);
+                                viewModel.set('Message', '');
+                            });
+                        }
+                    });
+                    kendo.bind($("#messaging"), viewModel);
+                };
+                return messages;
+            }());
+            Profile.messages = messages;
         })(Profile = User.Profile || (User.Profile = {}));
     })(User = Alpha.User || (Alpha.User = {}));
 })(Alpha || (Alpha = {}));

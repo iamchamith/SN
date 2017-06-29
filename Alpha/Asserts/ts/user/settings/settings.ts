@@ -292,6 +292,7 @@
                     Dob: kendo.toString(new Date(e.Dob), 'd'),
                     Bio: e.Bio,
                     ProfileImage: e.ProfileImage,
+                    Employeement: ($.trim(e.Employeement) === '') ? 'Not mention' : e.Employeement,
                     IsMine: !e.IsMine
                 });
                 kendo.bind($("#priviewpage"), viewModel);
@@ -370,32 +371,25 @@
         }
     }
     export class changeProfileImage implements settings {
+        private cm = new Alpha.Utility.comman();
+        private ajax = new Alpha.Utility.Ajax();
+        private data: string;
         constructor() { }
         public execute() {
             this.initControllers();
         }
         private initControllers() {
-            $('#saveImage').off('click').on('click', () => {
-                var data = new FormData();
-                var d: any = $("#fileProfileImage").get(0);
-                var files = d.files;
-                // Add the uploaded image content to the form data collection
-                if (files.length > 0) {
-                    data.append("UploadedImage", files[0]);
-                }
-                // Make Ajax request with the contentType = false, and procesDate = false
-                var ajaxRequest = $.ajax({
-                    type: "POST",
-                    url: "/api/v1/base/image",
-                    contentType: false,
-                    processData: false,
-                    data: data
+            $('#profileimagechangeble').attr('src', `${Alpha.Utility.comman.getUserProfileImage()}`);
+            $('#fileProfileImage').on('change', (e: any) => {
+                this.cm.fileTo64BaseString(e.target.files[0], (r) => {
+                    this.data = r;
                 });
+            });
+            $('#saveImage').off('click').on('click', (el) => {
+                this.ajax.post('/api/v1/user/settings/profileimage', { profileimage: this.data }, el, 'updated', () => {
 
-                ajaxRequest.done(function (xhr, textStatus) {
-                    // Do other operation
                 });
-            })
+            });
         }
     }
 
@@ -422,13 +416,6 @@
             });
         }
 
-        constructor() { }
-    }
-
-    export class messages implements settings {
-        execute() {
-            throw new Error("Method not implemented.");
-        }
         constructor() { }
     }
 }

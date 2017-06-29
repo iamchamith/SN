@@ -6,22 +6,12 @@
         private pop = $("#notification").kendoNotification().data("kendoNotification");
         private ajax = new Alpha.Utility.Ajax();
         private viewModel = new kendo.data.ObservableObject();
+        private cm = new Alpha.Utility.comman();
         constructor() { }
         public execute() {
             this.initControllers();
         }
-
         private initControllers() {
-            function getBase64(file, callback) {
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function () {
-                    callback(reader.result);
-                };
-                reader.onerror = function (error) {
-                    console.log('Error: ', error);
-                };
-            }
             $('.askQuestionMenu').off('click').on('click', () => {
                 this.ajax.get('/api/v1/tag/read', null, null, "", (e) => {
                     $('#model-askQuestion').modal('show').appendTo('body');
@@ -52,20 +42,19 @@
                     });
                     kendo.bind($("#model-askQuestion"), this.viewModel);
                 });
-
             });
             $('#pollImgVs1').on('change', (e: any) => {
-                getBase64(e.target.files[0], (r) => {
+                this.cm.fileTo64BaseString(e.target.files[0], (r) => {
                     this.viewModel.set('Vs1Data', r);
                 });
             });
             $('#pollImgVs2').on('change', (e: any) => {
-                getBase64(e.target.files[0], (r) => {
+                this.cm.fileTo64BaseString(e.target.files[0], (r) => {
                     this.viewModel.set('Vs2Data', r);
                 });
             });
             $('#askcommentImg').on('change', (e: any) => {
-                getBase64(e.target.files[0], (r) => {
+                this.cm.fileTo64BaseString(e.target.files[0], (r) => {
                     this.viewModel.set('AskCommentImage', r);
                 });
             });

@@ -78,13 +78,6 @@
                 $('#preferences').animateCss(Alpha.Utility.comman.animateType);
             });
         });
-        router.route("/sendmessage", function () {
-            templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/message.template.html", () => {
-                obj = new Alpha.User.Settings.messages();
-                obj.execute();
-                $('#messaging').animateCss(Alpha.Utility.comman.animateType);
-            });
-        });
         router.start();
     });
 }

@@ -43,3 +43,7 @@ D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAc
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.posttableenhancement3.resources
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.posttableenhancement4.resources
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addProfileImageUrlToUsertable.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addUserEmployeementToUserTable.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addUserPreferencesTable.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addUserMessagetable.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addIsReadField.resources

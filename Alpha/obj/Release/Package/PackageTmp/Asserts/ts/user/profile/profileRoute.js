@@ -53,6 +53,11 @@ var Alpha;
                             templateUrl = '../asserts/ts/user/settings/templates/tags.template.html';
                             a = new Alpha.User.Settings.tags();
                             break;
+                        case 'chat':
+                            templateUrl = '../asserts/ts/user/profile/templates/message.template.html';
+                            a = new Alpha.User.Profile.messages();
+                            $('#messaging').animateCss(Alpha.Utility.comman.animateType);
+                            break;
                         default:
                             break;
                     }

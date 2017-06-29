@@ -14,6 +14,7 @@ namespace Alpha.Utility
         public int Country { get; set; }
         public int Sex { get; set; }
         public int MaritalStatus { get; set; }
+        public string ProfileImage { get; set; }
         public List<int> Tags { get; set; }
     }
     public class GCSession
@@ -71,14 +72,30 @@ namespace Alpha.Utility
             }
         }
 
-        public static string ProfileImage {
-            get {
-               return $"https://www.gravatar.com/avatar/{Alpha.Bo.Utility.Helper.MD5Hash(Email)}";
+        public static string ProfileImage
+        {
+            get
+            {
+                return $"{Alpha.Bo.Utility.Configs.ImagePrefixBlob}{Alpha.Bo.Enums.Enums.Imagetype.profileimages.ToString()}/{User.ProfileImage}";
             }
         }
 
-        public static int Country {
-            get {
+        public static string ProfileImageName
+        {
+            set
+            {
+                User.ProfileImage = value;
+                HttpContext.Current.Session["user"] = User;
+            }
+            get
+            {
+                return User.ProfileImage;
+            }
+        }
+        public static int Country
+        {
+            get
+            {
                 return User.Country;
             }
         }

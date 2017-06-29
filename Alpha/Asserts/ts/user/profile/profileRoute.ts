@@ -29,8 +29,7 @@
         });
 
         $('.menu').off('click').on('click', (e) => {
-            let $type = $(e.target).data('menu');
-
+            let $type = $(e.target).data('menu');   
             switch ($type) {
                 case 'preview':
                     templateUrl = '../asserts/ts/user/settings/templates/preview.template.html';
@@ -48,6 +47,11 @@
                 case 'criends':
                     templateUrl = '../asserts/ts/user/settings/templates/tags.template.html';
                     a = new Alpha.User.Settings.tags();
+                    break;
+                case 'chat':
+                    templateUrl = '../asserts/ts/user/profile/templates/message.template.html';
+                    a = new Alpha.User.Profile.messages();
+                    $('#messaging').animateCss(Alpha.Utility.comman.animateType);
                     break;
                 default:
                     break;

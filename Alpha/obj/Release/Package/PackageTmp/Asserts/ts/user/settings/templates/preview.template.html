@@ -29,7 +29,7 @@
                         <p style="font-size:11px;">Answers</p>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" data-bind="visible:IsMine">
                     <div class="col-md-12">
                         <div class="btn-group pull-right">
                             <div class="btn-group btn-group-xs" role="group" aria-label="action">
@@ -89,6 +89,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p data-bind="text: MaritalStatus">Marital Status</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="color:#999;">Employeement:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p data-bind="text: Employeement">Employeement</p>
                                 </div>
                             </div>
                             <div class="row">

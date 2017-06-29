@@ -24,7 +24,7 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
         {
             service = new UserMessageService(new UnitOfWork());
         }
-        [HttpGet, Route("message")]
+        [HttpPost, Route("message/read")]
         public IHttpActionResult Read(UserMessageSendRequestBo item)
         {
             try

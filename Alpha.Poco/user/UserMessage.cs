@@ -17,5 +17,6 @@ namespace Alpha.Poco
         [Required, StringLength(500), DataType("nvarchar")]
         public string Message { get; set; }
         public DateTime SendDate { get; set; }
+        public bool IsRead { get; set;  }
     }
 }

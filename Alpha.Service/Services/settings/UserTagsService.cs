@@ -126,7 +126,7 @@ namespace Alpha.Service.Services
                         IsTagThere = (count == 1),
                         OwnerEmail = tag.Email,
                         OwnerName = tag.Name,
-                        OwnerProfileImage = ProfileImage(tag.Email),
+                        OwnerProfileImage = "",
                         OwnerId = tag.Owner
                     };
                 }

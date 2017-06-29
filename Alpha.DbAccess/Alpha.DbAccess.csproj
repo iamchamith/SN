@@ -166,6 +166,10 @@
     <Compile Include="Migrations\201706281025401_addUserMessagetable.Designer.cs">
       <DependentUpon>201706281025401_addUserMessagetable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706290619339_addIsReadField.cs" />
+    <Compile Include="Migrations\201706290619339_addIsReadField.Designer.cs">
+      <DependentUpon>201706290619339_addIsReadField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -263,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706281025401_addUserMessagetable.resx">
       <DependentUpon>201706281025401_addUserMessagetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706290619339_addIsReadField.resx">
+      <DependentUpon>201706290619339_addIsReadField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

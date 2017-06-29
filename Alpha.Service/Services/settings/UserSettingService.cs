@@ -41,6 +41,7 @@ namespace Alpha.Service.Services
             try
             {
                 var item = Mapper.Map<UserBo>(this.uow.UserRepository.GetByID(id));
+                item.ProfileImage = $"{Bo.Utility.Configs.ImagePrefixBlob}{Bo.Enums.Enums.Imagetype.profileimages}/" + item.ProfileImage;
                 item.Password = string.Empty;
                 return item;
             }
@@ -122,7 +123,6 @@ namespace Alpha.Service.Services
             {
                 throw ExceptionHandler(e);
             }
-
         }
 
         Task<List<UserBo>> IRepository<UserBo, Guid>.Read(Guid userid)
@@ -133,6 +133,20 @@ namespace Alpha.Service.Services
         public Task Delete(Guid id, Guid userid)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task UpdateProfileImage(Guid userid, string profileimage)
+        {
+            try
+            {
+                var r = this.uow.UserRepository.GetByID(userid);
+                r.ProfileImage = profileimage;
+                await this.uow.SaveAsync();
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
         }
     }
 }
