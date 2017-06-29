@@ -12,7 +12,7 @@ namespace Alpha.Service.Interfaces
         SessionBo Login(UserLoginBo item);
         Task<SessionBo> Register(UserBo item);
         Task ChangePassword(ChangePasswordBo item);
-        Task<string> ForgetPasswordRequest(string email);
+        Task<string[]> ForgetPasswordRequest(string email);
         Task<SessionBo> ForgetPasswordRequestTokenValidate(string token, string email);
         Task ChangePassword(string password, Guid userid);
     }

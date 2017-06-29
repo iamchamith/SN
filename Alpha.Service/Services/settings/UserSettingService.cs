@@ -72,7 +72,7 @@ namespace Alpha.Service.Services
             }
         }
 
-        public async Task<string> SendValidateEmailToken(Guid userid)
+        public async Task<string[]> SendValidateEmailToken(Guid userid)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace Alpha.Service.Services
                 var result = this.uow.UserRepository.GetByID(userid);
                 result.Token = $"{Enums.TokenType.EmailValidate}-{random}";
                 await this.uow.SaveAsync();
-                return random;
+                return new string[] { random, result.Name };
             }
             catch (Exception e)
             {

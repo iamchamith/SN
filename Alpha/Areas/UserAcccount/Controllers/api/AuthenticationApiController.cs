@@ -74,10 +74,11 @@ namespace Alpha.Areas.UserAcccount.Controllers
         {
             try
             {
-                var random = await this.service.ForgetPasswordRequest(email);
+                var result = await this.service.ForgetPasswordRequest(email);
                 Email.Send(new Alpha.Models.EmailModel
                 {
-                    Body = random,
+                    UserName = result[1],
+                    Body = $"Please use <b>{result[0]} </b> code for validate yourself :)",
                     Subject = "Forget password token",
                     ToPrimary = email.Trim().ToLower()
                 });

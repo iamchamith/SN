@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.Service", "Alpha.Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.DbAccess", "Alpha.DbAccess\Alpha.DbAccess.csproj", "{D014B391-9C5F-4FC6-9F04-DF33B67E71C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7E039BFF-6119-4CD2-8CA4-8BBD0DC7C5E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.AutomationTest", "Alpha.AutomationTest\Alpha.AutomationTest.csproj", "{438EC385-4DF2-423B-9DFA-78751972E666}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,10 @@ Global
 		{D014B391-9C5F-4FC6-9F04-DF33B67E71C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D014B391-9C5F-4FC6-9F04-DF33B67E71C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D014B391-9C5F-4FC6-9F04-DF33B67E71C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{438EC385-4DF2-423B-9DFA-78751972E666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{438EC385-4DF2-423B-9DFA-78751972E666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{438EC385-4DF2-423B-9DFA-78751972E666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{438EC385-4DF2-423B-9DFA-78751972E666}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +58,6 @@ Global
 		{E8C5D5B8-D15A-415C-BD9C-C2D0DD5E3E7C} = {AA43880F-B7FA-4771-8878-954CEA56D81D}
 		{67215ED9-2B19-4FF2-B0A8-9A82A5867CC2} = {AA43880F-B7FA-4771-8878-954CEA56D81D}
 		{D014B391-9C5F-4FC6-9F04-DF33B67E71C5} = {AA43880F-B7FA-4771-8878-954CEA56D81D}
+		{438EC385-4DF2-423B-9DFA-78751972E666} = {7E039BFF-6119-4CD2-8CA4-8BBD0DC7C5E0}
 	EndGlobalSection
 EndGlobal

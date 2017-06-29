@@ -96,11 +96,12 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
 
             try
             {
-                var token = await this.service.SendValidateEmailToken(GCSession.UserGuid);
+                var result = await this.service.SendValidateEmailToken(GCSession.UserGuid);
                 var taskList = new List<Task>();
                 Email.Send(new Alpha.Models.EmailModel
                 {
-                    Body = token,
+                    Body = $"Hay your email is not valied.<br/> please type  <b>{result[0]}</b> code for validate",
+                    UserName = result[1],
                     Subject = "Validate email token",
                     ToPrimary = GCSession.Email
                 });

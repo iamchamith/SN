@@ -111,7 +111,7 @@ namespace Alpha.Service.Services
             }
         }
 
-        public async Task<string> ForgetPasswordRequest(string email)
+        public async Task<string[]> ForgetPasswordRequest(string email)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace Alpha.Service.Services
                 var random = Bo.Utility.Helper.GenarateRandomNumber(5);
                 result.Token = $"{Enums.TokenType.ForgetPassword}-{random}";
                 await uow.SaveAsync();
-                return random;
+                return new string[] { random, result.Name };
             }
             catch (Exception e)
             {

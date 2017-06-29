@@ -7,7 +7,7 @@ namespace Alpha.Models
 {
     public class EmailModel
     {
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public string ToPrimary { get; set; }
         public List<string> ToSecondary { get; set; }
         public string Body { get; set; }
@@ -15,6 +15,7 @@ namespace Alpha.Models
         public EmailModel()
         {
             ToSecondary = new List<string>();
+            UserName = "Criend,";
         }
     }
 }

@@ -9,5 +9,7 @@ namespace Alpha.Utility
     {
         public static string SiteName = "criends";
         public static int ViewCacheTime = int.MaxValue;
+        public static string Domain = "http://www.criends.com";
+        public static string SiteEmailLogo = "https://criends.blob.core.windows.net/resources/emaillogo.PNG";
     }
 }
