@@ -8,7 +8,7 @@
         <div class="col-md-12" style="float:left;">
             <div class="row">
                 <div class="col-md-1">
-                    #if(!post.Anonymous){#
+                    #if(post.Anonymous){#
                     <a href="/useracccount/userprofile?userid=#=post.UserId#">
                         <img width="50" height="50" src="#=post.ProfileImage#" style="border-radius:100px;"
                              title="#=post.Name#">
@@ -20,40 +20,44 @@
                 </div>
                 <div class="col-md-11" style="vertical-align:middle">
                     <br />
-                    #if(!post.Anonymous){#
+                    #if(post.Anonymous){#
                     <b> <a href="/useracccount/userprofile?userid=#=post.UserId#"> Chamith Sarana </a></b>
-                #}else{#
-                   <b>Anonymas</b>   
-                 #}#
+                    #}else{#
+                    <b>Anonymas</b>
+                    #}#
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-1"></div>
                 #if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Question)){#
                 <div class="col-md-11">
-                    <b>#=post.Topic#</b>
+                    #=post.Topic#
                     <br>
                     <p class="tags">#=post.PostQuestion.Description#</p>
                     <br>
                 </div>
                 #}else if(post.PostType=== @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
-                <b>#=post.Topic#</b><br />
+                #=post.Topic#<br /><br />
                 <div class="col-md-5">
-                    <img src="/images/postimages/#=post.PostPoll.Vs1Url#" class="img-thumbnail" /><br />
+                    <img src="#=post.PostPoll.Vs1Url#" class="img-thumbnail" width="100%" height="250"  onerror="this.src='~/Asserts/images/errorimageloading.jpg'"/><br />
                     <b>This</b>
                 </div>
                 <div class="col-md-5">
-                    <img src="/images/postimages/#=post.PostPoll.Vs2Url#" class="img-thumbnail" /><br />
+                    <img src="#=post.PostPoll.Vs2Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='~/Asserts/images/errorimageloading.jpg'"/><br />
                     <b>This</b>
                 </div>
                 <div class="col-md-1"></div>
                 #}else if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Comment)){#
                 <div class="col-md-11">
-                    <a href=""><b>#=post.Topic#</b></a>
+                     #=post.Topic# 
                     <br>
                     <p class="tags">#=post.PostNeedComment.Description#</p>
                     <br>
+                    #if(post.PostNeedComment.IsImage){#
+                    <img src="#=post.PostNeedComment.ImageUrl#" class="img-thumbnail" width="50%" height="250" onerror="this.src='~/Asserts/images/errorimageloading.jpg'"/><br />
+                    #}#
                 </div>
+                <br />
                 #}#
             </div>
             <div padding-left:10px;">
@@ -63,6 +67,7 @@
         </div>
         <br />
     </div>
+    #if(post.PostType!= @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
     <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-2">
@@ -71,6 +76,7 @@
         <div class="col-md-2"><a href="\#." data-userPostId="#=post.UserPostId#" class="dislike">Dislike(2000)</a></div>
         <div class="col-md-2"><a href="\#." data-userPostId="#=post.UserPostId#" class="viewpost">View(115)</a></div>
     </div>
+    #}#
     <hr style="margin-top:15px; margin-bottom:15px;">
     #
     var isthere = true;

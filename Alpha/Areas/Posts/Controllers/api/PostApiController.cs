@@ -20,10 +20,10 @@ using Alpha.Bo.Enums;
 namespace Alpha.Areas.Posts.Controllers
 {
     [RoutePrefix("api/v1")]
-    public class UserPostController : BaseApiController, IApiService<PostViewModel, string>
+    public class PostApiController : BaseApiController, IApiService<PostViewModel, string>
     {
         IUserPost service;
-        public UserPostController()
+        public PostApiController()
         {
             service = new UserPostService(new UnitOfWork());
         }

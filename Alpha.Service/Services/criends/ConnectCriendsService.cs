@@ -11,7 +11,8 @@ using Alpha.DbAccess;
 using Alpha.Bo.Enums;
 using Alpha.Poco;
 using Alpha.Bo;
-
+using Alpha.Bo.Bo.criends;
+using AutoMapper;
 namespace Alpha.Service.Services
 {
     public class ConnectCriendsService : BaseService, IConnectCriends
@@ -148,6 +149,63 @@ namespace Alpha.Service.Services
             }
         }
 
+        private class UserRelationCount
+        {
+            public bool IsFollowing { get; set; }
+            public bool IsFollower { get; set; }
+        }
+        public async Task<RelationCountBo> GetCriendsRelationCount(Guid userid)
+        {
+            try
+            {
+                using (var cn = DatabaseInfo.Connection)
+                {
+                    var response = await cn.QueryMultipleAsync(@"select IsFollowing, IsFollower from UserRelations
+                      where OwnerId = @UserId and IsBlock <> 1;
+                    select  IsFollowing,IsFollower from UserRelations where UserId = @UserId and IsBlock <> 1",
+                            new { UserId = userid });
 
+                    var my = response.Read<UserRelationCount>();
+                    var criends = response.Read<UserRelationCount>();
+
+                    return new RelationCountBo
+                    {
+                        MyFollowers = my.Count(p => p.IsFollower),
+                        MyFollowing = my.Count(p => p.IsFollowing),
+                        OtherFollowing = criends.Count(p => p.IsFollowing),
+                        OtherFollowers = criends.Count(p => p.IsFollower)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ExceptionHandler(ex);
+            }
+        }
+
+        public async Task<CriendsRelationsBo> GetCriendRelation(Guid my, Guid criend)
+        {
+            try
+            {
+                var res = this.uow.Context.UserRelations.FirstOrDefault(p => p.OwnerId == my && p.UserId == criend);
+                if (res is null)
+                {
+                    return new CriendsRelationsBo
+                    {
+                        IsBlock = false,
+                        IsFollower = false,
+                        IsFollowing = false
+                    };
+                }
+                else
+                {
+                    return Mapper.Map<CriendsRelationsBo>(res);
+                }
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
+        }
     }
 }

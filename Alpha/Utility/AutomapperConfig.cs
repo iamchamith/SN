@@ -54,6 +54,8 @@ namespace Alpha.Utility
             Mapper.CreateMap<UserMessageViewModel, UserMessageBo>().ReverseMap();
             Mapper.CreateMap<UserMessageBo, UserMessage>().ReverseMap();
 
+            Mapper.CreateMap<CriendsRelationsBo, UserRelation>().ReverseMap();
+
         }
     }
 }

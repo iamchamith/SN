@@ -84,5 +84,6 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
                 return InternalServerError(e);
             }
         }
+        
     }
 }

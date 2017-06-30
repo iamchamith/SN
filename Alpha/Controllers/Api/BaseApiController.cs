@@ -1,5 +1,6 @@
 ﻿using Alpha.Areas.UserAcccount.Models;
 using Alpha.Bo;
+using Alpha.Bo.Bo.criends;
 using Alpha.Bo.Enums;
 using Alpha.DbAccess;
 using Alpha.Utility;
@@ -21,7 +22,7 @@ namespace Alpha.Controllers.Api
     public class BaseApiController : ApiController
     {
         [NonAction]
-        protected UserPreviewPageViewModel GetPreviewObject(UserBo item, bool ismine = true)
+        protected UserPreviewPageViewModel GetPreviewObject(UserBo item, RelationCountBo relationcount, bool ismine = true)
         {
             var result = new UserPreviewPageViewModel();
             result.Bio = item.Bio;
@@ -32,6 +33,10 @@ namespace Alpha.Controllers.Api
             result.Gender = ((Enums.Gender)item.Gender).ToString().Replace('_', ' ');
             result.ProfileImage = (ismine) ? GCSession.ProfileImage : item.ProfileImage;
             result.IsMine = item.UserId == GCSession.UserGuid;
+            result.Followings = relationcount.MyFollowing;
+            result.Followers = relationcount.MyFollowers;
+            result.FollowersCriends = relationcount.OtherFollowers;
+            result.FollowingsCriends = relationcount.OtherFollowing;
             return result;
         }
 
@@ -76,6 +81,20 @@ namespace Alpha.Controllers.Api
                 container.CreateIfNotExists();
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
                 blockBlob.UploadFromStream(fileStream);
+            }
+            catch (Exception e) { throw e; }
+        }
+
+        [NonAction]
+        void RemoveImageBlob(Enums.Imagetype imagetype,string fileName) {
+
+            try
+            {
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Configs.BlobConnectionString);
+                CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+                CloudBlobContainer container = blobClient.GetContainerReference(imagetype.ToString());
+                container.CreateIfNotExists();
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
             }
             catch (Exception e) { throw e; }
         }

@@ -281,7 +281,7 @@
             this.ajax.get('/api/v1/user/settings/priviewpage', null, null, '', (e) => {
                 var viewModel = kendo.observable({
                     Followings: e.Followings,
-                    Followers: e.Followings,
+                    Followers: e.Followers,
                     Asks: e.Asks,
                     Answers: e.Answers,
                     Country: e.Country,
@@ -383,11 +383,12 @@
             $('#fileProfileImage').on('change', (e: any) => {
                 this.cm.fileTo64BaseString(e.target.files[0], (r) => {
                     this.data = r;
+                    $('#profileimagechangeble').attr('src', r);
                 });
             });
             $('#saveImage').off('click').on('click', (el) => {
-                this.ajax.post('/api/v1/user/settings/profileimage', { profileimage: this.data }, el, 'updated', () => {
-
+                this.ajax.post('/api/v1/user/settings/profileimage', { ImageData: this.data }, el, 'updated', (res) => {
+                    location.reload();
                 });
             });
         }

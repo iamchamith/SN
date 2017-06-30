@@ -27,12 +27,14 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
         IUserSettings service;
         IAuthontication serviceAuth;
         IUserContact serviceContect;
+        IConnectCriends serviceConnectionCriends;
         public SettingsApiController()
         {
             var uow = new UnitOfWork();
             service = new UserSettingService(uow);
             serviceAuth = new AuthonticationService(uow);
             serviceContect = new UserContactService(uow);
+            serviceConnectionCriends = new ConnectCriendsService(uow);
         }
         #region basic info
         [Route("looksup"), HttpGet, Authorized]
@@ -141,7 +143,8 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
             try
             {
                 var result = await this.service.Read(GCSession.UserGuid);
-                return Ok<UserPreviewPageViewModel>(GetPreviewObject(result));
+                var relations = await this.serviceConnectionCriends.GetCriendsRelationCount(GCSession.UserGuid);
+                return Ok<UserPreviewPageViewModel>(GetPreviewObject(result, relations));
             }
             catch (Exception e)
             {
@@ -253,15 +256,15 @@ namespace Alpha.Areas.UserAcccount.Controllers.api
             }
         }
         #endregion
-        [HttpPost, Authorize, Route("profileimage")]
-        public async Task<IHttpActionResult> ChangeProfileImage(string profileimage)
+        [HttpPost, Authorized, Route("profileimage")]
+        public async Task<IHttpActionResult> ChangeProfileImage(ImagesViewModel profileimage)
         {
             try
             {
-                var profileimagex = UploadImage(profileimage, Enums.Imagetype.profileimages, Guid.NewGuid().ToString());
+                var profileimagex = UploadImage(profileimage.ImageData, Enums.Imagetype.profileimages, Guid.NewGuid().ToString());
                 await this.service.UpdateProfileImage(GCSession.UserGuid, profileimagex);
                 GCSession.ProfileImageName = profileimagex;
-                return Ok();
+                return Ok<string>(profileimagex);
             }
             catch (Exception e)
             {

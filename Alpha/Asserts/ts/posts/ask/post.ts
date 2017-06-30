@@ -14,37 +14,69 @@ module Alpha.Post {
         public execute() {
             this.initController();
             this.bindSearchViewModel();
-            var search = {
+            var search: postSearchRequest = {
                 Topic: '',
                 IsDateDesc: true,
+                Skip: 0,
+                Take: 10,
                 UserId: this.userid,
-                Skip: 0, Take: 10
+                IsMyAnswers: false,
+                IsMyAsks: false,
+                IsNeedComments: true,
+                IsPoll: true,
+                IsQuestions: true,
+                Tags: []
             };
             this.bindSearchData(search);
         }
         private bindSearchViewModel() {
-            var viewModel = kendo.observable({
-                Reason: true,
-                Titile: '',
-                search: (el) => {
-                    var search = {
-                        Topic: viewModel.get('Titile'),
-                        IsDateDesc: viewModel.get('Reason'),
-                        UserId: this.userid,
-                        Skip: 0, Take: 10
-                    };
-                    this.bindSearchData(search);
-                }, reset: () => {
-                    var search = {
-                        Topic: '',
-                        IsDateDesc: true, Skip: 0, Take: 10
-                    };
-                    this.bindSearchData(search);
-                    viewModel.set('Titile', '');
-                    viewModel.set('Reason', true);
-                }
+            this.ajax.get('/api/v1/tag/read', null, null, "", (e) => {
+                var viewModel = kendo.observable({
+                    Reason: true,
+                    Titile: '',
+                    IsMyAnswers: false,
+                    IsMyAsks: false,
+                    IsNeedComments: true,
+                    IsPoll: true,
+                    IsQuestions: true,
+                    Tagss: e,
+                    Tag: '',
+                    search: (el) => {
+                        var search: postSearchRequest = {
+                            Topic: viewModel.get('Titile'),
+                            IsDateDesc: viewModel.get('Reason'),
+                            UserId: this.userid,
+                            Skip: 0,
+                            Take: 10,
+                            IsMyAnswers: viewModel.get('IsMyAnswers'),
+                            IsMyAsks: viewModel.get('IsMyAsks'),
+                            IsNeedComments: viewModel.get('IsNeedComments'),
+                            IsPoll: viewModel.get('IsPoll'),
+                            IsQuestions: viewModel.get('IsQuestions'),
+                            Tags: []
+                        };
+                        this.bindSearchData(search);
+                    }, reset: () => {
+                        var search: postSearchRequest = {
+                            Topic: '',
+                            IsDateDesc: true,
+                            Skip: 0,
+                            Take: 10,
+                            UserId: this.userid,
+                            IsMyAnswers: false,
+                            IsMyAsks: false,
+                            IsNeedComments: true,
+                            IsPoll: true,
+                            IsQuestions: true,
+                            Tags: []
+                        };
+                        this.bindSearchData(search);
+                        viewModel.set('Titile', '');
+                        viewModel.set('Reason', true);
+                    }
+                });
+                kendo.bind($("#searchpostcontrollers"), viewModel);
             });
-            kendo.bind($("#searchpostcontrollers"), viewModel);
         }
         private initController() {
             $('.like').off('click').on('click', () => { alert('liked'); });
@@ -53,7 +85,7 @@ module Alpha.Post {
                 $('#showpostinfo-model').modal('show');
             });
         }
-        private bindSearchData(e) {
+        private bindSearchData(e: postSearchRequest) {
             this.ajax.post('/api/v1/post/search', e, null, "search is complete", (r) => {
                 var d = [];
                 d.push(r);

@@ -170,6 +170,10 @@
     <Compile Include="Migrations\201706290619339_addIsReadField.Designer.cs">
       <DependentUpon>201706290619339_addIsReadField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706300904525_removePostDescriptinRequred.cs" />
+    <Compile Include="Migrations\201706300904525_removePostDescriptinRequred.Designer.cs">
+      <DependentUpon>201706300904525_removePostDescriptinRequred.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -270,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706290619339_addIsReadField.resx">
       <DependentUpon>201706290619339_addIsReadField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706300904525_removePostDescriptinRequred.resx">
+      <DependentUpon>201706300904525_removePostDescriptinRequred.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

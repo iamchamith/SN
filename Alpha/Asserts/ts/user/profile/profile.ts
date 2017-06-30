@@ -82,6 +82,22 @@
             var result = kendo.render(template, d);
             $("#contactinfopreview").html(result);
         }
+        private renderUserRelations(r) {
+            var d = [];
+            d.push(r);
+            var templateContent = $("#userRelations-template").html();
+            var template = kendo.template(templateContent);
+            var result = kendo.render(template, d);
+            $("#relationsbuttonlist").html(result);
+            $('.relation').off('click').on('click', (el) => {
+                let searchRequest = {
+                    OparationType: !$(el.target).data('isrelation'),
+                    UserId: $(el.target).data('userid'),
+                    State: $(el.target).data('type')
+                };
+                this.cm.sendRelationshipRequest(searchRequest, el);
+            });
+        }
         private bindViewModel() {
             this.ajax.get(`/api/v1/userprofile/preview?guid=${this.userid}`, null, null, '', (re) => {
                 var e = re.BasicInfo;
@@ -106,6 +122,7 @@
                 $('#criendprofileimage').val(e.ProfileImage);
                 this.renderUserTags(re.UserTags);
                 this.renderUserContacts(re.UserContacts);
+                this.renderUserRelations(re.CriendsRelations);
             });
         }
     }
@@ -143,9 +160,9 @@
         }
         private bindViewModel() {
             var viewModel = kendo.observable({
-                ChatWith: 'Chamith',
+                ChatWith: $('#criendname').val(),
                 Message: '',
-                ProfileImage: '',
+                ProfileImage: Alpha.Utility.comman.getUserProfileImage(),
                 ToUser: this.userid,
                 send: (el) => {
                     this.ajax.post('/api/v1/user/message', viewModel, el, 'sent', (e) => {

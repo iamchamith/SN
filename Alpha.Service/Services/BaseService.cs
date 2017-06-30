@@ -31,5 +31,20 @@ namespace Alpha.Service.Services
                 return ex;
             }
         }
+
+        public string ImagePostBlobPrefix
+        {
+            get
+            {
+                return Bo.Utility.Configs.ImagePrefixBlob + Bo.Enums.Enums.Imagetype.postimages.ToString() + "/";
+            }
+        }
+        public string ImageProfileBlobPrefix
+        {
+            get
+            {
+                return Bo.Utility.Configs.ImagePrefixBlob + Bo.Enums.Enums.Imagetype.profileimages.ToString() + "/";
+            }
+        }
     }
 }

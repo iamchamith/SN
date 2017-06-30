@@ -10,5 +10,6 @@ namespace Alpha.Areas.UserAcccount.Models
         public List<UserContactsViewModel> UserContacts { get; set; }
         public UserPreviewPageViewModel BasicInfo { get; set; }
         public List<UserTagsViewModel> UserTags { get;set; }
+        public CriendsRelationsViewModel CriendsRelations { get; set; }
     }
 }

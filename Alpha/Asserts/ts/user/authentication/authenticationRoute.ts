@@ -38,18 +38,13 @@ module Alpha.User.Authentication {
                 $('#welcome').animateCss('pulse');
             });
         });
-        router.route("/login", function () {
-            templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/login.template.html", () => {
+        router.route("/join", function () {
+            templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/join.template.html", () => {
                 a = new Alpha.User.Authentication.login();
                 a.execute();
-                $('#login').animateCss(Alpha.Utility.comman.animateType);
-            });
-        });
-        router.route("/register", function () {
-            templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/register.template.html", () => {
                 a = new Alpha.User.Authentication.register();
                 a.execute();
-                $('#register').animateCss(Alpha.Utility.comman.animateType);
+                $('#join').animateCss(Alpha.Utility.comman.animateType);
             });
         });
         router.start();

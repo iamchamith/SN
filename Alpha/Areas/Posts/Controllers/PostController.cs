@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.Posts.Controllers
 {
-    [OutputCache(Duration = int.MaxValue)]
+    //[OutputCache(Duration = int.MaxValue)]
     public class PostController : Controller
     {
         [HttpGet, Compress]

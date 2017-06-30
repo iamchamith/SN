@@ -50,6 +50,7 @@
     <Compile Include="Bo\auth\AuthBo.cs" />
     <Compile Include="Bo\criends\CriendsRelationsBo.cs" />
     <Compile Include="Bo\criends\CriendsRelationshipBo.cs" />
+    <Compile Include="Bo\criends\RelationCountBo.cs" />
     <Compile Include="Bo\criends\SearchCriendsRequestBo.cs" />
     <Compile Include="Bo\criends\SearchCriendsResultBo.cs" />
     <Compile Include="Bo\DropDownBo.cs" />

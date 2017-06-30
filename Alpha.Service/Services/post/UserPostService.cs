@@ -154,8 +154,10 @@ namespace Alpha.Service.Services
             {
                 var sql = new StringBuilder();
                 var where = new StringBuilder();
+                var posttypeseach = new StringBuilder();
                 where.Append(" where ");
                 var isWhere = false;
+                var isposttypesearch = false;
                 if (!string.IsNullOrEmpty(request.Topic))
                 {
                     where.Append($"	 Post.Topic Like '{request.Topic}%'   and   ");
@@ -166,14 +168,34 @@ namespace Alpha.Service.Services
                     where.Append($" UserPost.UserId Like '{request.UserId}'   and   ");
                     isWhere = true;
                 }
+                if (request.IsNeedComments)
+                {
+                    posttypeseach.Append($" Post.PostType = '{(int)Bo.Enums.Enums.PostType.Comment}'   or   ");
+                    isposttypesearch = true;
+                }
+                if (request.IsPoll)
+                {
+                    posttypeseach.Append($" Post.PostType = '{(int)Bo.Enums.Enums.PostType.Poll}'   or   ");
+                    isposttypesearch = true;
+                }
+                if (request.IsQuestions)
+                {
+                    posttypeseach.Append($" Post.PostType = '{(int)Bo.Enums.Enums.PostType.Question}'   or   ");
+                    isposttypesearch = true;
+                }
                 var _where = string.Empty;
                 if (isWhere)
                 {
                     _where = where.ToString().Substring(0, where.ToString().Length - 8);
                 }
+                if (isposttypesearch)
+                {
+                    _where += $@"
+                       {(!isWhere?" WHERE ":" AND ")} ({posttypeseach.ToString().Substring(0, posttypeseach.ToString().Length - 8)})";
+                }
                 sql.Append($@"select UserPost.Id as [userPostId],UserPost.PostId,[User].Name,
                     [User].Email,[User].UserId,
-                    UserPost.Anonymous,UserPost.PostDate,Post.PostType,Post.Topic,post.Tags from [User]
+                    UserPost.Anonymous,UserPost.PostDate,Post.PostType,Post.Topic,post.Tags,[User].ProfileImage from [User]
                     inner join UserPost on [User].UserId = UserPost.UserId
                     inner join Post on Post.PostId = UserPost.PostId {_where}
                     order by UserPost.PostDate {(request.IsDateDesc ? "Desc" : "Asc")}
@@ -200,6 +222,7 @@ namespace Alpha.Service.Services
                         {
                             item.PostNeedComment = Mapper.Map<PostNeedCommentBo>(askNeedComment.FirstOrDefault(p => p.PostId == item.PostId) ?? new PostNeedComment());
                         }
+                        item.ProfileImage = base.ImageProfileBlobPrefix + item.ProfileImage; 
                     }
                     return r;
                 }
@@ -226,8 +249,15 @@ namespace Alpha.Service.Services
         {
             try
             {
-                return cn.Query<PostPoll>(@"select  PostId,Topic,Vs1Url,Vs2Url from PostPolls where PostId in @PostId", new { PostId = postId }).ToList();
+                var res = cn.Query<PostPoll>($@"
+                select  PostId,Topic,Vs1Url,Vs2Url from PostPolls where PostId in @PostId", new { PostId = postId }).ToList();
 
+                foreach (var item in res)
+                {
+                    item.Vs1Url = base.ImagePostBlobPrefix + item.Vs1Url;
+                    item.Vs2Url = base.ImagePostBlobPrefix + item.Vs2Url;
+                }
+                return res;
             }
             catch (Exception)
             {
@@ -239,8 +269,20 @@ namespace Alpha.Service.Services
         {
             try
             {
-                return cn.Query<PostNeedComment>(@"select PostId,Topic,Description,ImageUrl from PostNeedComments where PostId in @PostId", new { PostId = postId }).ToList();
-
+                var res = cn.Query<PostNeedComment>(@"select PostId,Topic,Description,ImageUrl from PostNeedComments where PostId in @PostId", new { PostId = postId }).ToList();
+                foreach (var item in res)
+                {
+                    if (string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        item.IsImage = false;
+                        item.ImageUrl = "";
+                    }
+                    else {
+                        item.IsImage = true;
+                        item.ImageUrl = base.ImagePostBlobPrefix + item.ImageUrl;
+                    }
+                }
+                return res;
             }
             catch (Exception)
             {

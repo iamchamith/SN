@@ -12,5 +12,6 @@ namespace Alpha.Bo.Bo.posts
     {
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsImage { get; set; }
     }
 }

@@ -30,11 +30,20 @@ namespace Alpha.Bo
         public Enums.Enums.PostType posttype { get; set; }
         public int Skip { get; set; }
         public int Take { get; set; }
+
+        public bool IsMyAnswers { get; set; }
+        public bool IsMyAsks { get; set; }
+        public bool IsNeedComments { get; set; }
+        public bool IsPoll { get; set; }
+        public bool IsQuestions { get; set; }
+
         public Enums.Enums.PostSearchType PostSearchType { get; set; }
         public UserPostSearchRequest()
         {
             IsDateDesc = true;
             PostSearchType = PostSearchType.Feed;
+            IsMyAnswers = IsMyAsks = false;
+            IsNeedComments = IsPoll = IsQuestions = true;
         }
     }
     public class UserPostSearchResponse
@@ -48,8 +57,8 @@ namespace Alpha.Bo
         public Guid PostId { get; set; }
         public string Tags { get; set; }
         public string Topic { get; set; }
+        public string ProfileImage { get; set; }
         public Enums.Enums.PostType PostType { get; set; }
-
         public PostQuestionBo PostQuestion { get; set; }
         public PostPollBo PostPoll { get; set; }
         public PostNeedCommentBo PostNeedComment { get; set; }

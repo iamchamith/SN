@@ -29,9 +29,12 @@ namespace Alpha.Areas.UserAcccount.Models
         public string Employeement { get; set; }
     }
 
-    public class UserPreviewPageViewModel: UserBasicViewModel {
+    public class UserPreviewPageViewModel : UserBasicViewModel
+    {
         public int Followings { get; set; }
         public int Followers { get; set; }
+        public int FollowingsCriends { get; set; }
+        public int FollowersCriends { get; set; }
         public int Asks { get; set; }
         public int Answers { get; set; }
         public new string Country { get; set; }

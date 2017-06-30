@@ -17,9 +17,11 @@ namespace Alpha.Poco
         public Guid PostId { get; set; }
         [Required, DataType("nvarchar"), StringLength(500)]
         public string Topic { get; set; }
-        [Required, DataType("nvarchar"), StringLength(1500)]
+        [DataType("nvarchar"), StringLength(1500)]
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public string Tags { get; set; }
+        [NotMapped]
+        public bool IsImage { get; set; }
     }
 }

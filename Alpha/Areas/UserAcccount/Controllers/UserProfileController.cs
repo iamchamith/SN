@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.UserAcccount.Controllers
 {
-    [OutputCache(Duration = int.MaxValue)]
+    //[OutputCache(Duration = int.MaxValue)]
     public class UserProfileController : Controller
     {
         [HttpGet, Compress]

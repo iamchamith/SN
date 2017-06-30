@@ -1,4 +1,5 @@
 ﻿using Alpha.Bo.Bo;
+using Alpha.Bo.Bo.criends;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace Alpha.Service.Interfaces
         Task<List<SearchCriendsResultBo>> Search(SearchCriendsRequestBo item);
 
         Task AddRemoveRelation(CriendsRelationshipBo item);
+
+        Task<RelationCountBo> GetCriendsRelationCount(Guid userid);
+
+        Task<CriendsRelationsBo> GetCriendRelation(Guid my, Guid criend);
     }
 }

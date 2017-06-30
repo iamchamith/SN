@@ -145,8 +145,8 @@
                         if (!$x.hasClass('btn-success')) {
                             $x.addClass('btn-success');
                         }
-                        if ($y.hasClass('btn-success')) {
-                            $y.removeClass('btn-success');
+                        if ($y.hasClass('btn-danger')) {
+                            $y.removeClass('btn-danger');
                         }
                         if (!$y.hasClass('btn-default')) {
                             $y.addClass('btn-default');
@@ -174,8 +174,8 @@
                         if (!$x.hasClass('btn-success')) {
                             $x.addClass('btn-success');
                         }
-                        if ($y.hasClass('btn-success')) {
-                            $y.removeClass('btn-success');
+                        if ($y.hasClass('btn-danger')) {
+                            $y.removeClass('btn-danger');
                         }
                         if (!$y.hasClass('btn-default')) {
                             $y.addClass('btn-default');
@@ -189,8 +189,8 @@
                     let $z = $(`#${userId}_follower`);
                     if (isrelation) {
                         // remove relation
-                        if ($x.hasClass('btn-success')) {
-                            $x.removeClass('btn-success');
+                        if ($x.hasClass('btn-danger')) {
+                            $x.removeClass('btn-danger');
                         }
                         if (!$x.hasClass('btn-default')) {
                             $x.addClass('btn-default');
@@ -201,8 +201,8 @@
                         if ($x.hasClass('btn-default')) {
                             $x.removeClass('btn-default');
                         }
-                        if (!$x.hasClass('btn-success')) {
-                            $x.addClass('btn-success');
+                        if (!$x.hasClass('btn-danger')) {
+                            $x.addClass('btn-danger');
                         }
                         if ($y.hasClass('btn-success')) {
                             $y.removeClass('btn-success');
@@ -221,7 +221,6 @@
                         $z.data('isrelation', false);
                     }
                 }
-
             }
             ajax.post('/api/v1/criends/relationship', searchRequest, null, 'saved', () => {
                 changeText(el);

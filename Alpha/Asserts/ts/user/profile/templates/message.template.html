@@ -25,15 +25,25 @@
     #var isthere = false;
     for(var i=0;i< data.length;i++ ){
     var chat = data[i];
-    console.log(chat);
-    #
+    var myprofileimage = ''
+    var criendprofileimage = document.getElementById("criendprofileimage").value;
+    if(chat.FromUser === document.getElementById("meuserid").value){#
     <div class="row">
         <div class="col-md-1">
         <img src="#=chat.ProfileImage#"
           onerror="this.src='/asserts/images/boy.png'"  class="img-thumbnail" width="75" height="75" /> </div>
         <div class="col-md-11">#=chat.Message#</div>
     </div>
-    #
+    #}else{#
+    <div class="row">
+        <div class="col-md-1">
+            <img src="#=criendprofileimage#"
+                 onerror="this.src='/asserts/images/boy.png'" class="img-thumbnail" width="75" height="75" />
+        </div>
+        <div class="col-md-11">#=chat.Message#</div>
+    </div>
+    
+    #}
     isthere = true;
     }
     if(!isthere){#

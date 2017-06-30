@@ -20,6 +20,9 @@
     $(document).ready(() => {
         let obj: Alpha.User.Settings.settings;
         var router = new kendo.Router({});
+        $('.menuleftx').off('click').on('click', (e) => {
+          //  window.location.href = $(e.target).children('a').attr('href');
+        });
         router.route("/", function () {
             templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/preview.template.html", () => {
                 $('#leftmenu').animateCss(Alpha.Utility.comman.animateTypeLeftMenu);
