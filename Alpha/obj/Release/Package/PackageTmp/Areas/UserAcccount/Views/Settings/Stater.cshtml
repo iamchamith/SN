@@ -1,0 +1,28 @@
+﻿@{
+    if (Request.Headers["X-PJAX"] != null)
+    {
+        Layout = "~/Views/Shared/_PjaxLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_View.cshtml";
+    }
+} 
+<ul id="leftmenu" class="list-group" style="margin:0px;">
+    <li class="list-group-item list-group-edit menuleftx" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#/basic"><i class="fa fa-info-circle fa-2" aria-hidden="true"></i> Basic Info</a>
+    </li>
+    <li class="list-group-item list-group-edit menuleftx" style="padding:10px; padding-left:20px; border-radius:0px;">
+        <a href="#/image"><i class="fa fa-picture-o fa-2" aria-hidden="true"></i> Profile Image</a>
+    </li>
+    <li class="list-group-item list-group-edit menuleftx" style="padding:10px; padding-left:20px; border-radius:0px; margin-top:5px;">
+        <a href="#/tags"><i class="fa fa-tags fa-2" aria-hidden="true"></i> Tags</a>
+    </li>
+</ul>
+
+@section scripts{
+    <script src="~/Asserts/ts/user/settings/settingsRoute.js"></script>
+    <script src="~/Asserts/ts/user/settings/settingsViewModel.js"></script>
+    <script src="~/Asserts/ts/user/settings/settings.js"></script>
+}
+

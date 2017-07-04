@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using Alpha.Poco;
 using System.Configuration;
+using Alpha.Bo.Utility;
 
 namespace Alpha.DbAccess
 {
@@ -14,7 +15,7 @@ namespace Alpha.DbAccess
         IDbSet<User> Users { get; set; }
         IDbSet<Post> Posts { get; set; }
         IDbSet<UserPost> UserPosts { get; set; }
-        IDbSet<UserPostComment> UserPostComments { get; set; }
+        IDbSet<PostComment> PostComments { get; set; }
         IDbSet<Tag> Tags { get; set; }
         IDbSet<UserTag> UserTags { get; set; }
         IDbSet<UserContact> Contacts { get; set; }
@@ -26,17 +27,18 @@ namespace Alpha.DbAccess
         IDbSet<UserPreferences> UserPreferences { get; set; }
         IDbSet<UserMessage> UserMessages { get; set; }
         IDbSet<PostLike> PostLikes { get; set; }
+        IDbSet<Notification> Notifications { get; set; }
     }
     public class AlphaContext : DbContext, IAlphaContext
     {
-        public AlphaContext() : base(Configurations.Conns)
+        public AlphaContext() : base(Configs.Conns)
         {
 
         }
         public IDbSet<User> Users { get; set; }
         public IDbSet<Post> Posts { get; set; }
         public IDbSet<UserPost> UserPosts { get; set; }
-        public IDbSet<UserPostComment> UserPostComments { get; set; }
+        public IDbSet<PostComment> PostComments { get; set; }
         public IDbSet<Tag> Tags { get; set; }
         public IDbSet<UserTag> UserTags { get; set; }
         public IDbSet<UserContact> Contacts { get; set; }
@@ -48,6 +50,7 @@ namespace Alpha.DbAccess
         public IDbSet<UserPreferences> UserPreferences { get; set; }
         public IDbSet<UserMessage> UserMessages { get; set; }
         public IDbSet<PostLike> PostLikes { get; set; }
+        public IDbSet<Notification> Notifications { get; set; }
     }
 }
 

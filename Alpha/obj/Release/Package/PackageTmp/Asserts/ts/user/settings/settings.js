@@ -9,14 +9,16 @@ var Alpha;
                     this.ajax = new Alpha.Utility.Ajax();
                     this.cm = new Alpha.Utility.comman();
                     this.pop = $("#notification").kendoNotification({ position: { top: 0, bottom: 20, right: 10 } }).data("kendoNotification");
+                    this.isstater = false;
                 }
                 basic.prototype.execute = function () {
                     this.initControllers();
                     this.bindViewModel();
                     this.cm.bindFunctions();
+                    this.isstater = $.trim(window.location.href.split('/')[5].toLowerCase()) == 'stater#';
                 };
                 basic.prototype.initControllers = function () {
-                    $(".nav-tabs a[data-toggle=tab]").on("click", function (e) {
+                    $("#model-validateEmail.nav-tabs a[data-toggle=tab]").on("click", function (e) {
                         var pop2 = $("#notification").kendoNotification().data("kendoNotification");
                         pop2.show(' please send validate request', 'info');
                         e.preventDefault();
@@ -36,10 +38,26 @@ var Alpha;
                                 }
                                 return true;
                             },
+                            // gender
+                            customRule3: function (input) {
+                                if (input.is("[name=gender]")) {
+                                    return (Number($(input).data("kendoComboBox").value()) != -1);
+                                }
+                                return true;
+                            },
+                            // country
+                            customRule4: function (input) {
+                                if (input.is("[name=country]")) {
+                                    return (Number($(input).data("kendoComboBox").value()) != -1);
+                                }
+                                return true;
+                            },
                         },
                         messages: {
                             customRule1: "Email requred",
-                            customRule2: "Name requred"
+                            customRule2: "Name requred",
+                            customRule3: 'Gender Requred',
+                            customRule4: 'Country Requred'
                         }
                     });
                 };
@@ -66,6 +84,7 @@ var Alpha;
                                 save: function (el) {
                                     if ($("#basic").data("kendoValidator").validate()) {
                                         _this.ajax.post('/api/v1/user/settings/basic', viewModel, el, "Saved", function (e) {
+                                            window.location.href = '/useracccount/settings/stater#/image';
                                         });
                                     }
                                 },
@@ -97,6 +116,8 @@ var Alpha;
                     this.ajax = new Alpha.Utility.Ajax();
                     this.pop = $("#notification").kendoNotification({ position: { top: 0, bottom: 20, right: 10 } }).data("kendoNotification");
                     this.cm = new Alpha.Utility.comman();
+                    this.isstater = false;
+                    this.isstater = $.trim(window.location.href.split('/')[5].toLowerCase()) == 'stater#';
                 }
                 tags.prototype.execute = function () {
                     this.renderUserTags();
@@ -148,6 +169,9 @@ var Alpha;
                     this.ajax.get('/api/v1/tag/read', null, null, '', function (r) {
                         var d = [];
                         d.push(r);
+                        if (r.length >= 10 && _this.isstater) {
+                            $('#startCriendsdiv').removeClass('hidden');
+                        }
                         var templateContent = $("#userTags-template").html();
                         var template = kendo.template(templateContent);
                         var result = kendo.render(template, d);
@@ -184,6 +208,11 @@ var Alpha;
                         }, el, 'Saved', function () {
                             _this.reset();
                             _this.renderUserTags();
+                        });
+                    });
+                    $('#startcriend').off('click').on('click', function (el) {
+                        _this.ajax.post('/api/v1/auth/start', null, el, 'rederecting', function () {
+                            window.location.href = '/posts/post/index?type=feed';
                         });
                     });
                 };
@@ -392,6 +421,8 @@ var Alpha;
                 function changeProfileImage() {
                     this.cm = new Alpha.Utility.comman();
                     this.ajax = new Alpha.Utility.Ajax();
+                    this.isstater = false;
+                    this.isstater = $.trim(window.location.href.split('/')[5].toLowerCase()) == 'stater#';
                 }
                 changeProfileImage.prototype.execute = function () {
                     this.initControllers();
@@ -407,9 +438,17 @@ var Alpha;
                     });
                     $('#saveImage').off('click').on('click', function (el) {
                         _this.ajax.post('/api/v1/user/settings/profileimage', { ImageData: _this.data }, el, 'updated', function (res) {
-                            location.reload();
+                            if (_this.isstater) {
+                                window.location.href = '/useracccount/settings/stater#/tags';
+                            }
+                            else {
+                                location.reload();
+                            }
                         });
                     });
+                    if (this.isstater) {
+                        $('#skipImage').removeClass('hidden');
+                    }
                 };
                 return changeProfileImage;
             }());

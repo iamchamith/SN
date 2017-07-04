@@ -56,6 +56,9 @@ namespace Alpha.Utility
 
             Mapper.CreateMap<CriendsRelationsBo, UserRelation>().ReverseMap();
 
+            Mapper.CreateMap<PostComment, PostCommentBo>().ReverseMap();
+            Mapper.CreateMap<PostCommentBo, PostCommentViewModel>().ReverseMap();
+
         }
     }
 }

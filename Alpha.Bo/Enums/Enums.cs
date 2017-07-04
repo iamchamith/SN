@@ -270,5 +270,12 @@ namespace Alpha.Bo.Enums
         public enum PostLikeType {
             Like,Dislike
         }
+
+        public enum NotificationType {
+            CommentToYourPost,
+            LikeToYourPost,
+            NeedReplay,
+            LikeToYourComment
+        }
     }
 }

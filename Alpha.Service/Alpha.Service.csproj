@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\IAuthontication.cs" />
     <Compile Include="Interfaces\IConnectCriends.cs" />
     <Compile Include="Interfaces\IPost.cs" />
+    <Compile Include="Interfaces\IPostCommentService.cs" />
     <Compile Include="Interfaces\IPostLikeService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ITags.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Services\AuthonticationService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\criends\ConnectCriendsService.cs" />
+    <Compile Include="Services\post\PostCommentService.cs" />
     <Compile Include="Services\post\PostLikeService.cs" />
     <Compile Include="Services\post\PostService.cs" />
     <Compile Include="Services\settings\LookupsService.cs" />

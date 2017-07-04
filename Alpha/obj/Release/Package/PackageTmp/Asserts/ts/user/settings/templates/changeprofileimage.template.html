@@ -10,16 +10,23 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                <img src=""   onerror="this.src='/Asserts/images/noprofile.png'" alt="profile image" class="img-thumbnail" id="profileimagechangeble" width="150" height="150">
+                <img src="" onerror="this.src='/Asserts/images/noprofile.png'" alt="profile image" class="img-thumbnail" id="profileimagechangeble" width="150" height="150">
+                <input name="files" type="file" id="fileProfileImage" class="btn btn-primary" />
             </div>
             <div class="col-md-6">
-                <input name="files" type="file" id="fileProfileImage" />
-                <p style="padding-top: 1em; text-align: right">
-                    <button  value="Saved" class="btn btn-primary" id="saveImage" >
-                        <i class="fa fa-floppy-o d menuiconfont" aria-hidden="true"></i> Save
-                    </button>
-                </p>
+              
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href='/useracccount/settings/stater#/tags' class="btn btn-primary pull-right hidden" id="skipImage">
+                <i class="fa fa-floppy-o d menuiconfont" aria-hidden="true"></i> Skip
+            </a>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn btn-primary pull-right" id="saveImage">
+                <i class="fa fa-floppy-o d menuiconfont" aria-hidden="true"></i> Save
+            </button>
         </div>
     </div>
 </div>

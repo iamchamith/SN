@@ -8,7 +8,7 @@ var Alpha;
             var login = (function () {
                 function login() {
                     this.ajax = new Alpha.Utility.Ajax();
-                    this.popupNotification = $("#notification").kendoNotification().data("kendoNotification");
+                    this.pop = $("#notification").kendoNotification().data("kendoNotification");
                     this.cm = new Alpha.Utility.comman();
                 }
                 login.prototype.execute = function () {
@@ -47,12 +47,20 @@ var Alpha;
                         login: function (el) {
                             if ($("#login").data("kendoValidator").validate()) {
                                 _this.ajax.post('/api/v1/auth/login', viewModel, el, 'login is success', function (e) {
-                                    window.location.href = "/useracccount/settings";
+                                    if (e) {
+                                        window.location.href = "/useracccount/settings/stater#/basic";
+                                    }
+                                    else {
+                                        window.location.href = "/posts/post/index?type=feed";
+                                    }
                                 });
+                            }
+                            else {
+                                _this.pop.showText(' Please validate the form', 'info');
                             }
                         },
                         openChangePasswordDialogbox: function () {
-                            $('.nav-tabs li:eq(0) a').tab('show');
+                            $('#forgetpasswordwizard .nav-tabs li:eq(0) a').tab('show');
                             $('#model-forgegtPassword').modal('show');
                             var cpw = new changePasswordRequest();
                             cpw.execute();
@@ -65,7 +73,7 @@ var Alpha;
             Authentication.login = login;
             var register = (function () {
                 function register() {
-                    this.popupNotification = $("#notification").kendoNotification().data("kendoNotification");
+                    this.pop = $("#notification").kendoNotification().data("kendoNotification");
                     this.ajax = new Alpha.Utility.Ajax();
                     this.cm = new Alpha.Utility.comman();
                 }
@@ -112,10 +120,13 @@ var Alpha;
                         Name: '',
                         register: function (el) {
                             if ($("#register").data("kendoValidator").validate()) {
-                                _this.popupNotification.show(' sending request...', 'info');
+                                _this.pop.show(' sending request...', 'info');
                                 _this.ajax.post('/api/v1/auth/register', viewModel, el, 'registration success', function (e) {
-                                    window.location.href = "/useracccount/settings";
+                                    window.location.href = "/useracccount/settings/stater#/basic";
                                 });
+                            }
+                            else {
+                                _this.pop.showText(' Please validate the form', 'info');
                             }
                         }
                     });
@@ -158,7 +169,7 @@ var Alpha;
                     });
                 };
                 changePasswordRequest.prototype.initContollers = function () {
-                    $("#forgetpasswordwizard .nav-tabs a[data-toggle=tab]").on("click", function (e) {
+                    $("#model-forgegtPassword .nav-tabs a[data-toggle=tab]").on("click", function (e) {
                         var pop2 = $("#notification").kendoNotification().data("kendoNotification");
                         pop2.show('please enter email', 'info');
                         e.preventDefault();
@@ -176,7 +187,7 @@ var Alpha;
                             if ($("#model-forgegtPassword").data("kendoValidator").validate()) {
                                 _this.pop.show('wait for sending email', 'info');
                                 _this.ajax.get('/api/v1/auth/forgetpasswordrequest?email=' + viewModel.get("Email"), null, el, 'email sent.please type the token', function (e) {
-                                    $('.nav-tabs li:eq(1) a').tab('show');
+                                    $('#model-forgegtPassword .nav-tabs li:eq(1) a').tab('show');
                                     _this.pop.hide();
                                 });
                             }
@@ -184,7 +195,7 @@ var Alpha;
                         validateForgetPasswordToken: function (el) {
                             _this.pop.show('wait for validate forget password token', 'info');
                             _this.ajax.get('/api/v1/auth/forgetpasswordrequesttokenvalidate?email=' + viewModel.get("Email") + '&token=' + viewModel.get("Token"), null, el, 'token validation success.please enter new password', function (e) {
-                                $('.nav-tabs li:eq(2) a').tab('show');
+                                $('#model-forgegtPassword .nav-tabs li:eq(2) a').tab('show');
                                 _this.pop.hide();
                             });
                         },
@@ -194,10 +205,10 @@ var Alpha;
                             });
                         },
                         backToSendEmail: function () {
-                            $('.nav-tabs li:eq(0) a').tab('show');
+                            $('#model-forgegtPassword .nav-tabs li:eq(0) a').tab('show');
                         },
                         skip: function () {
-                            window.location.href = '/useracccount/settings';
+                            window.location.href = '/useracccount/settings?type=start#/basic';
                         }
                     });
                     kendo.bind($("#model-forgegtPassword"), viewModel);

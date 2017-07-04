@@ -1,25 +1,24 @@
 ﻿<div id="seachpostresult">
-    <div class="header-title-bg">
-        Search results <b id="searchCount">0</b>
-    </div>
-    <br /><br />
     <div style="padding:20px; background: #f5f5f5; border-bottom: 1px solid #e1e1e8;" id="searchpostcontrollers">
         <div class="row">
             <div class="col-md-6">
                 <input type="text" name="name" value="" placeholder="Enter part of titile" class="form-control" data-bind="value:Titile" />
             </div>
-            <div class="col-md-3">
-                <input type="checkbox" id="eq2" class="k-checkbox" data-bind="checked:Reason">
-                <label class="k-checkbox-label" for="eq2"> Is Most Reason?</label>
+            <div class="col-md-6">
+                <select data-role="multiselect"
+                        data-placeholder="Type a interesting e.g. 'rice'"
+                        data-value-primitive="true"
+                        data-text-field="TagName"
+                        data-value-field="TagId"
+                        data-bind="value: Tag,source: Tagss " style="width:100%"></select>
             </div>
-            <div class="col-md-3">
-                <input type="button" class="btn btn-primary" name="name" value="Filter posts" data-bind="click:search" />
-                <input type="button" class="btn btn-primary" name="name" value="Reset" data-bind="click:reset" />
-            </div>
+
         </div>
         <br />
         <div class="row">
             <div class="col-md-12">
+                <input type="checkbox" id="eq2" class="k-checkbox" data-bind="checked:Reason">
+                <label class="k-checkbox-label" for="eq2"> Is Most Reason?</label> |
                 <input type="checkbox" id="eq3" class="k-checkbox" data-bind="checked:IsQuestions">
                 <label class="k-checkbox-label" for="eq3"> Questions I </label>
                 <input type="checkbox" id="eq4" class="k-checkbox" data-bind="checked:IsPoll">&nbsp;&nbsp;
@@ -35,12 +34,14 @@
         <br />
         <div class="row">
             <div class="col-md-12">
-                <select data-role="multiselect"
-                        data-placeholder="Type a interesting e.g. 'rice'"
-                        data-value-primitive="true"
-                        data-text-field="TagName"
-                        data-value-field="TagId"
-                        data-bind="value: Tag,source: Tagss " style="width:100%"></select>
+                <div class="pull-right">
+                    <button class="btn btn-primary" data-bind="click:search">
+                        <i class="fa fa-search fa-2 menuiconfont" aria-hidden="true"></i>  Search
+                    </button>
+                    <button class="btn btn-primary" data-bind="click:reset">
+                        <i class="fa fa-refresh fa-2 menuiconfont" aria-hidden="true"></i> Reset
+                    </button>
+                </div>
             </div>
         </div>
     </div>

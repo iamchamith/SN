@@ -15,7 +15,7 @@ var Alpha;
                             callback();
                         })
                             .fail(function (result) {
-                            // alert("Error Loading Templates -- TODO: Better Error Handling");
+                            // window.location.href = 'http://localhost:57449';
                         });
                         tmplLoader.always(function () {
                             $(host).trigger("TEMPLATE_LOADED", [path]);
@@ -52,6 +52,7 @@ var Alpha;
                     });
                 });
                 router.start();
+                router.navigate("/welcome");
             });
         })(Authentication = User.Authentication || (User.Authentication = {}));
     })(User = Alpha.User || (Alpha.User = {}));

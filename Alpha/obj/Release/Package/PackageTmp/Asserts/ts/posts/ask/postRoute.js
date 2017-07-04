@@ -21,6 +21,7 @@ var Alpha;
             };
         })(jQuery, document);
         $(document).ready(function () {
+            $('#placeholder').css('padding', '0');
             var a;
             var cm = new Alpha.Utility.comman();
             var type = cm.getQueryString('type');

@@ -98,13 +98,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Forget password</h4>
+                <h4 class="modal-title" id="exampleModalLabel">
+                    <i class="fa fa-key menuiconfont fa-2" aria-hidden="true"></i> Forget password</h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs" id="forgetpasswordwizard">
-                    <li class="active"><a data-toggle="tab" href="#home">Send Request</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Validate token</a></li>
-                    <li><a data-toggle="tab" href="#menu2">New Password</a></li>
+                    <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-envelope menuiconfont fa-2" aria-hidden="true"></i> Send Request</a></li>
+                    <li><a data-toggle="tab" href="#menu1"><i class="fa fa-check menuiconfont fa-2" aria-hidden="true"></i> Validate token</a></li>
+                    <li><a data-toggle="tab" href="#menu2"><i class="fa fa-floppy-o menuiconfont fa-2" aria-hidden="true"></i> New Password</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
@@ -114,7 +115,8 @@
                                 <label for="recipient-name" class="control-label">Email Address:</label>
                                 <input type="email" class="form-control" data-bind="value: Email" placeholder="youremail@domain.com" required name="Email" />
                             </div>
-                            <button type="button" class="btn btn-primary pull-right" data-bind="click: sendForgetPasswordRecoveryRequest">Send token to my email</button>
+                            <button type="button" class="btn btn-primary pull-right" data-bind="click: sendForgetPasswordRecoveryRequest">
+                                <i class="fa fa-envelope menuiconfont fa-2" aria-hidden="true"></i> Send token to my email</button>
                         </form>
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -127,8 +129,9 @@
                                     <a href="#." data-bind="click: backToSendEmail">Do not find a email.please try again</a>
                                 </p>
                             </div>
-                            <button type="button" class="btn btn-default pull-left" data-bind="click: backToSendEmail">< Back</button>
-                            <button type="button" class="btn btn-primary pull-right" data-bind="click: validateForgetPasswordToken">Validate Token</button>
+                            <button type="button" class="btn btn-default pull-left" data-bind="click: backToSendEmail">
+                                <i class="fa fa-arrow-left  menuiconfont fa-2" aria-hidden="true"></i> Back</button>
+                            <button type="button" class="btn btn-primary pull-right" data-bind="click: validateForgetPasswordToken"><i class="fa fa-check menuiconfont fa-2" aria-hidden="true"></i> Validate Token</button>
                         </form>
                     </div>
                     <div id="menu2" class="tab-pane fade">
@@ -145,7 +148,8 @@
                             <button type="button" class="btn btn-default pull-left" data-bind="click: backToSendEmail">< Back</button>
                             <button type="button" class="btn btn-primary pull-right" data-bind="click:skip">Skip</button>
                             &nbsp;&nbsp;
-                            <button type="button" class="btn btn-primary pull-right" data-bind="click:changePassword">Change Password</button>
+                            <button type="button" class="btn btn-primary pull-right" data-bind="click:changePassword">
+                                <i class="fa fa-floppy-o menuiconfont fa-2" aria-hidden="true"></i> Change Password</button>
                         </form>
                     </div>
                 </div>

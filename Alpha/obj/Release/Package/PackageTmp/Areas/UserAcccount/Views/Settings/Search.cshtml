@@ -1,8 +1,13 @@
-﻿
-@{
-    ViewBag.Title = "SearchCriends";
-    Layout = "~/Views/Shared/_View.cshtml";
-}
+﻿@{
+    if (Request.Headers["X-PJAX"] != null)
+    {
+        Layout = "~/Views/Shared/_PjaxLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_View.cshtml";
+    }
+} 
 <div id="criendsearch" style="position:static">
     <div class="header-title-bg" style="margin-left:1px; margin-top:1px;">
         <i class="fa fa-search fa-2 d" aria-hidden="true"></i> Search options

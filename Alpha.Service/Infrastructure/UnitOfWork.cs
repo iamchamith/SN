@@ -20,6 +20,7 @@ namespace Alpha.Service.Infrastructure
         GenericRepository<UserPreferences> UserPreferencesRepository { get; }
         GenericRepository<UserMessage> UserMessageRepository { get; }
         GenericRepository<PostLike> PostLikeRepository { get; }
+        GenericRepository<PostComment> PostCommentRepository { get; }
         void Save();
         Task SaveAsync();
         AlphaContext Context { get; }
@@ -41,6 +42,7 @@ namespace Alpha.Service.Infrastructure
         private GenericRepository<UserPreferences> userPreferencesRepository;
         private GenericRepository<UserMessage> userMessageRepository;
         private GenericRepository<PostLike> postLikeRepository;
+        private GenericRepository<PostComment> postCommentRepository;
         public AlphaContext Context
         {
             get
@@ -154,6 +156,18 @@ namespace Alpha.Service.Infrastructure
                 return postLikeRepository;
             }
         }
+
+        public GenericRepository<PostComment> PostCommentRepository {
+            get
+            {
+                if (this.postCommentRepository == null)
+                {
+                    this.postCommentRepository = new GenericRepository<PostComment>(context);
+                }
+                return postCommentRepository;
+            }
+        }
+
         public void Save()
         {
             context.SaveChanges();

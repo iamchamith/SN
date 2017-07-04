@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlphaContext.cs" />
-    <Compile Include="Configurations.cs" />
     <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Migrations\201706070942379_init.cs" />
     <Compile Include="Migrations\201706070942379_init.Designer.cs">
@@ -202,6 +201,18 @@
     <Compile Include="Migrations\201707040826232_enhancePostLikeTable1.Designer.cs">
       <DependentUpon>201707040826232_enhancePostLikeTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707040956282_enhancePostCommenttable.cs" />
+    <Compile Include="Migrations\201707040956282_enhancePostCommenttable.Designer.cs">
+      <DependentUpon>201707040956282_enhancePostCommenttable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707041000319_enhancePostCommenttable2.cs" />
+    <Compile Include="Migrations\201707041000319_enhancePostCommenttable2.Designer.cs">
+      <DependentUpon>201707041000319_enhancePostCommenttable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707041135274_addNotificationTable.cs" />
+    <Compile Include="Migrations\201707041135274_addNotificationTable.Designer.cs">
+      <DependentUpon>201707041135274_addNotificationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -210,6 +221,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alpha.Bo\Alpha.Bo.csproj">
+      <Project>{E8C5D5B8-D15A-415C-BD9C-C2D0DD5E3E7C}</Project>
+      <Name>Alpha.Bo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alpha.Poco\Alpha.Poco.csproj">
       <Project>{59031697-a6ff-4c93-bd33-0d91025ba11b}</Project>
       <Name>Alpha.Poco</Name>
@@ -326,6 +341,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707040826232_enhancePostLikeTable1.resx">
       <DependentUpon>201707040826232_enhancePostLikeTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707040956282_enhancePostCommenttable.resx">
+      <DependentUpon>201707040956282_enhancePostCommenttable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707041000319_enhancePostCommenttable2.resx">
+      <DependentUpon>201707041000319_enhancePostCommenttable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707041135274_addNotificationTable.resx">
+      <DependentUpon>201707041135274_addNotificationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

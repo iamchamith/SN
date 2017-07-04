@@ -2,6 +2,7 @@
 using Alpha.Bo;
 using Alpha.Bo.Bo.criends;
 using Alpha.Bo.Enums;
+using Alpha.Bo.Utility;
 using Alpha.DbAccess;
 using Alpha.Utility;
 using Microsoft.WindowsAzure.Storage;

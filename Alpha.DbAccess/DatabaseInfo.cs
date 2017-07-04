@@ -10,7 +10,7 @@ namespace Alpha.DbAccess
 {
     public class DatabaseInfo
     {
-        static string cns = Configurations.Conns;
+        static string cns = Bo.Utility.Configs.Conns;
         static SqlConnection cn = new SqlConnection();
         public static SqlConnection Connection
         {

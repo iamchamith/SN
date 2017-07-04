@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Error.cs" />
+    <Compile Include="posts\Notifications.cs" />
     <Compile Include="posts\PostLike.cs" />
     <Compile Include="user\UserContact.cs" />
     <Compile Include="IPoco.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="user\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="posts\UserPost.cs" />
-    <Compile Include="posts\UserPostComment.cs" />
+    <Compile Include="posts\PostComment.cs" />
     <Compile Include="posts\types\PostNeedComment.cs" />
     <Compile Include="posts\types\PostPoll.cs" />
     <Compile Include="posts\types\PostQuestion.cs" />

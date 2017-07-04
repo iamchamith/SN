@@ -48,3 +48,12 @@ D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAc
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addUserMessagetable.resources
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addIsReadField.resources
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.removePostDescriptinRequred.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addStaterColomToUser.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.addPostLikeTable.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.enhancePostLikeService.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.enhancePostLikeTable.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.enhancePostLikeTable2.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.enhancePostLikeTableEnhanemnt.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.enhancePostLikeTable1.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.enhancePostCommenttable.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Release\Alpha.DbAccess.Migrations.enhancePostCommenttable2.resources

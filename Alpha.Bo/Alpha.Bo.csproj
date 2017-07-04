@@ -58,6 +58,7 @@
     <Compile Include="Bo\PaginBo.cs" />
     <Compile Include="Bo\posts\IPost.cs" />
     <Compile Include="Bo\posts\PostBo.cs" />
+    <Compile Include="Bo\posts\PostCommentSearchRequest.cs" />
     <Compile Include="Bo\posts\PostLikeBo.cs" />
     <Compile Include="Bo\posts\PostMyStatus.cs" />
     <Compile Include="Bo\posts\type\UserPostNeedCommentBo.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="Bo\settings\UserBo.cs" />
     <Compile Include="Bo\auth\UserLoginBo.cs" />
     <Compile Include="Bo\posts\UserPostBo.cs" />
-    <Compile Include="Bo\posts\UserPostCommentBo.cs" />
+    <Compile Include="Bo\posts\PostCommentBo.cs" />
     <Compile Include="Bo\tags\TagInfoBo.cs" />
     <Compile Include="Bo\tags\UserTagBo.cs" />
     <Compile Include="Bo\settings\UserContactBo.cs" />

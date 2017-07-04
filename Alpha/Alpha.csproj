@@ -234,9 +234,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\Posts\Controllers\api\PostApiController.cs" />
-    <Compile Include="Areas\Posts\Controllers\api\PostLikeApiController.cs" />
+    <Compile Include="Areas\Posts\Controllers\api\PostReplyApiController.cs" />
     <Compile Include="Areas\Posts\Controllers\PostController.cs" />
     <Compile Include="Areas\Posts\Models\DoPostLIkeViewModel.cs" />
+    <Compile Include="Areas\Posts\Models\PostCommentViewModel.cs" />
     <Compile Include="Areas\Posts\Models\PostViewModel.cs" />
     <Compile Include="Areas\Posts\Models\type\UserPostNeedCommentViewModel.cs" />
     <Compile Include="Areas\Posts\Models\type\UserPostPollViewModel.cs" />
@@ -285,7 +286,6 @@
     <Compile Include="Utility\AuthorizedAttribute.cs" />
     <Compile Include="Utility\AutomapperConfig.cs" />
     <Compile Include="Utility\CompressAttribute.cs" />
-    <Compile Include="Utility\Configs.cs" />
     <Compile Include="Utility\Email.cs" />
     <Compile Include="Utility\GCInfo.cs" />
     <Compile Include="Utility\GCSession.cs" />

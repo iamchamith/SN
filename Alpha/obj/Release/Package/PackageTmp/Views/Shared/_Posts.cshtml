@@ -1,135 +1,75 @@
-﻿@*<script type="text/x-kendo-template" id="posts-template">
+﻿<script type="text/x-kendo-template" id="posts-template">
     #
     var isthere = false;
     for(var i=0;i< data.length;i++){
     var post = data[i];
     #
-    <div class="row">
-        <div class="col-md-12" style="float:left;">
-            <div class="row">
-                <div class="col-md-1">
+    <div class="panel panel-white post panel-shadow">
+        <div class="pull-right">
+            #if(post.UserId === document.getElementById('meuserid').value){#
+            <span title="remove" style="cursor:pointer" data-postid="#=post.PostId#" class="removepost">
+                <i class="fa fa-remove fa-2 removepost" aria-hidden="true" data-postid="#=post.PostId#"></i>
+            </span>
+            #}#
+        </div>
+        <div class="post-heading">
+            <div class="pull-left image">
+                #if(post.Anonymous){#
+                <img class="img-circle avatar" src="#=post.ProfileImage#" title="#=post.Name#" alt="#=post.Name#" width="46" height="46" />
+                #}else{#
+                <img src="/asserts/images/boy.png" class="img-circle avatar" alt="Anonymas" width="46" height="46" />
+                #}#
+            </div>
+            <div class="pull-left meta">
+                <div class="title h5">
                     #if(post.Anonymous){#
-                    <a href="/useracccount/userprofile?userid=#=post.UserId#">
-                        <img width="50" height="50" src="#=post.ProfileImage#" style="border-radius:100px;"
-                             title="#=post.Name#">
-                    </a>
-                    #}else{#
-                    <img width="50" height="50" src="/asserts/images/boy.png" style="border-radius:100px;"
-                         title="Anonymas">
-                    #}#
-                </div>
-                <div class="col-md-11" style="vertical-align:middle">
-                    <br />
-                    #if(post.Anonymous){#
-                    <b> <a href="/useracccount/userprofile?userid=#=post.UserId#"> Chamith Sarana </a></b>
+                    <a href="/useracccount/userprofile?userid=#=post.UserId#"><b>#=post.Name#</b></a>
                     #}else{#
                     <b>Anonymas</b>
                     #}#
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1"></div>
-                #if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Question)){#
-                <div class="col-md-11">
-                    #=post.Topic#
-                    <br>
-                    <p class="tags">#=post.PostQuestion.Description#</p>
-                    <br>
-                </div>
-                #}else if(post.PostType=== @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
-                #=post.Topic#<br /><br />
-                <div class="col-md-5">
-                    <img src="#=post.PostPoll.Vs1Url#" class="img-thumbnail" width="100%" height="250"  onerror="this.src='/Asserts/images/errorimageloading.jpg'"/><br />
-                    <b>This</b>
-                </div>
-                <div class="col-md-5">
-                    <img src="#=post.PostPoll.Vs2Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'"/><br />
-                    <b>This</b>
-                </div>
-                <div class="col-md-1"></div>
-                #}else if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Comment)){#
-                <div class="col-md-11">
-                     #=post.Topic# 
-                    <br>
-                    <p class="tags">#=post.PostNeedComment.Description#</p>
-                    <br>
-                    #if(post.PostNeedComment.IsImage){#
-                    <img src="#=post.PostNeedComment.ImageUrl#" class="img-thumbnail" width="50%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'"/><br />
-                    #}#
-                </div>
-                <br />
-                #}#
-            </div>
-            <div padding-left:10px;">
-
-                <span class="tags"></span>
+                <h6 class="text-muted time">1 minute ago</h6>
             </div>
         </div>
-        <br />
-    </div>
-    #if(post.PostType!= @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
-    <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-2">
-            <a href="\#." data-userPostId="#=post.UserPostId#" class="like">Like(150)</a>
-        </div>
-        <div class="col-md-2"><a href="\#." data-userPostId="#=post.UserPostId#" class="dislike">Dislike(2000)</a></div>
-        <div class="col-md-2"><a href="\#." data-userPostId="#=post.UserPostId#" class="viewpost">View(115)</a></div>
-    </div>
-    #}#
-    <hr style="margin-top:15px; margin-bottom:15px;">
-    #
-    var isthere = true;
-    }#
-    #if(!isthere){#
-    <p style="padding:15px; margin-bottom:0px; background:\#f5f5f5; border-radius:4px; text-align:center;">Posts do not exist.</p>
-    #}#
-</script>*@
-
-<script type="text/x-kendo-template" id="posts-template">
-    #
-    var isthere = false;
-    for(var i=0;i< data.length;i++){
-    var post = data[i];
-    #
-    <div class="[ panel panel-default ] panel-google-plus">
-        <div class="dropdown">
-            <span class="dropdown-toggle" type="button" data-toggle="dropdown">
-                <span class="[ glyphicon glyphicon-chevron-down ]"></span>
-            </span>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href=".">Action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href=".">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href=".">Something else here</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href=".">Separated link</a></li>
-            </ul>
-        </div>
-        <div class="panel-heading">
-            #if(post.Anonymous){#
-             <img class="[ img-circle pull-left ]" src="#=post.ProfileImage#" title="#=post.Name#" width="46" height="46" />
-            <a href="/useracccount/userprofile?userid=#=post.UserId#"><h3>#=post.Name#</h3></a>
-                #}else{#
-                <img class="[ img-circle pull-left ]" src="/asserts/images/boy.png" alt="Anonymas" width="46" height="46" />
-                <h3>Anonymas</h3>
-                #}#
-                <h5><span>Shared publicly</span> - <span>Jun 27, 2014</span> </h5>
-</div>
-        <div class="panel-body">
+        #
+        let likebuttontype = 'btn-default';
+        let dislikebuttontype = 'btn-default';
+        let islike = false;
+        let isdislike = false;
+        if(post.MeComment){
+        if(post.MeLike){
+        likebuttontype = 'btn-primary';
+        islike = true;
+        }else{
+        dislikebuttontype = 'btn-primary';
+        isdislike  = true;
+        }
+        }#
+        <div class="post-description">
             #if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Question)){#
-                #=post.Topic#
-                <p class="tags">#=post.PostQuestion.Description#</p>
-            #}else if(post.PostType=== @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
-            #=post.Topic#<br /><br />
-            <div class="col-md-5">
-                <img src="#=post.PostPoll.Vs1Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'" /><br />
-                <b>This</b>
+            #=post.Topic#
+            <p class="tags">#=post.PostQuestion.Description#</p>
+            <div class="stats">
+                <a href="\#." class="btn #=likebuttontype# stat-item like" data-postid="#=post.PostId#" data-state="#=islike#" id="l_#=post.PostId#">
+                    <i class="fa fa-thumbs-up icon"></i> #=post.Likes#
+                </a>
+                <a href="\#." class="btn #=dislikebuttontype# stat-item dislike" data-postid="#=post.PostId#" data-state="#=isdislike#" id="dl_#=post.PostId#">
+                    <i class="fa fa-thumbs-down icon"></i> #=post.Dislikes#
+                </a>
             </div>
-            <div class="col-md-5">
-                <img src="#=post.PostPoll.Vs2Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'" /><br />
-                <b>This</b>
+            #}
+            else if(post.PostType=== @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
+            #=post.Topic#
+            <div class="row">
+                <div class="col-md-5">
+                    <img src="#=post.PostPoll.Vs1Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'" /><br />
+                    <b>This</b>
+                </div>
+                <div class="col-md-5">
+                    <img src="#=post.PostPoll.Vs2Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'" /><br />
+                    <b>This</b>
+                </div>
             </div>
-            <div class="col-md-1"></div>
             #}else if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Comment)){#
             <div class="col-md-11">
                 #=post.Topic#
@@ -137,30 +77,51 @@
                 #if(post.PostNeedComment.IsImage){#
                 <img src="#=post.PostNeedComment.ImageUrl#" class="img-thumbnail" width="50%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'" /><br />
                 #}#
+                <div class="stats">
+                    <a href="\#." class="btn #=likebuttontype# stat-item like" data-postid="#=post.PostId#" data-state="#=islike#" id="l_#=post.PostId#">
+                        <i class="fa fa-thumbs-up icon"></i> <span>#=post.Likes#</span>
+                    </a>
+                    <a href="\#." class="btn #=dislikebuttontype# stat-item dislike" data-postid="#=post.PostId#" data-state="#=isdislike#" id="dl_#=post.PostId#">
+                        <i class="fa fa-thumbs-down icon"></i> <span>#=post.Dislikes#</span>
+                    </a>
+                </div>
+            </div>
+            #}#
+            # if(post.PostType != @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
+            <div class="post-footer">
+                <div class="input-group">
+                    <input class="form-control" placeholder="Add a comment" type="text" id="txt_#=post.PostId#">
+                    <span class="input-group-addon">
+                        <a href="\#" data-postid="#=post.PostId#" class="sendpost"><i class="fa fa-edit"></i></a> |
+                        <a href="\#"><i class="fa fa-eye"></i></a>
+                    </span>
+                </div>
+                <ul class="comments-list">
+                    <li class="comment">
+                        <ul class="comments-list">
+                            <li class="comment">
+                                <a class="pull-left" href="\#">
+                                    <img class="avatar" src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">Ryan Haywood</h4>
+                                        <h5 class="time">3 minutes ago</h5>
+                                    </div>
+                                    <p>Relax my friend</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
             #}#
         </div>
-        <div class="panel-footer">
-            <button type="button" class="[ btn btn-default ]">+1</button>
-            <button type="button" class="[ btn btn-default ]">
-                <span class="[ glyphicon glyphicon-share-alt ]"></span>
-            </button>
-            <div class="input-placeholder">Add a comment...</div>
-        </div>
-        <div class="panel-google-plus-comment">
-            <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image">
-            <div class="panel-google-plus-textarea">
-                <textarea rows="4"></textarea>
-                <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
-                <button type="reset" class="[ btn btn-default ]">Cancel</button>
-            </div>
-            <div class="clearfix"></div>
-        </div>
     </div>
+
     #}#
-     
+
 </script>
- 
 <style>
     .tags {
         font-size: 12px;
@@ -168,4 +129,4 @@
     }
 </style>
 
- 
+
