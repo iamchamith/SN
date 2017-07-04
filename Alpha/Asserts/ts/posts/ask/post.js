@@ -10,26 +10,6 @@ var Alpha;
                 this.cm = new Alpha.Utility.comman();
                 this.userid = this.cm.getQueryString('userid');
             }
-            ask.prototype.renderDoComment = function () {
-                var $comment;
-                $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]').on('click', function (event) {
-                    var $panel = $(this).closest('.panel-google-plus');
-                    $comment = $panel.find('.panel-google-plus-comment');
-                    $comment.find('.btn:first-child').addClass('disabled');
-                    $comment.find('textarea').val('');
-                    $panel.toggleClass('panel-google-plus-show-comment');
-                    if ($panel.hasClass('panel-google-plus-show-comment')) {
-                        $comment.find('textarea').focus();
-                    }
-                });
-                $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea').on('keyup', function (event) {
-                    var $comment = $(this).closest('.panel-google-plus-comment');
-                    $comment.find('button[type="submit"]').addClass('disabled');
-                    if ($(this).val().length >= 1) {
-                        $comment.find('button[type="submit"]').removeClass('disabled');
-                    }
-                });
-            };
             ask.prototype.execute = function () {
                 this.initController();
                 this.bindSearchViewModel();
@@ -47,7 +27,6 @@ var Alpha;
                     Tags: []
                 };
                 this.bindSearchData(search);
-                this.renderDoComment();
             };
             ask.prototype.bindSearchViewModel = function () {
                 var _this = this;
@@ -99,10 +78,53 @@ var Alpha;
                     kendo.bind($("#searchpostcontrollers"), viewModel);
                 });
             };
+            ask.prototype.changeLikeButtonState = function (buttonType, state, postid, el) {
+                if (!state) {
+                    $(el).removeClass('btn-primary');
+                    $(el).addClass('btn-default');
+                    $(el).children('span').html((Number($(el).children('span').html()) - 1).toString());
+                }
+                else {
+                    var $like = $("#l_" + postid);
+                    var $dislike = $("#dl_" + postid);
+                    if (buttonType == 0) {
+                        $like.removeClass('btn-default').addClass('btn-primary');
+                        $like.children('span').html((Number($like.children('span').html()) + 1).toString());
+                        $dislike.children('span').html((Number($dislike.children('span').html()) - 1).toString());
+                    }
+                    else {
+                        $dislike.removeClass('btn-default').addClass('btn-primary');
+                        $dislike.children('span').html((Number($dislike.children('span').html()) + 1).toString());
+                        $like.children('span').html((Number($like.children('span').html()) - 1).toString());
+                    }
+                }
+            };
             ask.prototype.initController = function () {
                 var _this = this;
-                $('.like').off('click').on('click', function () { alert('liked'); });
-                $('.dislike').off('click').on('click', function () { alert('liked'); });
+                $('.like').off('click').on('click', function (el) {
+                    var $postid = $(el.target).data('postid');
+                    var $state = !$(el.target).data('state');
+                    var data = {
+                        PostId: $postid,
+                        Type: 0,
+                        IsSelect: $state
+                    };
+                    _this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', function (e) {
+                        _this.changeLikeButtonState(0, $state, $postid, el);
+                    });
+                });
+                $('.dislike').off('click').on('click', function (el) {
+                    var $postid = $(el.target).data('postid');
+                    var $state = !$(el.target).data('state');
+                    var data = {
+                        PostId: $postid,
+                        Type: 1,
+                        IsSelect: $state
+                    };
+                    _this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', function (e) {
+                        _this.changeLikeButtonState(1, $state, $postid, el);
+                    });
+                });
                 $('.viewpost').off('click').on('click', function () {
                     $('#showpostinfo-model').modal('show');
                 });
@@ -113,6 +135,13 @@ var Alpha;
                             $('#p_' + pid_1).remove();
                         });
                     }
+                });
+                $('.sendpost').off('click').on('click', function (el) {
+                    var $postid = $(el.target).data('postid');
+                    var $txt = $("#txt_" + $postid).val();
+                    _this.ajax.post('', null, el, 'sent', function () {
+                        alert('sent');
+                    });
                 });
             };
             ask.prototype.bindSearchData = function (e) {

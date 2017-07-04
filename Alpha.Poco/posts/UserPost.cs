@@ -28,12 +28,12 @@ namespace Alpha.Poco
         public YesNo Anonymous { get; set; }
         public virtual User User { get; set; }
         public virtual Post Post { get; set; }
-        public int Like { get; set; }
-        public int Dislike { get; set; }
+        public int Likes { get; set; }
+        public int Dislikes { get; set; }
         public UserPost()
         {
-            this.Like = 0;
-            this.Dislike = 0;
+            this.Likes = 0;
+            this.Dislikes = 0;
             IsPrimaryUser = YesNo.Yes;
             Anonymous = YesNo.No;
             PostDate = DateTime.UtcNow;

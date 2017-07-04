@@ -194,6 +194,14 @@
     <Compile Include="Migrations\201707040452048_enhancePostLikeTable2.Designer.cs">
       <DependentUpon>201707040452048_enhancePostLikeTable2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707040722261_enhancePostLikeTableEnhanemnt.cs" />
+    <Compile Include="Migrations\201707040722261_enhancePostLikeTableEnhanemnt.Designer.cs">
+      <DependentUpon>201707040722261_enhancePostLikeTableEnhanemnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707040826232_enhancePostLikeTable1.cs" />
+    <Compile Include="Migrations\201707040826232_enhancePostLikeTable1.Designer.cs">
+      <DependentUpon>201707040826232_enhancePostLikeTable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -312,6 +320,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707040452048_enhancePostLikeTable2.resx">
       <DependentUpon>201707040452048_enhancePostLikeTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707040722261_enhancePostLikeTableEnhanemnt.resx">
+      <DependentUpon>201707040722261_enhancePostLikeTableEnhanemnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707040826232_enhancePostLikeTable1.resx">
+      <DependentUpon>201707040826232_enhancePostLikeTable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

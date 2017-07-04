@@ -1,4 +1,5 @@
-﻿using Alpha.Utility;
+﻿using Alpha.Controllers;
+using Alpha.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,16 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.Posts.Controllers
 {
-    //[OutputCache(Duration = int.MaxValue)]
-    public class PostController : Controller
+    #if !DEBUG
+      [OutputCache(Duration = int.MaxValue)]
+    #endif
+    public class PostController : BaseController
     {
         [HttpGet, Compress]
         public ActionResult Index()
         {
-            if (!GCSession.IsSession)
-            {
-                return RedirectToAction("Index", "../UserAcccount/Authentication");
-            }
+            var view = base.Rederector();
+            return (view != null) ? view : View();
             return View();
         }
 

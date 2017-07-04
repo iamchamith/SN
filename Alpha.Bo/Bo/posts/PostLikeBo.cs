@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Alpha.Bo.Enums.Enums;
 
 namespace Alpha.Bo.Bo
 {
@@ -11,7 +12,6 @@ namespace Alpha.Bo.Bo
         public int Id { get; set; }
         public Guid UserId { get; set; }
         public Guid PostId { get; set; }
-        public bool IsLike { get; set; }
-        public bool IsDisLike { get; set; }
+        public PostLikeType PostLikeType { get; set; }
     }
 }

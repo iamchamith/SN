@@ -14,8 +14,7 @@ namespace Alpha.Poco
         public int Id { get; set; }
         public Guid UserId { get; set; }
         public Guid PostId { get; set; }
-        public bool IsLike { get; set; }
-        public bool IsDisLike { get; set; }
+        public Bo.Enums.Enums.PostLikeType PostLikeType { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
     }

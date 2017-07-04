@@ -236,6 +236,7 @@
     <Compile Include="Areas\Posts\Controllers\api\PostApiController.cs" />
     <Compile Include="Areas\Posts\Controllers\api\PostLikeApiController.cs" />
     <Compile Include="Areas\Posts\Controllers\PostController.cs" />
+    <Compile Include="Areas\Posts\Models\DoPostLIkeViewModel.cs" />
     <Compile Include="Areas\Posts\Models\PostViewModel.cs" />
     <Compile Include="Areas\Posts\Models\type\UserPostNeedCommentViewModel.cs" />
     <Compile Include="Areas\Posts\Models\type\UserPostPollViewModel.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="Areas\UserAcccount\UserAcccountAreaRegistration.cs" />
     <Compile Include="Areas\Wall\WallAreaRegistration.cs" />
     <Compile Include="Controllers\Api\BaseApiController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="FilterConfig.cs" />
     <Compile Include="Global.asax.cs">
@@ -466,6 +468,7 @@
     <Folder Include="Areas\Wall\Models\" />
     <Folder Include="Areas\Wall\Views\Shared\" />
     <Folder Include="Controllers\View\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

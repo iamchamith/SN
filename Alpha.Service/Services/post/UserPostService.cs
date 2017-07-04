@@ -223,7 +223,8 @@ namespace Alpha.Service.Services
                 }
                 sql.Append($@"select UserPost.Id as [userPostId],UserPost.PostId,[User].Name,
                     [User].Email,[User].UserId,
-                    UserPost.Anonymous,UserPost.PostDate,Post.PostType,Post.Topic,post.Tags,[User].ProfileImage from [User]
+                    UserPost.Anonymous,UserPost.PostDate,Post.PostType,Post.Topic,post.Tags,
+                    [User].ProfileImage,UserPost.Likes,UserPost.Dislikes from [User]
                     inner join UserPost on [User].UserId = UserPost.UserId
                     inner join Post on Post.PostId = UserPost.PostId {_where}
                     order by UserPost.PostDate {(request.IsDateDesc ? "Desc" : "Asc")}
@@ -236,6 +237,7 @@ namespace Alpha.Service.Services
                     var askQuestions = await SearchAskQuestion(postidlist, cn);
                     var askPoll = await SearchAskPoll(postidlist, cn);
                     var askNeedComment = await SearchAskNeedComment(postidlist, cn);
+                    var myPostStatus = await MyPostStatus(postidlist, request.MyUserId, cn);
                     foreach (var item in r)
                     {
                         if (item.PostType == Bo.Enums.Enums.PostType.Question)
@@ -251,6 +253,12 @@ namespace Alpha.Service.Services
                             item.PostNeedComment = Mapper.Map<PostNeedCommentBo>(askNeedComment.FirstOrDefault(p => p.PostId == item.PostId) ?? new PostNeedComment());
                         }
                         item.ProfileImage = base.ImageProfileBlobPrefix + item.ProfileImage;
+
+                        var c = myPostStatus.FirstOrDefault(p => p.PostId == item.PostId);
+
+                        item.MeLike = c.MeLike;
+                        item.MeDislike = c.MeDislike;
+                        item.MeComment = c.MeComment;
                     }
                     return r;
                 }
@@ -273,7 +281,7 @@ namespace Alpha.Service.Services
             }
         }
 
-        public async Task<List<PostPoll>> SearchAskPoll(List<Guid> postId, IDbConnection cn)
+        async Task<List<PostPoll>> SearchAskPoll(List<Guid> postId, IDbConnection cn)
         {
             try
             {
@@ -293,7 +301,7 @@ namespace Alpha.Service.Services
             }
         }
 
-        public async Task<List<PostNeedComment>> SearchAskNeedComment(List<Guid> postId, IDbConnection cn)
+        async Task<List<PostNeedComment>> SearchAskNeedComment(List<Guid> postId, IDbConnection cn)
         {
             try
             {
@@ -316,6 +324,45 @@ namespace Alpha.Service.Services
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        async Task<List<PostMyStatus>> MyPostStatus(List<Guid> postId, Guid userid, IDbConnection cn)
+        {
+            try
+            {
+                var result = cn.Query<PostLike>("select PostId,PostLikeType from PostLikes where PostId in @PostId and UserId = @UserId",
+                    new { PostId = postId, UserId = userid });
+                var res = new List<PostMyStatus>();
+                foreach (var item in postId)
+                {
+                    var r = result.FirstOrDefault(p => p.PostId == item);
+                    if (r is null)
+                    {
+                        res.Add(new PostMyStatus
+                        {
+                            MeComment = false,
+                            MeDislike = false,
+                            MeLike = false,
+                            PostId = item
+                        });
+                    }
+                    else
+                    {
+                        res.Add(new PostMyStatus
+                        {
+                            MeComment = true,
+                            MeLike = (r.PostLikeType == Bo.Enums.Enums.PostLikeType.Like) ? true : false,
+                            MeDislike = (r.PostLikeType == Bo.Enums.Enums.PostLikeType.Dislike) ? true : false,
+                            PostId = item
+                        });
+                    }
+                }
+                return res;
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
             }
         }
 

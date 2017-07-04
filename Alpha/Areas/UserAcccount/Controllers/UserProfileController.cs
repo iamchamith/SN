@@ -1,4 +1,5 @@
-﻿using Alpha.Utility;
+﻿using Alpha.Controllers;
+using Alpha.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,16 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.UserAcccount.Controllers
 {
-    //[OutputCache(Duration = int.MaxValue)]
-    public class UserProfileController : Controller
+    #if !DEBUG
+          [OutputCache(Duration = int.MaxValue)]
+    #endif
+    public class UserProfileController : BaseController
     {
         [HttpGet, Compress]
         public ActionResult Index()
         {
-            if (!GCSession.IsSession)
-            {
-                return RedirectToAction("Index", "Authentication");
-            }
-            return View();
+            var view = base.Rederector();
+            return (view != null) ? view : View();
         }
     }
 }

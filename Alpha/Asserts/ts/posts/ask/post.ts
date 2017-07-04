@@ -11,30 +11,6 @@ module Alpha.Post {
         constructor() {
             this.userid = this.cm.getQueryString('userid');
         }
-        private renderDoComment() {
-            let $comment;
-            $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]').on('click', function (event) {
-                var $panel = $(this).closest('.panel-google-plus');
-                $comment = $panel.find('.panel-google-plus-comment');
-
-                $comment.find('.btn:first-child').addClass('disabled');
-                $comment.find('textarea').val('');
-
-                $panel.toggleClass('panel-google-plus-show-comment');
-
-                if ($panel.hasClass('panel-google-plus-show-comment')) {
-                    $comment.find('textarea').focus();
-                }
-            });
-            $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea').on('keyup', function (event) {
-                var $comment = $(this).closest('.panel-google-plus-comment');
-
-                $comment.find('button[type="submit"]').addClass('disabled');
-                if ($(this).val().length >= 1) {
-                    $comment.find('button[type="submit"]').removeClass('disabled');
-                }
-            });
-        }
         public execute() {
             this.initController();
             this.bindSearchViewModel();
@@ -52,7 +28,6 @@ module Alpha.Post {
                 Tags: []
             };
             this.bindSearchData(search);
-            this.renderDoComment();
         }
         private bindSearchViewModel() {
             this.ajax.get('/api/v1/tag/read', null, null, "", (e) => {
@@ -103,9 +78,51 @@ module Alpha.Post {
                 kendo.bind($("#searchpostcontrollers"), viewModel);
             });
         }
+
+        private changeLikeButtonState(buttonType: number, state: boolean, postid: string, el: any) {
+            if (!state) {
+                $(el).removeClass('btn-primary');
+                $(el).addClass('btn-default');
+                $(el).children('span').html((Number($(el).children('span').html()) - 1).toString());
+            } else {
+                let $like = $(`#l_${postid}`);
+                let $dislike = $(`#dl_${postid}`);
+                if (buttonType == 0) {//like
+                    $like.removeClass('btn-default').addClass('btn-primary');
+                    $like.children('span').html((Number($like.children('span').html()) + 1).toString());
+                    $dislike.children('span').html((Number($dislike.children('span').html()) - 1).toString());
+                } else {
+                    $dislike.removeClass('btn-default').addClass('btn-primary');
+                    $dislike.children('span').html((Number($dislike.children('span').html()) + 1).toString());
+                    $like.children('span').html((Number($like.children('span').html()) - 1).toString());
+                }
+            }
+        }
         private initController() {
-            $('.like').off('click').on('click', () => { alert('liked'); });
-            $('.dislike').off('click').on('click', () => { alert('liked'); });
+            $('.like').off('click').on('click', (el) => {
+                let $postid = $(el.target).data('postid');
+                let $state = !$(el.target).data('state');
+                let data = {
+                    PostId: $postid,
+                    Type: 0,
+                    IsSelect: $state
+                };
+                this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', (e) => {
+                    this.changeLikeButtonState(0, $state, $postid, el);
+                });
+            });
+            $('.dislike').off('click').on('click', (el) => {
+                let $postid = $(el.target).data('postid');
+                let $state = !$(el.target).data('state');
+                let data = {
+                    PostId: $postid,
+                    Type: 1,
+                    IsSelect: $state
+                };
+                this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', (e) => {
+                    this.changeLikeButtonState(1, $state, $postid, el);
+                });
+            });
             $('.viewpost').off('click').on('click', () => {
                 $('#showpostinfo-model').modal('show');
             });
@@ -116,6 +133,13 @@ module Alpha.Post {
                         $('#p_' + pid).remove();
                     });
                 }
+            });
+            $('.sendpost').off('click').on('click', (el) => {
+                let $postid = $(el.target).data('postid');
+                let $txt = $(`#txt_${$postid}`).val();
+                this.ajax.post('', null, el, 'sent', () => {
+                    alert('sent');
+                });
             });
         }
         private bindSearchData(e: postSearchRequest) {

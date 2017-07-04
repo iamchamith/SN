@@ -36,7 +36,7 @@ namespace Alpha.Bo
         public bool IsNeedComments { get; set; }
         public bool IsPoll { get; set; }
         public bool IsQuestions { get; set; }
-
+        public Guid MyUserId { get; set; }
         public Enums.Enums.PostSearchType PostSearchType { get; set; }
         public UserPostSearchRequest()
         {
@@ -62,5 +62,19 @@ namespace Alpha.Bo
         public PostQuestionBo PostQuestion { get; set; }
         public PostPollBo PostPoll { get; set; }
         public PostNeedCommentBo PostNeedComment { get; set; }
+        public int Likes { get; set; }
+        public int Dislikes { get; set; }
+        public bool MeComment { get; set; }
+        public bool MeLike { get; set; }
+        public bool MeDislike { get; set; }
+
+        public UserPostSearchResponse()
+        {
+            this.Likes = 0;
+            this.Dislikes = 0;
+            this.MeLike = false;
+            this.MeDislike = false;
+            this.MeComment = false;
+        }
     }
 }

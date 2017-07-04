@@ -98,6 +98,7 @@ namespace Alpha.Areas.Posts.Controllers
                 {
                     request.UserId = GCSession.UserGuid.ToString();
                 }
+                request.MyUserId = GCSession.UserGuid;
                 return Ok<List<UserPostSearchResponse>>(await this.service.SearchPost(request));
             }
             catch (Exception e)

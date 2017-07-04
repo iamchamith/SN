@@ -1,4 +1,5 @@
-﻿using Alpha.Utility;
+﻿using Alpha.Controllers;
+using Alpha.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Web.Mvc;
 
 namespace Alpha.Areas.UserAcccount.Controllers
 {
-    //[OutputCache(Duration = int.MaxValue)]
-    public class AuthenticationController : Controller
+        #if !DEBUG
+              [OutputCache(Duration = int.MaxValue)]
+        #endif
+    public class AuthenticationController : BaseController
     {
         public ActionResult Index()
         {

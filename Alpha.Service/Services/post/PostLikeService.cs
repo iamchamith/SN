@@ -20,56 +20,36 @@ namespace Alpha.Service.Services.post
         {
             this.uow = _uow;
         }
-        public async Task LikeDislikePost(Guid userid, Guid postid, PostLikeType postLikeType, bool islike, bool isdislike)
+        public async Task LikeDislikePost(Guid userid, Guid postid, PostLikeType postLikeType, bool islike)
         {
             try
             {
                 using (var cn = DatabaseInfo.Connection)
                 {
-                    var response = cn.Query<PostLike>(@"select IsLike,IsDisLike,PostId,UserId,Id from PostLikes
+                    var response = cn.Query<PostLike>(@"select PostLikeType,PostId,UserId,Id from PostLikes
                     where UserId = @UserId and PostId = @PostId", new { UserId = userid, PostId = postid }).FirstOrDefault();
                     var isfirst = false;
                     var islikex = false;
                     var obj = new PostLike();
                     obj.PostId = postid;
                     obj.UserId = userid;
-                    if (response is null)
+                    if (response is null && islike)
                     {
-                        if (postLikeType == PostLikeType.Like)
-                        {
-                            obj.IsLike = true;
-                            obj.IsDisLike = false;
-                        }
-                        else
-                        {
-                            obj.IsLike = false;
-                            obj.IsDisLike = true;
-                        }
+                        obj.PostLikeType = postLikeType;
                         this.uow.PostLikeRepository.Insert(obj);
                         isfirst = true;
                     }
                     else
                     {
-                        if (response.IsDisLike)
+                        if (islike)
                         {
-                            islikex = false;
+                            response.PostLikeType = postLikeType;
+                            this.uow.PostLikeRepository.Update(response);
                         }
                         else
                         {
-                            islikex = true;
+                            this.uow.PostLikeRepository.Delete(response);
                         }
-
-                        if (postLikeType == PostLikeType.Like)
-                        {
-                            response.IsLike = true;
-                            response.IsDisLike = false;
-                        }
-                        else
-                        {
-                            response.IsLike = false;
-                            response.IsDisLike = true;
-                        }
-                        this.uow.PostLikeRepository.Update(obj);
                     }
                     var ress = this.uow.Context.UserPosts.FirstOrDefault(p => p.UserId == userid && p.PostId == postid);
                     if (ress is null)
@@ -82,28 +62,43 @@ namespace Alpha.Service.Services.post
                         {
                             if (postLikeType == PostLikeType.Like)
                             {
-                                ress.Like = 1;
-                                ress.Dislike = 0;
+                                ress.Likes = 1;
+                                ress.Dislikes = 0;
                             }
                             else
                             {
-                                ress.Like = 0;
-                                ress.Dislike = 1;
+                                ress.Likes = 0;
+                                ress.Dislikes = 1;
                             }
                         }
                         else
                         {
                             if (postLikeType == PostLikeType.Like)
                             {
-                                ress.Like = ress.Like + 1;
-                                ress.Dislike = ress.Dislike - 1;
+                                if (islike)
+                                {
+                                    ress.Likes = ress.Likes + 1;
+                                    ress.Dislikes = ress.Dislikes - 1;
+                                }
+                                else {
+                                    ress.Likes = ress.Likes - 1;
+                                }
+                                
                             }
                             else
                             {
-                                ress.Like = ress.Like - 1;
-                                ress.Dislike = ress.Dislike + 1;
+                                if (islike)
+                                {
+                                    ress.Likes = ress.Likes - 1;
+                                    ress.Dislikes = ress.Dislikes + 1;
+                                }
+                                else
+                                {
+                                    ress.Dislikes = ress.Dislikes - 1;
+                                }
                             }
                         }
+                        this.uow.UserPostRepository.Update(ress);
                     }
                     await this.uow.SaveAsync();
                 }

@@ -38,10 +38,26 @@ var Alpha;
                                 }
                                 return true;
                             },
+                            // gender
+                            customRule3: function (input) {
+                                if (input.is("[name=gender]")) {
+                                    return (Number($(input).data("kendoComboBox").value()) != -1);
+                                }
+                                return true;
+                            },
+                            // country
+                            customRule4: function (input) {
+                                if (input.is("[name=country]")) {
+                                    return (Number($(input).data("kendoComboBox").value()) != -1);
+                                }
+                                return true;
+                            },
                         },
                         messages: {
                             customRule1: "Email requred",
-                            customRule2: "Name requred"
+                            customRule2: "Name requred",
+                            customRule3: 'Gender Requred',
+                            customRule4: 'Country Requred'
                         }
                     });
                 };
