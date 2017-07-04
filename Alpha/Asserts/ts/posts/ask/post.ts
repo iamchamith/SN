@@ -11,6 +11,30 @@ module Alpha.Post {
         constructor() {
             this.userid = this.cm.getQueryString('userid');
         }
+        private renderDoComment() {
+            let $comment;
+            $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]').on('click', function (event) {
+                var $panel = $(this).closest('.panel-google-plus');
+                $comment = $panel.find('.panel-google-plus-comment');
+
+                $comment.find('.btn:first-child').addClass('disabled');
+                $comment.find('textarea').val('');
+
+                $panel.toggleClass('panel-google-plus-show-comment');
+
+                if ($panel.hasClass('panel-google-plus-show-comment')) {
+                    $comment.find('textarea').focus();
+                }
+            });
+            $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea').on('keyup', function (event) {
+                var $comment = $(this).closest('.panel-google-plus-comment');
+
+                $comment.find('button[type="submit"]').addClass('disabled');
+                if ($(this).val().length >= 1) {
+                    $comment.find('button[type="submit"]').removeClass('disabled');
+                }
+            });
+        }
         public execute() {
             this.initController();
             this.bindSearchViewModel();
@@ -28,6 +52,7 @@ module Alpha.Post {
                 Tags: []
             };
             this.bindSearchData(search);
+            this.renderDoComment();
         }
         private bindSearchViewModel() {
             this.ajax.get('/api/v1/tag/read', null, null, "", (e) => {
@@ -83,6 +108,14 @@ module Alpha.Post {
             $('.dislike').off('click').on('click', () => { alert('liked'); });
             $('.viewpost').off('click').on('click', () => {
                 $('#showpostinfo-model').modal('show');
+            });
+            $('.removepost').off('click').on('click', (el) => {
+                if (confirm('do you want to remove this post')) {
+                    let pid = $(el.target).data('postid');
+                    this.ajax.get(`/api/v1/post/delete?item=${pid}`, null, el, 'Removed', () => {
+                        $('#p_' + pid).remove();
+                    });
+                }
             });
         }
         private bindSearchData(e: postSearchRequest) {

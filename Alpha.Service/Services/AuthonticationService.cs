@@ -71,7 +71,8 @@ namespace Alpha.Service.Services
                         Country = res.Country,
                         Sex = (int)res.Gender,
                         MaritalStatus = (int)res.MaritalStatus,
-                        ProfileImage = res.ProfileImage
+                        ProfileImage = res.ProfileImage,
+                        IsStater = res.IsStarter
                     };
                 }
             }
@@ -94,6 +95,7 @@ namespace Alpha.Service.Services
                 item.Country = -1;//not mention
                 item.Dob = DateTime.Now.AddYears(-18);
                 item.ProfileImage = "no.jpg";
+                item.IsStarter = true;
                 var user = Mapper.Map<User>(item);
                 this.uow.Context.Users.Add(user);
                 await this.uow.SaveAsync();
@@ -102,7 +104,8 @@ namespace Alpha.Service.Services
                     Id = user.Id,
                     Name = user.Name,
                     UserId = user.UserId,
-                    Email = item.Email
+                    Email = item.Email,
+                    IsStater = true
                 };
             }
             catch (Exception e)
@@ -179,6 +182,24 @@ namespace Alpha.Service.Services
             try
             {
                 this.uow.UserRepository.GetByID(userid).Password = password;
+                await this.uow.SaveAsync();
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
+        }
+
+        public async Task StartCriends(Guid userid)
+        {
+            try
+            {
+                var r = this.uow.Context.Users.Where(p => p.UserId == userid).FirstOrDefault();
+                if (r == null)
+                {
+                    throw new ObjectNotFoundException();
+                }
+                r.IsStarter = false;
                 await this.uow.SaveAsync();
             }
             catch (Exception e)

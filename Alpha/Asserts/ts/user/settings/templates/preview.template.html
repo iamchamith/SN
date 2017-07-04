@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-md-2" style="text-align:center;">
                     <img id="id_avatar" data-toggle="tooltip" data-placement="top" title="" width="100" height="100"
-                         data-bind="attr: { src: ProfileImage}" style="border-radius:100px; cursor:pointer;">
+                         data-bind="attr: { src: ProfileImage}"   onerror="this.src='/Asserts/images/noprofile.png'"
+                         style="border-radius:100px; cursor:pointer;">
             </div>
             <div class="col-md-3" style="text-align:center; padding-top:15px;">
                 <h4 style="margin:0px;" data-bind="text: Name"></h4>
@@ -41,7 +42,7 @@
             <div class="col-md-12">
                 <div style="padding:20px; padding-bottom:0px; padding-top:7px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px; margin-bottom:20px;">
                     <div class="header-title-bg" style="margin-top:-7px;">
-                        Information
+                        <i class="fa fa-info-circle fa-2" aria-hidden="true"></i> Information
                     </div>
                     <div class="row" style="padding-top:50px; padding-bottom:15px;">
                         <div class="col-md-6">
@@ -95,12 +96,12 @@
                                     <p data-bind="text: Bio">Bio</p>
                                 </div>
                             </div>
-                            <h6><b>Interestings:</b></h6>
+                            <h6><b><i class="fa fa-tags fa-2" aria-hidden="true"></i> Interestings:</b></h6>
                             <hr style="margin-top:5px; margin-bottom:5px;">
                             <div id="usertags_preview"></div>
                         </div>
                         <div class="col-md-6">
-                            <h6><b>Contact info:</b> </h6>
+                            <h6><b><i class="fa fa-phone fa-2" aria-hidden="true"></i> Contact info:</b> </h6>
                             <hr style="margin-top:5px; margin-bottom:5px;">
                             <div id="contactinfopreview"></div>
                         </div>

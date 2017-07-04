@@ -1,7 +1,7 @@
 ﻿<div id="usertags">
     <div>
         <div class="header-title-bg">
-            Tags
+            <i class="fa fa-tags fa-2" aria-hidden="true"></i> Tags
             <span class="pull-right help"
                   data-url="/asserts/ts/help/settings/help.tags.template.html"
                   data-caption="Tags | Help "
@@ -14,14 +14,16 @@
                 <div class="row">
                     <div class="col-md-8">
                         <select id="tags" style="width: 100%;"></select><br /><br />
-                        <p class="demo-hint">e.g. 'cricket'</p>
+                        <p class="demo-hint">e.g. 'banana' / Please provide atleaset 10 interstings</p>
                         <textarea id="tagDescription" required style="width:100%" class="hidden"
                                   placeholder="You are the creator of tag :).Enter some small description"></textarea>
                         <button type="button" class="btn btn-primary hidden pull-right" id="crateAndAddTag">Create and Add</button>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-primary" id="searchTags">Search</button>
-                        <button type="button" class="btn btn-primary hidden" id="addTag">Add</button>
+                        <button type="button" class="btn btn-primary" id="searchTags">
+                            <i class="fa fa-search d menuiconfont" aria-hidden="true"></i> Search</button>
+                        <button type="button" class="btn btn-primary hidden" id="addTag">
+                            <i class="fa fa-plus d menuiconfont" aria-hidden="true"></i>  Add</button>
                     </div>
                 </div>
             </div>
@@ -29,6 +31,12 @@
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12" id="userTags"></div>
+    </div>
+    <div class="row hidden" id="startCriendsdiv">
+        <div class="col-md-12">
+            <input type="button" name="name" class="btn btn-lg btn-primary pull-right"
+                   value="Start Criends" id="startcriend" />
+        </div>
     </div>
 </div>
 <script type="text/x-kendo-template" id="userTags-template">

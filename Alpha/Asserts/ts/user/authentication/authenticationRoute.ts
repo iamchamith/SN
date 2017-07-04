@@ -11,7 +11,7 @@ module Alpha.User.Authentication {
                         callback();
                     })
                     .fail(function (result) {
-                       // alert("Error Loading Templates -- TODO: Better Error Handling");
+                       // window.location.href = 'http://localhost:57449';
                     })
                 tmplLoader.always(function () {
                     $(host).trigger("TEMPLATE_LOADED", [path]);
@@ -48,5 +48,6 @@ module Alpha.User.Authentication {
             });
         });
         router.start();
+        router.navigate("/welcome");
     });
 }

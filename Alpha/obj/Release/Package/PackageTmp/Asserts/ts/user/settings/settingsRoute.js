@@ -25,6 +25,9 @@ var Alpha;
             $(document).ready(function () {
                 var obj;
                 var router = new kendo.Router({});
+                $('.menuleftx').off('click').on('click', function (e) {
+                    //  window.location.href = $(e.target).children('a').attr('href');
+                });
                 router.route("/", function () {
                     templateLoader.loadExtTemplate("../asserts/ts/user/settings/templates/preview.template.html", function () {
                         $('#leftmenu').animateCss(Alpha.Utility.comman.animateTypeLeftMenu);

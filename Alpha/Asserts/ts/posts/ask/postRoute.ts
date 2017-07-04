@@ -18,6 +18,7 @@
         };
     })(jQuery, document);
     $(document).ready(() => {
+        $('#placeholder').css('padding', '0');
         let a: Alpha.Post.post;
         let cm = new Alpha.Utility.comman();
         let type = cm.getQueryString('type');

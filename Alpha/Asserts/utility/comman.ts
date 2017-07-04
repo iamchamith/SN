@@ -240,6 +240,10 @@
     }
 
     $(document).ready(() => {
+        $(function () {
+            // pjax
+            $(document).pjax('a.top-pjax-menu', '#placeholder');
+        })
         let cm = new comman();
         cm.initControllers();
     });

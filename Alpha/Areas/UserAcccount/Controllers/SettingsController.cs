@@ -15,7 +15,7 @@ namespace Alpha.Areas.UserAcccount.Controllers
         {
             if (!GCSession.IsSession)
             {
-                return RedirectToAction("Index", "Authentication");
+                return RedirectToAction("index", "authentication");
             }
             return View();
         }
@@ -24,7 +24,17 @@ namespace Alpha.Areas.UserAcccount.Controllers
         {
             if (!GCSession.IsSession)
             {
-                return RedirectToAction("Index", "Authentication");
+                return RedirectToAction("index", "authentication");
+            }
+            return View();
+        }
+
+        [HttpGet, Compress]
+        public ActionResult Stater()
+        {
+            if (!GCSession.IsSession)
+            {
+                return RedirectToAction("index", "authentication");
             }
             return View();
         }

@@ -266,5 +266,9 @@ namespace Alpha.Bo.Enums
             SendNotificationEmail, ShowAnonymas, ShowMyAsk, ShowMyContacts,
             ShowMyAnswers
         }
+
+        public enum PostLikeType {
+            Like,Dislike
+        }
     }
 }

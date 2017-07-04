@@ -10,41 +10,94 @@ var Alpha;
                 this.cm = new Alpha.Utility.comman();
                 this.userid = this.cm.getQueryString('userid');
             }
+            ask.prototype.renderDoComment = function () {
+                var $comment;
+                $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]').on('click', function (event) {
+                    var $panel = $(this).closest('.panel-google-plus');
+                    $comment = $panel.find('.panel-google-plus-comment');
+                    $comment.find('.btn:first-child').addClass('disabled');
+                    $comment.find('textarea').val('');
+                    $panel.toggleClass('panel-google-plus-show-comment');
+                    if ($panel.hasClass('panel-google-plus-show-comment')) {
+                        $comment.find('textarea').focus();
+                    }
+                });
+                $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea').on('keyup', function (event) {
+                    var $comment = $(this).closest('.panel-google-plus-comment');
+                    $comment.find('button[type="submit"]').addClass('disabled');
+                    if ($(this).val().length >= 1) {
+                        $comment.find('button[type="submit"]').removeClass('disabled');
+                    }
+                });
+            };
             ask.prototype.execute = function () {
                 this.initController();
                 this.bindSearchViewModel();
                 var search = {
                     Topic: '',
                     IsDateDesc: true,
+                    Skip: 0,
+                    Take: 10,
                     UserId: this.userid,
-                    Skip: 0, Take: 10
+                    IsMyAnswers: false,
+                    IsMyAsks: false,
+                    IsNeedComments: true,
+                    IsPoll: true,
+                    IsQuestions: true,
+                    Tags: []
                 };
                 this.bindSearchData(search);
+                this.renderDoComment();
             };
             ask.prototype.bindSearchViewModel = function () {
                 var _this = this;
-                var viewModel = kendo.observable({
-                    Reason: true,
-                    Titile: '',
-                    search: function (el) {
-                        var search = {
-                            Topic: viewModel.get('Titile'),
-                            IsDateDesc: viewModel.get('Reason'),
-                            UserId: _this.userid,
-                            Skip: 0, Take: 10
-                        };
-                        _this.bindSearchData(search);
-                    }, reset: function () {
-                        var search = {
-                            Topic: '',
-                            IsDateDesc: true, Skip: 0, Take: 10
-                        };
-                        _this.bindSearchData(search);
-                        viewModel.set('Titile', '');
-                        viewModel.set('Reason', true);
-                    }
+                this.ajax.get('/api/v1/tag/read', null, null, "", function (e) {
+                    var viewModel = kendo.observable({
+                        Reason: true,
+                        Titile: '',
+                        IsMyAnswers: false,
+                        IsMyAsks: false,
+                        IsNeedComments: true,
+                        IsPoll: true,
+                        IsQuestions: true,
+                        Tagss: e,
+                        Tag: '',
+                        search: function (el) {
+                            var search = {
+                                Topic: viewModel.get('Titile'),
+                                IsDateDesc: viewModel.get('Reason'),
+                                UserId: _this.userid,
+                                Skip: 0,
+                                Take: 10,
+                                IsMyAnswers: viewModel.get('IsMyAnswers'),
+                                IsMyAsks: viewModel.get('IsMyAsks'),
+                                IsNeedComments: viewModel.get('IsNeedComments'),
+                                IsPoll: viewModel.get('IsPoll'),
+                                IsQuestions: viewModel.get('IsQuestions'),
+                                Tags: []
+                            };
+                            _this.bindSearchData(search);
+                        }, reset: function () {
+                            var search = {
+                                Topic: '',
+                                IsDateDesc: true,
+                                Skip: 0,
+                                Take: 10,
+                                UserId: _this.userid,
+                                IsMyAnswers: false,
+                                IsMyAsks: false,
+                                IsNeedComments: true,
+                                IsPoll: true,
+                                IsQuestions: true,
+                                Tags: []
+                            };
+                            _this.bindSearchData(search);
+                            viewModel.set('Titile', '');
+                            viewModel.set('Reason', true);
+                        }
+                    });
+                    kendo.bind($("#searchpostcontrollers"), viewModel);
                 });
-                kendo.bind($("#searchpostcontrollers"), viewModel);
             };
             ask.prototype.initController = function () {
                 $('.like').off('click').on('click', function () { alert('liked'); });

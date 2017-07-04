@@ -234,6 +234,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\Posts\Controllers\api\PostApiController.cs" />
+    <Compile Include="Areas\Posts\Controllers\api\PostLikeApiController.cs" />
     <Compile Include="Areas\Posts\Controllers\PostController.cs" />
     <Compile Include="Areas\Posts\Models\PostViewModel.cs" />
     <Compile Include="Areas\Posts\Models\type\UserPostNeedCommentViewModel.cs" />
@@ -288,6 +289,7 @@
     <Compile Include="Utility\GCSession.cs" />
     <Compile Include="Utility\Helper.cs" />
     <Compile Include="Utility\BlobService.cs" />
+    <Compile Include="Utility\ImageProcess.cs" />
     <Compile Include="Utility\ValidateModelAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +298,7 @@
     <Content Include="Asserts\images\dragdrop.png" />
     <Content Include="Asserts\images\emaillogo.PNG" />
     <Content Include="Asserts\images\errorimageloading.jpg" />
+    <Content Include="Asserts\images\noprofile.png" />
     <Content Include="Asserts\ts\help\auth\help.about.template.html" />
     <Content Include="Asserts\ts\help\auth\help.register.template.html" />
     <Content Include="Asserts\ts\help\auth\help.login.template.html" />
@@ -325,10 +328,10 @@
     <Content Include="Asserts\js\jquery.pjax.js" />
     <Content Include="Asserts\js\plugin.js" />
     <Content Include="Asserts\ts\help\settings\help.tags.template.html" />
+    <Content Include="Asserts\ts\posts\ask\postwall.css" />
     <Content Include="Asserts\ts\posts\ask\templates\searchResult.template.html" />
     <Content Include="Asserts\ts\user\authentication\templates\welcome.template.html" />
     <Content Include="Asserts\ts\user\authentication\templates\join.template.html" />
-    <Content Include="Asserts\ts\user\authentication\templates\register.template.html" />
     <Content Include="Asserts\ts\user\search\templates\searchResult.template.html" />
     <Content Include="Asserts\ts\user\profile\templates\message.template.html" />
     <Content Include="Asserts\ts\user\settings\templates\userpreferences.template.html" />
@@ -356,6 +359,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\Site2.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\timeline.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -410,6 +414,8 @@
     <Content Include="Areas\Posts\Views\Post\index.cshtml" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
     <Content Include="Asserts\resources\emailtemplate.html" />
+    <Content Include="Areas\Posts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\UserAcccount\Views\Settings\Stater.cshtml" />
     <None Include="Properties\PublishProfiles\criends - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -450,6 +456,8 @@
     <Content Include="Views\Shared\models\_AddRemoveTags.cshtml" />
     <Content Include="Views\Shared\models\_AskQuestions.cshtml" />
     <Content Include="Views\Shared\models\_HelpModel.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_PjaxLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Posts\Views\Shared\" />
@@ -457,8 +465,6 @@
     <Folder Include="Areas\Wall\Controllers\" />
     <Folder Include="Areas\Wall\Models\" />
     <Folder Include="Areas\Wall\Views\Shared\" />
-    <Folder Include="Asserts\ts\posts\answers\" />
-    <Folder Include="Asserts\ts\posts\comments\" />
     <Folder Include="Controllers\View\" />
   </ItemGroup>
   <ItemGroup>

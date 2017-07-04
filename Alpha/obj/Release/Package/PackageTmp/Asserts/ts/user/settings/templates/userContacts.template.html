@@ -1,7 +1,7 @@
 ﻿<div id="contacts">
     <div>
         <div class="header-title-bg">
-            Contacts
+            <i class="fa fa-phone fa-3" aria-hidden="true"></i> Contacts
             <span class="pull-right help"
                   data-url="/asserts/ts/help/settings/help.userContacts.template.html"
                   data-caption="User Contact | Help "
@@ -28,8 +28,10 @@
                     <input type="url" name="name" value="" placeholder="Url" class="form-control" data-bind="value:Url" />
                 </div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-primary" data-bind="click: add,visible: IsSaveVisible">Save</button>
-                    <button type="button" class="btn btn-primary" data-bind="click: remove,visible: IsRemoveVisible">Remove</button>
+                    <button type="button" class="btn btn-primary" data-bind="click: add,visible: IsSaveVisible">
+                        <i class="fa fa-floppy-o d menuiconfont" aria-hidden="true"></i>  Save</button>
+                    <button type="button" class="btn btn-primary" data-bind="click: remove,visible: IsRemoveVisible">
+                        <i class="fa fa-remove d menuiconfont" aria-hidden="true"></i> Remove</button>
                 </div>
             </div>
         </div>

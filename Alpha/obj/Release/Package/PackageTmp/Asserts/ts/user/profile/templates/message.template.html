@@ -1,10 +1,13 @@
 ﻿<div id="messaging">
     <div style="padding:0px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px; margin-bottom:20px;">
-        <div class="header-title-bg" style="margin-top:0px; margin-left:0px;">
-            Conversation with the user <b data-bind="html:ChatWith"></b>
+        <div class="header-title-bg">
+            <i class="fa fa-comments" aria-hidden="true"></i>  Conversation with the user <b data-bind="html:ChatWith"></b>
         </div>
         <div id="id_message_scroll" style="height:300px; overflow-y:scroll; margin-top:47px; padding:20px;">
-            <div id="chatContent">
+            <div class="chat-message">
+                <ul class="chat" id="chatContent">
+                    <!--chat content goes here-->
+                </ul>
             </div>
         </div>
         <div style="padding:15px; background:#f5f5f5; border-top:1px solid #e1e1e8;">
@@ -14,7 +17,9 @@
             </div>
             <div style="width:calc(100% - 30px); float:left; padding-left:10px;">
                 <textarea data-bind="value:Message" placeholder="Your message" style="height: 70px; width: 100%; padding: 7px; resize: none; border: 1px solid rgb(225, 225, 232);"></textarea>
-                <button type="button" class="btn btn-primary pull-right" data-bind="click:send">To send</button>
+                <button type="button" class="btn btn-primary pull-right" data-bind="click:send">
+                    <i class="fa fa-paper-plane fa-2 menuiconfont" aria-hidden="true"></i> Send
+                </button>
             </div>
         </div>
         <div style="padding:15px; background:#f5f5f5; border-radius:0px 0px 4px 4px;"><div class="row"></div></div>
@@ -23,21 +28,163 @@
 
 <script id="chats-template" type="text/x-kendo-template">
     #var isthere = false;
+
     for(var i=0;i< data.length;i++ ){
     var chat = data[i];
-    console.log(chat);
-    #
-    <div class="row">
-        <div class="col-md-1">
-        <img src="#=chat.ProfileImage#"
-          onerror="this.src='/asserts/images/boy.png'"  class="img-thumbnail" width="75" height="75" /> </div>
-        <div class="col-md-11">#=chat.Message#</div>
-    </div>
-    #
-    isthere = true;
+    var myprofileimage = ''
+    var criendprofileimage = document.getElementById("criendprofileimage").value;
+    var possition = 'left';
+    var chattername = '';
+    var imagepull = 'pull-left'
+    if(chat.FromUser === document.getElementById("meuserid").value){
+    possition = 'right'
+    chattername = document.getElementById("mename").value;
+    imagepull = 'pull-right'
+    }else{
+    chattername = document.getElementById("criendname").value;
+    }#
+    <li class="#=possition# clearfix">
+        <span class="chat-img #=imagepull#">
+            <img src="#=chat.ProfileImage#" class="img-circle"
+                 onerror="this.src='/asserts/images/boy.png'" alt="User Avatar" width="75" height="75">
+        </span>
+        <div class="chat-body clearfix">
+            <div class="header">
+                <strong class="primary-font">#=chattername#</strong>
+                <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
+            </div>
+            <p>
+                #=chat.Message#
+            </p>
+        </div>
+    </li>
+
+    # isthere = true;
     }
     if(!isthere){#
     <p style="padding:15px; margin-bottom:0px; background:\#f5f5f5;
         border-radius:4px; text-align:center;">No message.</p>
     #}#
 </script>
+
+<style>
+    .friend-list li a .chat-alert {
+        position: absolute;
+        right: 8px;
+        top: 27px;
+        font-size: 10px;
+        padding: 3px 5px;
+    }
+
+    .chat-message {
+        padding: 10px 20px 10px;
+    }
+
+    .chat {
+        list-style: none;
+        margin: 0;
+    }
+
+    .chat-message {
+        background: #f9f9f9;
+    }
+
+    .chat li img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50em;
+        -moz-border-radius: 50em;
+        -webkit-border-radius: 50em;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    .chat-body {
+        padding-bottom: 20px;
+    }
+
+    .chat li.left .chat-body {
+        margin-left: 70px;
+        background-color: #fff;
+    }
+
+    .chat li .chat-body {
+        position: relative;
+        font-size: 11px;
+        padding: 10px;
+        border: 1px solid #f1f5fc;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+
+        .chat li .chat-body .header {
+            padding-bottom: 5px;
+            border-bottom: 1px solid #f1f5fc;
+        }
+
+        .chat li .chat-body p {
+            margin: 0;
+        }
+
+    .chat li.left .chat-body:before {
+        position: absolute;
+        top: 10px;
+        left: -8px;
+        display: inline-block;
+        background: #fff;
+        width: 16px;
+        height: 16px;
+        border-top: 1px solid #f1f5fc;
+        border-left: 1px solid #f1f5fc;
+        content: '';
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+    }
+
+    .chat li.right .chat-body:before {
+        position: absolute;
+        top: 10px;
+        right: -8px;
+        display: inline-block;
+        background: #fff;
+        width: 16px;
+        height: 16px;
+        border-top: 1px solid #f1f5fc;
+        border-right: 1px solid #f1f5fc;
+        content: '';
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+    }
+
+    .chat li {
+        margin: 15px 0;
+    }
+
+        .chat li.right .chat-body {
+            margin-right: 70px;
+            background-color: #fff;
+        }
+
+    .chat-box {
+        position: fixed;
+        bottom: 0;
+        left: 444px;
+        right: 0;
+        padding: 15px;
+        border-top: 1px solid #eee;
+        transition: all .5s ease;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        -o-transition: all .5s ease;
+    }
+</style>

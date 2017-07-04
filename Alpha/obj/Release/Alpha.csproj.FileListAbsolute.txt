@@ -151,3 +151,9 @@ D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\ko\System.Spatial.resources
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\ru\System.Spatial.resources.dll
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\zh-Hans\System.Spatial.resources.dll
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\zh-Hant\System.Spatial.resources.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\Hangfire.Core.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\Hangfire.SqlServer.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\Hangfire.Core.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\Hangfire.SqlServer.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\es\Hangfire.Core.resources.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\zh\Hangfire.Core.resources.dll

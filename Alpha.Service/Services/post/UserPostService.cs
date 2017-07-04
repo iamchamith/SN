@@ -41,6 +41,35 @@ namespace Alpha.Service.Services
                 {
                     throw new ObjectNotFoundException();
                 }
+                var x = this.uow.Context.Posts.FirstOrDefault(p => p.PostId == id);
+                if (x != null)
+                {
+                    this.uow.Context.Posts.Remove(x);
+                }
+                if (x.PostType == Bo.Enums.Enums.PostType.Comment)
+                {
+                    var removefromposttype = this.uow.Context.PostNeedComments.FirstOrDefault(p => p.PostId == id);
+                    if (removefromposttype != null)
+                    {
+                        this.uow.Context.PostNeedComments.Remove(removefromposttype);
+                    }
+                }
+                else if (x.PostType == Bo.Enums.Enums.PostType.Poll)
+                {
+                    var removefromposttype = this.uow.Context.PostPolls.FirstOrDefault(p => p.PostId == id);
+                    if (removefromposttype != null)
+                    {
+                        this.uow.Context.PostPolls.Remove(removefromposttype);
+                    }
+                }
+                else if (x.PostType == Bo.Enums.Enums.PostType.Question)
+                {
+                    var removefromposttype = this.uow.Context.PostQuestion.FirstOrDefault(p => p.PostId == id);
+                    if (removefromposttype != null)
+                    {
+                        this.uow.Context.PostQuestion.Remove(removefromposttype);
+                    }
+                }
                 this.uow.Context.UserPosts.Remove(r);
                 await this.uow.SaveAsync();
             }
@@ -49,7 +78,6 @@ namespace Alpha.Service.Services
                 throw ExceptionHandler(e);
             }
         }
-
         public async Task<UserPostBo> Insert(PostQuestionBo item, UserPostBo userpostinfo)
         {
             try
@@ -191,7 +219,7 @@ namespace Alpha.Service.Services
                 if (isposttypesearch)
                 {
                     _where += $@"
-                       {(!isWhere?" WHERE ":" AND ")} ({posttypeseach.ToString().Substring(0, posttypeseach.ToString().Length - 8)})";
+                       {(!isWhere ? " WHERE " : " AND ")} ({posttypeseach.ToString().Substring(0, posttypeseach.ToString().Length - 8)})";
                 }
                 sql.Append($@"select UserPost.Id as [userPostId],UserPost.PostId,[User].Name,
                     [User].Email,[User].UserId,
@@ -222,7 +250,7 @@ namespace Alpha.Service.Services
                         {
                             item.PostNeedComment = Mapper.Map<PostNeedCommentBo>(askNeedComment.FirstOrDefault(p => p.PostId == item.PostId) ?? new PostNeedComment());
                         }
-                        item.ProfileImage = base.ImageProfileBlobPrefix + item.ProfileImage; 
+                        item.ProfileImage = base.ImageProfileBlobPrefix + item.ProfileImage;
                     }
                     return r;
                 }
@@ -277,7 +305,8 @@ namespace Alpha.Service.Services
                         item.IsImage = false;
                         item.ImageUrl = "";
                     }
-                    else {
+                    else
+                    {
                         item.IsImage = true;
                         item.ImageUrl = base.ImagePostBlobPrefix + item.ImageUrl;
                     }

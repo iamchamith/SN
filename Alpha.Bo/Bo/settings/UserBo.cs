@@ -21,5 +21,6 @@ namespace Alpha.Bo
         public bool IsValiedEmail { get; set; }
         public string ProfileImage { get; set; }
         public string Employeement { get; set; }
+        public bool IsStarter { get; set; }
     }
 }

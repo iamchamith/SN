@@ -25,6 +25,7 @@ namespace Alpha.DbAccess
         IDbSet<PostQuestion> PostQuestion { get; set; }
         IDbSet<UserPreferences> UserPreferences { get; set; }
         IDbSet<UserMessage> UserMessages { get; set; }
+        IDbSet<PostLike> PostLikes { get; set; }
     }
     public class AlphaContext : DbContext, IAlphaContext
     {
@@ -46,6 +47,7 @@ namespace Alpha.DbAccess
         public IDbSet<PostQuestion> PostQuestion { get; set; }
         public IDbSet<UserPreferences> UserPreferences { get; set; }
         public IDbSet<UserMessage> UserMessages { get; set; }
+        public IDbSet<PostLike> PostLikes { get; set; }
     }
 }
 

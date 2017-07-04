@@ -15,5 +15,6 @@ namespace Alpha.Service.Interfaces
         Task<string[]> ForgetPasswordRequest(string email);
         Task<SessionBo> ForgetPasswordRequestTokenValidate(string token, string email);
         Task ChangePassword(string password, Guid userid);
+        Task StartCriends(Guid userid);
     }
 }

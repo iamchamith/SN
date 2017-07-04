@@ -1,11 +1,16 @@
-﻿
-@{
-    ViewBag.Title = "SearchCriends";
-    Layout = "~/Views/Shared/_View.cshtml";
-}
+﻿@{
+    if (Request.Headers["X-PJAX"] != null)
+    {
+        Layout = "~/Views/Shared/_PjaxLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_View.cshtml";
+    }
+} 
 <div id="criendsearch" style="position:static">
     <div class="header-title-bg" style="margin-left:1px; margin-top:1px;">
-        Search options
+        <i class="fa fa-search fa-2 d" aria-hidden="true"></i> Search options
     </div>
     <div style="padding:20px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px; margin-bottom:20px; padding-top:60px;">
         <div class="form-group">
@@ -78,8 +83,11 @@
         <div class="form-group">
             <div class="row" data-toggle="tooltip" data-placement="top" title="">
                 <div class="col-md-12">
-                    <input type="button" name="name" value="Reset" class="btn btn-primary pull-left" id="resetSearch" />
-                    <input type="button" name="name" value="Search" class="btn btn-primary pull-right" data-bind="click:Search" />
+                    <button name="name" class="btn btn-primary pull-left" id="resetSearch">
+                        <i class="fa fa-refresh fa-2 d menuiconfont" aria-hidden="true"></i> Reset</button>
+                    <button name="name" class="btn btn-primary pull-right " data-bind="click:Search">
+                        <i class="fa fa-search fa-2 d menuiconfont" aria-hidden="true"></i> Search   
+                    </button>
                 </div>
             </div>
         </div>
@@ -137,7 +145,7 @@
                 }
                 if(relations.IsBlock)
                 {
-                blockButton = 'btn-danger';
+                blockButton = 'btn-success';
                 }#
                 <div class="btn-group">
                     <div class="btn-group btn-group-xs" role="group" aria-label="action">     

@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null;
-}
-<!DOCTYPE html>
+﻿ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -47,8 +44,12 @@
     </div>
     <input type="hidden" name="meuserid" value="@Alpha.Utility.GCSession.UserGuid.ToString()" id="meuserid" />
     <input type="hidden" name="mename" value="@Alpha.Utility.GCSession.UserDisplayName" id="mename" />
-    <input type="hidden" name="meprofileimage" value="@Alpha.Utility.GCSession.ProfileImage" id="meprofileimage" />
+    <input type="hidden" name="meprofileimage" value="@Alpha.Utility.GCSession.ProfileImageName" id="meprofileimage" />
     <input type="hidden" name="meemail" value="@Alpha.Utility.GCSession.Email" id="meemail" />
+    <input type="hidden" name="blob" value="@Alpha.Bo.Utility.Configs.ImagePrefixBlob" id="blob" />
+    <input type="hidden" name="blobprofile" value="@Alpha.Bo.Enums.Enums.Imagetype.profileimages.ToString()" id="blobprofile" />
+    <input type="hidden" name="blobpost" value="@Alpha.Bo.Enums.Enums.Imagetype.postimages.ToString()" id="blobpost" />
+
     <div id="google_translate_element" class="hidden"></div>
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -63,6 +64,7 @@
     <script src="~/Scripts/kendo/jquery.min.js"></script>
     <script src="~/Scripts/kendo/kendo.all.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Asserts/js/jquery.pjax.js"></script>
     <script src="~/Asserts/js/plugin.js"></script>
     <script src="~/Asserts/utility/ajax.js"></script>
     <script src="~/Asserts/utility/comman.js"></script>

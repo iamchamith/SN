@@ -293,7 +293,7 @@ var Alpha;
                     this.ajax.get('/api/v1/user/settings/priviewpage', null, null, '', function (e) {
                         var viewModel = kendo.observable({
                             Followings: e.Followings,
-                            Followers: e.Followings,
+                            Followers: e.Followers,
                             Asks: e.Asks,
                             Answers: e.Answers,
                             Country: e.Country,
@@ -390,29 +390,24 @@ var Alpha;
             Settings.userContact = userContact;
             var changeProfileImage = (function () {
                 function changeProfileImage() {
+                    this.cm = new Alpha.Utility.comman();
+                    this.ajax = new Alpha.Utility.Ajax();
                 }
                 changeProfileImage.prototype.execute = function () {
                     this.initControllers();
                 };
                 changeProfileImage.prototype.initControllers = function () {
-                    $('#saveImage').off('click').on('click', function () {
-                        var data = new FormData();
-                        var d = $("#fileProfileImage").get(0);
-                        var files = d.files;
-                        // Add the uploaded image content to the form data collection
-                        if (files.length > 0) {
-                            data.append("UploadedImage", files[0]);
-                        }
-                        // Make Ajax request with the contentType = false, and procesDate = false
-                        var ajaxRequest = $.ajax({
-                            type: "POST",
-                            url: "/api/v1/base/image",
-                            contentType: false,
-                            processData: false,
-                            data: data
+                    var _this = this;
+                    $('#profileimagechangeble').attr('src', "" + Alpha.Utility.comman.getUserProfileImage());
+                    $('#fileProfileImage').on('change', function (e) {
+                        _this.cm.fileTo64BaseString(e.target.files[0], function (r) {
+                            _this.data = r;
+                            $('#profileimagechangeble').attr('src', r);
                         });
-                        ajaxRequest.done(function (xhr, textStatus) {
-                            // Do other operation
+                    });
+                    $('#saveImage').off('click').on('click', function (el) {
+                        _this.ajax.post('/api/v1/user/settings/profileimage', { ImageData: _this.data }, el, 'updated', function (res) {
+                            location.reload();
                         });
                     });
                 };

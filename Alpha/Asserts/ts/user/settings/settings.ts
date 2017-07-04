@@ -8,13 +8,15 @@
         private ajax = new Alpha.Utility.Ajax();
         private cm = new Alpha.Utility.comman();
         private pop = $("#notification").kendoNotification({ position: { top: 0, bottom: 20, right: 10 } }).data("kendoNotification");
+        private isstater: boolean = false;
         public execute() {
             this.initControllers();
             this.bindViewModel();
             this.cm.bindFunctions();
+            this.isstater = $.trim(window.location.href.split('/')[5].toLowerCase()) == 'stater#';
         }
         private initControllers() {
-            $(".nav-tabs a[data-toggle=tab]").on("click", function (e) {
+            $("#model-validateEmail.nav-tabs a[data-toggle=tab]").on("click", function (e) {
                 let pop2 = $("#notification").kendoNotification().data("kendoNotification");
                 pop2.show(' please send validate request', 'info');
                 e.preventDefault();
@@ -63,6 +65,7 @@
                         save: (el) => {
                             if ($("#basic").data("kendoValidator").validate()) {
                                 this.ajax.post('/api/v1/user/settings/basic', viewModel, el, "Saved", (e) => {
+                                    window.location.href = '/useracccount/settings/stater#/image'
                                 });
                             }
                         },
@@ -96,6 +99,7 @@
         private ajax = new Alpha.Utility.Ajax();
         private pop = $("#notification").kendoNotification({ position: { top: 0, bottom: 20, right: 10 } }).data("kendoNotification");
         private cm = new Alpha.Utility.comman();
+        private isstater: boolean = false;
         public execute() {
             this.renderUserTags();
             this.initcontrollers();
@@ -143,6 +147,9 @@
             this.ajax.get('/api/v1/tag/read', null, null, '', (r) => {
                 var d = [];
                 d.push(r);
+                if (r.length >= 10 && this.isstater) {
+                    $('#startCriendsdiv').removeClass('hidden');
+                }
                 var templateContent = $("#userTags-template").html();
                 var template = kendo.template(templateContent);
                 var result = kendo.render(template, d);
@@ -180,9 +187,15 @@
                         this.reset();
                         this.renderUserTags();
                     });
-            })
+            });
+            $('#startcriend').off('click').on('click', (el) => {
+                this.ajax.post('/api/v1/auth/start', null, el, 'rederecting', () => {
+                    window.location.href = '/posts/post/index?type=feed';
+                });
+            });
         }
         constructor() {
+            this.isstater = $.trim(window.location.href.split('/')[5].toLowerCase()) == 'stater#';
         }
     }
 
@@ -374,7 +387,10 @@
         private cm = new Alpha.Utility.comman();
         private ajax = new Alpha.Utility.Ajax();
         private data: string;
-        constructor() { }
+        private isstater: boolean = false;
+        constructor() {
+            this.isstater = $.trim(window.location.href.split('/')[5].toLowerCase()) == 'stater#';
+        }
         public execute() {
             this.initControllers();
         }
@@ -388,9 +404,16 @@
             });
             $('#saveImage').off('click').on('click', (el) => {
                 this.ajax.post('/api/v1/user/settings/profileimage', { ImageData: this.data }, el, 'updated', (res) => {
-                    location.reload();
+                    if (this.isstater) {
+                        window.location.href = '/useracccount/settings/stater#/tags'
+                    } else {
+                        location.reload();
+                    }
                 });
             });
+            if (this.isstater) {
+                $('#skipImage').removeClass('hidden');
+            }
         }
     }
 

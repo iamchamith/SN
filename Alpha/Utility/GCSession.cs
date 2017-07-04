@@ -16,6 +16,7 @@ namespace Alpha.Utility
         public int MaritalStatus { get; set; }
         public string ProfileImage { get; set; }
         public List<int> Tags { get; set; }
+        public bool IsStater { get; set; }
     }
     public class GCSession
     {
@@ -90,6 +91,18 @@ namespace Alpha.Utility
             get
             {
                 return User.ProfileImage;
+            }
+        }
+        public static bool IsStater
+        {
+            set
+            {
+                User.IsStater = value;
+                HttpContext.Current.Session["user"] = User;
+            }
+            get
+            {
+                return User.IsStater;
             }
         }
         public static int Country

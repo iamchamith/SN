@@ -5,7 +5,7 @@ module Alpha.User.Authentication {
     }
     export class login implements authenticate {
         private ajax = new Alpha.Utility.Ajax();
-        private popupNotification = $("#notification").kendoNotification().data("kendoNotification");
+        private pop = $("#notification").kendoNotification().data("kendoNotification");
         private cm = new Alpha.Utility.comman();
         public execute() {
             this.validate();
@@ -41,13 +41,19 @@ module Alpha.User.Authentication {
                 Password: '',
                 login: (el) => {
                     if ($("#login").data("kendoValidator").validate()) {
-                        this.ajax.post('/api/v1/auth/login', viewModel, el,'login is success', (e) => {
-                            window.location.href = "/useracccount/settings";
+                        this.ajax.post('/api/v1/auth/login', viewModel, el, 'login is success', (e) => {
+                            if (e) {
+                                window.location.href = "/useracccount/settings/stater#/basic";
+                            } else {
+                                window.location.href = "/posts/post/index?type=feed";
+                            }
                         });
+                    } else {
+                        this.pop.showText(' Please validate the form', 'info');
                     }
                 },
                 openChangePasswordDialogbox: () => {
-                    $('.nav-tabs li:eq(0) a').tab('show');
+                    $('#forgetpasswordwizard .nav-tabs li:eq(0) a').tab('show');
                     $('#model-forgegtPassword').modal('show');
                     var cpw = new changePasswordRequest();
                     cpw.execute();
@@ -60,7 +66,7 @@ module Alpha.User.Authentication {
     }
 
     export class register implements authenticate {
-        private popupNotification = $("#notification").kendoNotification().data("kendoNotification");
+        private pop = $("#notification").kendoNotification().data("kendoNotification");
         private ajax = new Alpha.Utility.Ajax();
         private cm = new Alpha.Utility.comman();
         public execute() {
@@ -105,10 +111,12 @@ module Alpha.User.Authentication {
                 Name: '',
                 register: (el) => {
                     if ($("#register").data("kendoValidator").validate()) {
-                        this.popupNotification.show(' sending request...', 'info');
-                        this.ajax.post('/api/v1/auth/register', viewModel, el,'registration success', (e) => {
-                            window.location.href = "/useracccount/settings";
+                        this.pop.show(' sending request...', 'info');
+                        this.ajax.post('/api/v1/auth/register', viewModel, el, 'registration success', (e) => {
+                            window.location.href = "/useracccount/settings/stater#/basic";
                         });
+                    } else {
+                        this.pop.showText(' Please validate the form', 'info');
                     }
                 }
             });
@@ -150,7 +158,7 @@ module Alpha.User.Authentication {
             });
         }
         private initContollers(): void {
-            $("#forgetpasswordwizard .nav-tabs a[data-toggle=tab]").on("click", function (e) {
+            $("#model-forgegtPassword .nav-tabs a[data-toggle=tab]").on("click", function (e) {
                 let pop2 = $("#notification").kendoNotification().data("kendoNotification");
                 pop2.show('please enter email', 'info');
                 e.preventDefault();
@@ -166,8 +174,8 @@ module Alpha.User.Authentication {
                 sendForgetPasswordRecoveryRequest: (el) => {
                     if ($("#model-forgegtPassword").data("kendoValidator").validate()) {
                         this.pop.show('wait for sending email', 'info');
-                        this.ajax.get('/api/v1/auth/forgetpasswordrequest?email=' + viewModel.get("Email"), null, el,'email sent.please type the token', (e) => {
-                            $('.nav-tabs li:eq(1) a').tab('show');
+                        this.ajax.get('/api/v1/auth/forgetpasswordrequest?email=' + viewModel.get("Email"), null, el, 'email sent.please type the token', (e) => {
+                            $('#model-forgegtPassword .nav-tabs li:eq(1) a').tab('show');
                             this.pop.hide();
                         });
                     }
@@ -175,21 +183,21 @@ module Alpha.User.Authentication {
                 validateForgetPasswordToken: (el) => {
                     this.pop.show('wait for validate forget password token', 'info');
                     this.ajax.get('/api/v1/auth/forgetpasswordrequesttokenvalidate?email=' + viewModel.get("Email") + '&token=' + viewModel.get("Token"),
-                        null, el,'token validation success.please enter new password', (e) => {
-                            $('.nav-tabs li:eq(2) a').tab('show');
+                        null, el, 'token validation success.please enter new password', (e) => {
+                            $('#model-forgegtPassword .nav-tabs li:eq(2) a').tab('show');
                             this.pop.hide();
                         });
                 },
                 changePassword: (el) => {
-                    this.ajax.post('/api/v1/auth/changepassword', viewModel, el,'', (e) => {
+                    this.ajax.post('/api/v1/auth/changepassword', viewModel, el, '', (e) => {
                         window.location.href = '/useracccount/settings';
                     });
                 },
                 backToSendEmail: () => {
-                    $('.nav-tabs li:eq(0) a').tab('show');
+                    $('#model-forgegtPassword .nav-tabs li:eq(0) a').tab('show');
                 },
                 skip: () => {
-                    window.location.href = '/useracccount/settings';
+                    window.location.href = '/useracccount/settings?type=start#/basic';
                 }
             });
             kendo.bind($("#model-forgegtPassword"), viewModel);

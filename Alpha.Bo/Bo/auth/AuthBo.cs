@@ -17,5 +17,6 @@ namespace Alpha.Bo
         public int MaritalStatus { get; set; }
         public string ProfileImage { get; set; }
         public List<int> Tags { get; set; }
+        public bool IsStater { get; set; }
     }
 }

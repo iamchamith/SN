@@ -58,6 +58,7 @@
     <Compile Include="Bo\PaginBo.cs" />
     <Compile Include="Bo\posts\IPost.cs" />
     <Compile Include="Bo\posts\PostBo.cs" />
+    <Compile Include="Bo\posts\PostLikeBo.cs" />
     <Compile Include="Bo\posts\type\UserPostNeedCommentBo.cs" />
     <Compile Include="Bo\posts\type\UserPostPollBo.cs" />
     <Compile Include="Bo\posts\type\UserPostQuestionBo.cs" />

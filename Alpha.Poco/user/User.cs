@@ -18,7 +18,7 @@ namespace Alpha.Poco
         public int Id { get; set; }
         [Key]
         public Guid UserId { get; set; }
-        [EmailAddress, Required, StringLength(50)]
+        [EmailAddress, Required, StringLength(50), Index("EmailIndex", IsUnique = true)]
         public string Email { get; set; }
         [Required, StringLength(500), DataType("nvarchar")]
         public string Name { get; set; }
@@ -40,6 +40,7 @@ namespace Alpha.Poco
         public string ProfileImage { get; set; }
         [StringLength(200),DataType("nvarchar")]
         public string Employeement { get; set; }
+        public bool IsStarter { get; set; }
         public User()
         {
             this.Gender = Gender.None;

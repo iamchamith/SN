@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -45,7 +46,7 @@ namespace Alpha.Areas.UserAcccount.Controllers
             try
             {
                 GCSession.User = Mapper.Map<SessionUser>(this.service.Login(Mapper.Map<UserLoginBo>(item)));
-                return Ok();
+                return Ok<bool>(GCSession.IsStater);
             }
             catch (InvaliedUserInputsException e)
             {
@@ -126,6 +127,20 @@ namespace Alpha.Areas.UserAcccount.Controllers
             try
             {
                 await this.service.ChangePassword(item.NewPassword, GCSession.UserGuid);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpPost, Authorized, Route("start"), Compress]
+        public async Task<IHttpActionResult> StartCriends()
+        {
+            try
+            {
+                await this.service.StartCriends(GCSession.UserGuid);
+                GCSession.IsStater = false;
                 return Ok();
             }
             catch (Exception ex)

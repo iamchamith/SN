@@ -120,7 +120,7 @@ namespace Alpha.Areas.Posts.Controllers
             }
         }
 
-        [Route("post/delete"), HttpPost, Authorized]
+        [Route("post/delete"), HttpGet, Authorized]
         public async Task<IHttpActionResult> Remove(string item)
         {
             try

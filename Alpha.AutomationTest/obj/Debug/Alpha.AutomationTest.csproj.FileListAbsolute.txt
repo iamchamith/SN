@@ -1,0 +1,12 @@
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\Alpha.AutomationTest.exe.config
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\Alpha.AutomationTest.exe
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\Alpha.AutomationTest.pdb
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\WebDriver.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\WebDriver.Support.dll
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\Selenium.WebDriverBackedSelenium.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\WebDriver.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\bin\Debug\WebDriver.Support.xml
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\obj\Debug\Alpha.AutomationTest.csprojResolveAssemblyReference.cache
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\obj\Debug\Alpha.AutomationTest.exe
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.AutomationTest\obj\Debug\Alpha.AutomationTest.pdb

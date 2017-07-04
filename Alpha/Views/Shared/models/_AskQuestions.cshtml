@@ -4,12 +4,18 @@
         <div class="modal-content" style="width:800px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Ask anything</h4>
+                <h4 class="modal-title" id="exampleModalLabel">
+                    <i class="fa fa-question-circle fa-3 menuiconfont" aria-hidden="true"></i> Ask anything</h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs" id="askquestiontabb">
-                    <li class="active"><a data-toggle="tab" href="#home">Ask</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Share Status</a></li>
+                    <li class="active">
+                        <a data-toggle="tab" href="#home">
+                            <i class="fa fa-question-circle fa-3 menuiconfont" aria-hidden="true"></i> Ask
+                        </a>
+                    </li>
+                    <li><a data-toggle="tab" href="#menu1">
+                            <i class="fa fa-pie-chart fa-3 menuiconfont" aria-hidden="true"></i> AskStatus</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
@@ -18,9 +24,21 @@
                             <!-- required for floating -->
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs tabs-left">
-                                <li class="active"><a href="#question" data-toggle="tab">Ask Question</a></li>
-                                <li><a href="#poll" data-toggle="tab">Ask Poll</a></li>
-                                <li><a href="#comment" data-toggle="tab">Ask Comment</a></li>
+                                <li class="active">
+                                    <a href="#question" data-toggle="tab">
+                                        <i class="fa fa-question-circle fa-3 menuiconfont" aria-hidden="true"></i> Ask Question
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#poll" data-toggle="tab">
+                                        <i class="fa fa-thumbs-up fa-3 menuiconfont" aria-hidden="true"></i> Ask Poll
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#comment" data-toggle="tab">
+                                        <i class="fa fa-comment fa-3 menuiconfont" aria-hidden="true"></i> Ask Comment
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-xs-9">
@@ -46,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
-                                            <input type="button" value="Ask" data-bind="click:askquestion" class="btn btn-primary pull-right"/>
+                                            <input type="button" value="Ask" data-bind="click:askquestion" class="btn btn-primary pull-right" />
                                         </div>
                                     </form>
                                 </div>
@@ -59,14 +77,14 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <img data-bind="attr: { src: Vs1Data}" class="img-thumbnail">
-                                                <input type="file" name="name" value=""  id="pollImgVs1" />
+                                                <input type="file" name="name" value="" id="pollImgVs1" />
                                             </div>
                                             <div class="col-md-2 text-center">
                                                 <b>Vs</b>
                                             </div>
                                             <div class="col-md-5">
                                                 <img data-bind="attr: { src: Vs2Data}" class="img-thumbnail">
-                                                <input type="file" name="name" value="" id="pollImgVs2"/>
+                                                <input type="file" name="name" value="" id="pollImgVs2" />
                                             </div>
                                         </div>
                                         <div class="form-group">
