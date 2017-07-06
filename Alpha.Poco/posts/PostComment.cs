@@ -18,11 +18,11 @@ namespace Alpha.Poco
         public Guid PostId { get; set; }
         [Required, DataType("nvarchar"), StringLength(500)]
         public string Comment { get; set; }
-        [Required,ForeignKey("User")]
+        [Required, ForeignKey("User")]
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
         public DateTime CommentDate { get; set; }
-        [Required, ForeignKey("PostId")]
+        [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
         public PostComment()
         {

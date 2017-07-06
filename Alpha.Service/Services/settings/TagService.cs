@@ -9,6 +9,7 @@ using AutoMapper;
 using Alpha.Poco;
 using Alpha.Bo.Bo;
 using Alpha.DbAccess;
+using Alpha.Bo.Exceptions;
 
 namespace Alpha.Service.Services
 {
@@ -26,6 +27,7 @@ namespace Alpha.Service.Services
             {
                 item.TagName = item.TagName.Trim().ToLower();
                 item.CreatedDate = DateTime.UtcNow;
+                item.TagCount = 1;
                 var obj = Mapper.Map<Tag>(item);
                 this.uow.TagRepository.Insert(obj);
                 await uow.SaveAsync();
@@ -41,7 +43,7 @@ namespace Alpha.Service.Services
         {
             try
             {
-                var sql = $@"select CONVERT(varchar(10),id) as Value,TagName as Text from tag
+                var sql = $@"select CONVERT(varchar(10),id) as Value,TagName+' ('+ CONVERT(varchar(10),TagCount)+')' as Text from tag
                         where TagName like '{q.Trim().ToLower()}%'
                         and id not in(select TagId from UserTag where UserId = @UserId)";
                 using (var cn = DatabaseInfo.Connection)
@@ -80,6 +82,27 @@ namespace Alpha.Service.Services
         public Task Delete(int id, Guid userid)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task Update(int tagid, bool isAdd)
+        {
+            try
+            {
+                var r = this.uow.TagRepository.GetByID(tagid);
+                if (r is null)
+                {
+                    throw new ObjectNotFoundException();
+                }
+                var newcount = r.TagCount + (isAdd ? 1 : -1);
+                if (newcount >= 0)
+                {
+                    r.TagCount = newcount;
+                }
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
         }
     }
 }

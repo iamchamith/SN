@@ -9,5 +9,6 @@ namespace Alpha.Bo
         public Guid Owner { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
+        public int TagCount { get; set; }
     }
 }

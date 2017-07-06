@@ -1,5 +1,6 @@
 ﻿using Alpha.Bo.Bo.posts;
 using System;
+using System.Collections.Generic;
 using static Alpha.Bo.Enums.Enums;
 
 namespace Alpha.Bo
@@ -67,7 +68,8 @@ namespace Alpha.Bo
         public bool MeComment { get; set; }
         public bool MeLike { get; set; }
         public bool MeDislike { get; set; }
-
+        public string PostDayShow { get; set; }
+        public List<PostCommentSearchResponse> PostCommentSearchResponse { get; set; }
         public UserPostSearchResponse()
         {
             this.Likes = 0;
@@ -75,6 +77,7 @@ namespace Alpha.Bo
             this.MeLike = false;
             this.MeDislike = false;
             this.MeComment = false;
+            PostCommentSearchResponse = new List<Bo.posts.PostCommentSearchResponse>();
         }
     }
 }

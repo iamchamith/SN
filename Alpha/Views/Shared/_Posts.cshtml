@@ -15,7 +15,7 @@
         <div class="post-heading">
             <div class="pull-left image">
                 #if(post.Anonymous){#
-                <img class="img-circle avatar" src="#=post.ProfileImage#" title="#=post.Name#" alt="#=post.Name#" width="46" height="46" />
+                <img class="img-circle avatar" src="#=post.ProfileImage#" title="#=post.Name#" alt="#=post.Name#" width="46" height="46" onerror="this.src='/Asserts/images/noprofile.png'"/>
                 #}else{#
                 <img src="/asserts/images/boy.png" class="img-circle avatar" alt="Anonymas" width="46" height="46" />
                 #}#
@@ -28,7 +28,7 @@
                     <b>Anonymas</b>
                     #}#
                 </div>
-                <h6 class="text-muted time">1 minute ago</h6>
+                <h6 class="text-muted time">#=post.PostDayShow#</h6>
             </div>
         </div>
         #
@@ -61,13 +61,17 @@
             else if(post.PostType=== @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
             #=post.Topic#
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-5 text-center">
                     <img src="#=post.PostPoll.Vs1Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'" /><br />
-                    <b>This</b>
+                    <a href="\#." class="votepoll" data-postid="#=post.PostId#" data-what="one" data-state="false">
+                        <i class="fa fa-thumbs-up icon fa-5x" data-postid="#=post.PostId#" data-what="one" data-state="false"></i>
+                    </a>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5 text-center">
                     <img src="#=post.PostPoll.Vs2Url#" class="img-thumbnail" width="100%" height="250" onerror="this.src='/Asserts/images/errorimageloading.jpg'" /><br />
-                    <b>This</b>
+                    <a href="\#." class="votepoll" data-postid="#=post.PostId#" data-what="two" data-state="false">
+                        <i class="fa fa-thumbs-up icon fa-5x" data-postid="#=post.PostId#" data-what="two" data-state="false"></i>
+                    </a>
                 </div>
             </div>
             #}else if(post.PostType === @((int)Alpha.Bo.Enums.Enums.PostType.Comment)){#
@@ -90,37 +94,59 @@
             # if(post.PostType != @((int)Alpha.Bo.Enums.Enums.PostType.Poll)){#
             <div class="post-footer">
                 <div class="input-group">
-                    <input class="form-control" placeholder="Add a comment" type="text" id="txt_#=post.PostId#">
+                    <input class="form-control" placeholder="Add a comment" type="text" id="txt_#=post.PostId#" maxlength="300">
                     <span class="input-group-addon">
-                        <a href="\#" data-postid="#=post.PostId#" class="sendpost"><i class="fa fa-edit"></i></a> |
-                        <a href="\#"><i class="fa fa-eye"></i></a>
+                        <a href="\#." data-postid="#=post.PostId#" class="sendcomment"><i class="fa fa-edit" data-postid="#=post.PostId#"></i></a> |
+                        <a href="\#." class="showcomment" data-postid="#=post.PostId#"><i class="fa fa-eye" data-postid="#=post.PostId#"></i></a>
                     </span>
                 </div>
                 <ul class="comments-list">
                     <li class="comment">
-                        <ul class="comments-list">
-                            <li class="comment">
-                                <a class="pull-left" href="\#">
-                                    <img class="avatar" src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                    <div class="comment-heading">
-                                        <h4 class="user">Ryan Haywood</h4>
-                                        <h5 class="time">3 minutes ago</h5>
-                                    </div>
-                                    <p>Relax my friend</p>
-                                </div>
-                            </li>
-                        </ul>
+                        <ul class="comments-list" id="c_#=post.PostId#"></ul>
                     </li>
                 </ul>
             </div>
             #}#
         </div>
     </div>
-
     #}#
-
+</script>
+<script type="text/x-kendo-template" id="postsComment-template">
+    #
+    console.log(data);
+    for(var i=0;i < data.length;i++ ) {
+    var d = data[i];
+    #
+    <li class="comment" id="c_#=d.CommentId#">
+        <a class="pull-left" href="\#.">
+            <img class="avatar" src="#=d.ProfileImage#" alt="#=d.Name#">
+        </a>
+        <div class="comment-body">
+            <div class="comment-heading">
+                <a href="/useracccount/userprofile?userid=#=d.UserId#">
+                    <h4 class="user"> #=d.Name#</h4>
+                </a>
+                <h5 class="time">#=d.CommentDateStr#</h5>
+                <div class="pull-right">
+                    <a href="\#." title="like" class="commentlike" data-commentid="#=d.CommentId#" data-state="fa">
+                        <i class="fa fa-thumbs-up" aria-hidden="true" title="like" data-commentid="#=d.CommentId#"></i>
+                    </a>
+                    <a href="\#." title="disike" class="commentdislike" data-commentid="#=d.CommentId#">
+                        <i class="fa fa-thumbs-down" aria-hidden="true" title="disike" data-commentid="#=d.CommentId#"></i>
+                    </a>
+                    #if(d.IsMine){#
+                    <a href="\#." title="remove" class="commentremove" data-commentid="#=d.CommentId#">
+                        <i class="fa fa-close" aria-hidden="true" title="remove" data-commentid="#=d.CommentId#"></i>
+                    </a>
+                    #}else{#
+                    <span> &nbsp; &nbsp;</span>
+                    #}#
+                </div>
+            </div>
+            <p>#=d.Comment#</p>
+        </div>
+    </li>
+    #}#
 </script>
 <style>
     .tags {

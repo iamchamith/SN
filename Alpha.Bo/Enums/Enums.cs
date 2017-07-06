@@ -267,15 +267,25 @@ namespace Alpha.Bo.Enums
             ShowMyAnswers
         }
 
-        public enum PostLikeType {
-            Like,Dislike
+        public enum PostLikeType
+        {
+            Like, Dislike
         }
 
-        public enum NotificationType {
+        public enum NotificationType
+        {
             CommentToYourPost,
             LikeToYourPost,
             NeedReplay,
             LikeToYourComment
+        }
+
+        public enum PostLikeModeType
+        {
+            Post, Comment
+        }
+        public enum Poll {
+            First,Second
         }
     }
 }

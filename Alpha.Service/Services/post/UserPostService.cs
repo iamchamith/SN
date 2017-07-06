@@ -14,6 +14,7 @@ using Alpha.DbAccess;
 using Alpha.Bo.Bo.posts;
 using System.Data.Common;
 using System.Data;
+using Alpha.Service.Services.post;
 
 namespace Alpha.Service.Services
 {
@@ -21,10 +22,12 @@ namespace Alpha.Service.Services
     {
         IUnitOfWork uow;
         Interfaces.IPost servicePost;
+        IPostCommentService servicePostComment;
         public UserPostService(IUnitOfWork _uow)
         {
             this.uow = _uow;
-            servicePost = new PostService(this.uow);
+            this.servicePost = new PostService(this.uow);
+            this.servicePostComment = new PostCommentService(this.uow);
         }
 
         public Task Delete(Guid id)
@@ -238,6 +241,7 @@ namespace Alpha.Service.Services
                     var askPoll = await SearchAskPoll(postidlist, cn);
                     var askNeedComment = await SearchAskNeedComment(postidlist, cn);
                     var myPostStatus = await MyPostStatus(postidlist, request.MyUserId, cn);
+                    var postcomments = await this.servicePostComment.Search(postidlist, request.MyUserId, cn);
                     foreach (var item in r)
                     {
                         if (item.PostType == Bo.Enums.Enums.PostType.Question)
@@ -255,10 +259,11 @@ namespace Alpha.Service.Services
                         item.ProfileImage = base.ImageProfileBlobPrefix + item.ProfileImage;
 
                         var c = myPostStatus.FirstOrDefault(p => p.PostId == item.PostId);
-
+                        item.PostDayShow = base.DateShow(item.PostDate);
                         item.MeLike = c.MeLike;
                         item.MeDislike = c.MeDislike;
                         item.MeComment = c.MeComment;
+                        item.PostCommentSearchResponse = postcomments.Where(p => p.PostId == item.PostId).OrderBy(p => p.CommentDate).ToList();
                     }
                     return r;
                 }

@@ -20,19 +20,21 @@ namespace Alpha.Service.Services.post
         {
             this.uow = _uow;
         }
-        public async Task LikeDislikePost(Guid userid, Guid postid, PostLikeType postLikeType, bool islike)
+        public async Task LikeDislikePost(Guid userid, Guid postid, PostLikeType postLikeType, PostLikeModeType modeType, bool islike)
         {
             try
             {
                 using (var cn = DatabaseInfo.Connection)
                 {
                     var response = cn.Query<PostLike>(@"select PostLikeType,PostId,UserId,Id from PostLikes
-                    where UserId = @UserId and PostId = @PostId", new { UserId = userid, PostId = postid }).FirstOrDefault();
+                    where UserId = @UserId and PostId = @PostId and PostLikeModeType = @PostLikeModeType ",
+                    new { UserId = userid, PostId = postid, PostLikeModeType = modeType }).FirstOrDefault();
                     var isfirst = false;
                     var islikex = false;
                     var obj = new PostLike();
                     obj.PostId = postid;
                     obj.UserId = userid;
+                    obj.PostLikeModeType = modeType;
                     if (response is null && islike)
                     {
                         obj.PostLikeType = postLikeType;
@@ -80,10 +82,11 @@ namespace Alpha.Service.Services.post
                                     ress.Likes = ress.Likes + 1;
                                     ress.Dislikes = ress.Dislikes - 1;
                                 }
-                                else {
+                                else
+                                {
                                     ress.Likes = ress.Likes - 1;
                                 }
-                                
+
                             }
                             else
                             {

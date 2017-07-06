@@ -12,6 +12,7 @@ using Alpha.Poco;
 using Alpha.Bo.Bo.posts;
 using Dapper;
 using Alpha.DbAccess;
+using System.Data;
 
 namespace Alpha.Service.Services.post
 {
@@ -31,7 +32,7 @@ namespace Alpha.Service.Services.post
         {
             try
             {
-                var r = this.uow.Context.PostComments.FirstOrDefault(p => p.PostId == id && p.UserId == userid);
+                var r = this.uow.Context.PostComments.FirstOrDefault(p => p.CommentId == id && p.UserId == userid);
                 if (r is null)
                 {
                     throw new ObjectNotFoundException();
@@ -49,6 +50,7 @@ namespace Alpha.Service.Services.post
         {
             try
             {
+                item.CommentId = Guid.NewGuid();
                 var r = Mapper.Map<PostComment>(item);
                 this.uow.PostCommentRepository.Insert(r);
                 await this.uow.SaveAsync();
@@ -70,19 +72,54 @@ namespace Alpha.Service.Services.post
             throw new NotImplementedException();
         }
 
-        public async Task<List<PostCommentSearchResponse>> Search(Guid postid)
+        public async Task<List<PostCommentSearchResponse>> Search(Guid postid,Guid userid)
         {
             try
             {
                 using (var cn = DatabaseInfo.Connection)
                 {
-                    return cn.Query<PostCommentSearchResponse>(@"select [PostComment].Comment,
+                    var r =  cn.Query<PostCommentSearchResponse>(@"select [PostComment].Comment,
                             [PostComment].CommentDate,[PostComment].CommentId,
-                            [PostComment].UserId,[User].Name,[User].ProfileImage
+                            [PostComment].UserId,[User].Name,[User].ProfileImage,
+                            [PostComment].PostId
                             from [PostComment]
                             inner join [User] on [User].UserId = [PostComment].UserId
-                            where [PostComment].PostId = @PostId", new { PostId = postid }).ToList();
+                            where [PostComment].PostId = @PostId 
+                            order by [PostComment].CommentDate asc", new { PostId = postid }).ToList();
+                    foreach (var item in r)
+                    {
+                        item.CommentDateStr = base.DateShow(item.CommentDate);
+                        item.ProfileImage = base.ImageProfileBlobPrefix + item.ProfileImage;
+                        item.IsMine = item.UserId == userid;
+                    }
+                    return r;
                 }
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
+        }
+
+        public async Task<List<PostCommentSearchResponse>> Search(List<Guid> postid, Guid userid,IDbConnection cn)
+        {
+            try
+            {
+                    var r = cn.Query<PostCommentSearchResponse>(@"select [PostComment].Comment,
+                            [PostComment].CommentDate,[PostComment].CommentId,
+                            [PostComment].UserId,[User].Name,[User].ProfileImage,
+                            [PostComment].PostId
+                            from [PostComment]
+                            inner join [User] on [User].UserId = [PostComment].UserId
+                            where [PostComment].PostId in @PostId 
+                            order by [PostComment].CommentDate asc", new { PostId = postid }).ToList();
+                    foreach (var item in r)
+                    {
+                        item.CommentDateStr = base.DateShow(item.CommentDate);
+                        item.ProfileImage = base.ImageProfileBlobPrefix + item.ProfileImage;
+                        item.IsMine = item.UserId == userid;
+                    }
+                    return r;
             }
             catch (Exception e)
             {

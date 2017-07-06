@@ -20,6 +20,7 @@ namespace Alpha.Poco
         public string Description { get; set; }
         [Required]
         public Guid Owner { get; set; }
+        public int TagCount { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

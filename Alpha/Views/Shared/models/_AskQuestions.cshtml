@@ -14,8 +14,13 @@
                             <i class="fa fa-question-circle fa-3 menuiconfont" aria-hidden="true"></i> Ask
                         </a>
                     </li>
-                    <li><a data-toggle="tab" href="#menu1">
-                            <i class="fa fa-pie-chart fa-3 menuiconfont" aria-hidden="true"></i> AskStatus</a></li>
+                    <li>
+                        <a data-toggle="tab" href="#menu1">
+                            <i class="fa fa-pie-chart fa-3 menuiconfont" aria-hidden="true"></i> Share
+                        </a>
+                    </li>
+                    <li><a data-toggle="tab" href="#menu2">
+                            <i class="fa fa-pie-chart fa-3 menuiconfont" aria-hidden="true"></i> Status</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
@@ -47,12 +52,12 @@
                                 <div class="tab-pane active" id="question">
                                     <form>
                                         <div class="form-group">
-                                            <label for="recipient-name" class="control-label">Topic:</label>
-                                            <input type="text" class="form-control" data-bind="value:Topic" placeholder="Type and share anything">
+                                            <label for="recipient-name" class="control-label">Topic (<span data-bind="text:TopicLength">150</span>):</label>
+                                            <input type="text" class="form-control topic" data-bind="value:Topic,events: { change: changetopic}" placeholder="Type and share anything" maxlength="150"/>
                                         </div>
                                         <div class="form-group">
-                                            <label for="message-text" class="control-label">Someting more:</label>
-                                            <textarea class="form-control" data-bind="value:Description" placeholder="Do you have any more?"></textarea>
+                                            <label for="message-text" class="control-label">Someting more (<span data-bind="text:MoreLength">300</span>):</label>
+                                            <textarea class="form-control" data-bind="value:Description,events: { change: changeMore}" placeholder="Do you have any more?" maxlength="300"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <select data-role="multiselect"
@@ -63,7 +68,8 @@
                                                     data-bind="value: Tag,source: Tagss "></select>
                                         </div>
                                         <div class="form-group">
-                                            <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                            <input type="checkbox" class="k-checkbox" data-bind="checked: IsAnonymas" id="eq3" />
+                                            <label class="k-checkbox-label" for="eq">As Anonymas</label>
                                             <input type="button" value="Ask" data-bind="click:askquestion" class="btn btn-primary pull-right" />
                                         </div>
                                     </form>
@@ -71,22 +77,23 @@
                                 <div class="tab-pane" id="poll">
                                     <form>
                                         <div class="form-group">
-                                            <label for="recipient-name" class="control-label">Topic:</label>
-                                            <input type="text" class="form-control" data-bind="value:Topic" placeholder="Type and share anything">
+                                            <label for="recipient-name" class="control-label">Topic (<span data-bind="text:TopicLength">150</span>):</label>
+                                            <input type="text" class="form-control topic" data-bind="value:Topic,events: { change: changetopic}" placeholder="Type and share anything" maxlength="150">
                                         </div>
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <img data-bind="attr: { src: Vs1Data}" class="img-thumbnail">
-                                                <input type="file" name="name" value="" id="pollImgVs1" />
+                                                <input type="file" name="name" value="" id="pollImgVs1" class="form-control btn btn-default"/>
                                             </div>
                                             <div class="col-md-2 text-center">
                                                 <b>Vs</b>
                                             </div>
                                             <div class="col-md-5">
                                                 <img data-bind="attr: { src: Vs2Data}" class="img-thumbnail">
-                                                <input type="file" name="name" value="" id="pollImgVs2" />
+                                                <input type="file" name="name" value="" id="pollImgVs2"  class="form-control btn btn-default"/>
                                             </div>
                                         </div>
+                                        <br />
                                         <div class="form-group">
                                             <select data-role="multiselect"
                                                     data-placeholder="Type a interesting e.g. 'rice'"
@@ -96,7 +103,8 @@
                                                     data-bind="value: Tag,source: Tagss "></select>
                                         </div>
                                         <div class="form-group">
-                                            <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                            <input type="checkbox" class="k-checkbox" data-bind="checked: IsAnonymas" id="eq4" />
+                                            <label class="k-checkbox-label" for="eq4">As Anonymas</label>
                                             <input type="button" value="Ask" data-bind="click:askpoll" class="btn btn-primary pull-right" />
                                         </div>
                                     </form>
@@ -104,16 +112,16 @@
                                 <div class="tab-pane" id="comment">
                                     <form>
                                         <div class="form-group">
-                                            <label for="recipient-name" class="control-label">Topic:</label>
-                                            <input type="text" class="form-control" data-bind="value:Topic" placeholder="Type and share anything">
+                                            <label for="recipient-name" class="control-label">Topic (<span data-bind="text:TopicLength">150</span>):</label>
+                                            <input type="text" class="form-control topic" data-bind="value:Topic,events: { change: changetopic}" placeholder="Type and share anything" maxlength="150"/>
                                         </div>
                                         <div class="form-group">
-                                            <label for="message-text" class="control-label">Someting more:</label>
-                                            <textarea class="form-control" data-bind="value:Description" placeholder="Do you have any more?"></textarea>
+                                            <label for="message-text" class="control-label">Someting more:(<span data-bind="text:MoreLength">300</span>)</label>
+                                            <textarea class="form-control" data-bind="value:Description,events: { change: changeMore}" placeholder="Do you have any more?" maxlength="300"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <img data-bind="attr: { src: AskCommentImage}" class="img-thumbnail">
-                                            <input name="files" type="file" id="askcommentImg">
+                                            <input name="files" type="file" id="askcommentImg" class="form-control btn btn-default" />
                                         </div>
                                         <div class="form-group">
                                             <select data-role="multiselect"
@@ -124,7 +132,8 @@
                                                     data-bind="value: Tag,source: Tagss "></select>
                                         </div>
                                         <div class="form-group">
-                                            <input type="checkbox" data-bind="checked: IsAnonymas" /> as Anonymas
+                                            <input type="checkbox" class="k-checkbox" data-bind="checked: IsAnonymas" id="eq5" />
+                                            <label class="k-checkbox-label" for="eq5">As Anonymas</label>
                                             <input type="button" value="Ask" data-bind="click:askcomment" class="btn btn-primary pull-right" />
                                         </div>
                                     </form>
@@ -134,6 +143,10 @@
                         <div class="clearfix"></div>
                     </div>
                     <div id="menu1" class="tab-pane fade">
+                        <h3>Share status</h3>
+                        <p>Some content in menu 1.</p>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
                         <h3>Share status</h3>
                         <p>Some content in menu 1.</p>
                     </div>

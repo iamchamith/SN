@@ -9,6 +9,6 @@ namespace Alpha.Service.Interfaces
 {
     public interface IPostLikeService
     {
-        Task LikeDislikePost(Guid userid,Guid postid, PostLikeType postLikeType, bool islike);
+        Task LikeDislikePost(Guid userid, Guid postid, PostLikeType postLikeType, PostLikeModeType modeType, bool islike);
     }
 }

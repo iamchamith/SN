@@ -10,6 +10,7 @@ namespace Alpha.Areas.Posts.Models
     {
         public int Id { get; set; }
         public Guid PostId { get; set; }
+        [Required(ErrorMessage = "Post topic required")]
         public string Topic { get; set; }
         public string Tags { get; set; }
         public bool IsAnonymas { get; set; }

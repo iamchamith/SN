@@ -243,9 +243,10 @@ var Alpha;
         }());
         comman.loading = "<img src='/asserts/images/loader.gif'/>";
         comman.animateType = 'bounceInDown';
-        comman.animateTypeAfterSearch = 'bounceIn';
+        comman.animateTypeAfterSearch = 'bounceInRight';
         comman.animateTypeAfterSave = 'pulse';
         comman.animateTypeLeftMenu = 'fadeInDown';
+        comman.animateTypeAttention = 'shake';
         Utility.comman = comman;
         $(document).ready(function () {
             $(function () {

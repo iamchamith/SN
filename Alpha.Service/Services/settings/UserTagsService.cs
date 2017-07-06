@@ -18,16 +18,16 @@ namespace Alpha.Service.Services
     public class UserTagsService : BaseService, IUserTags
     {
         IUnitOfWork uow;
+        ITags tagService;
         public UserTagsService(IUnitOfWork _uow)
         {
             this.uow = _uow;
+            this.tagService = new TagService(this.uow);
         }
         public Task Delete(int id)
         {
             throw new NotImplementedException();
         }
-
-
         public async Task Delete(int id, Guid userid)
         {
             try
@@ -38,6 +38,7 @@ namespace Alpha.Service.Services
                     throw new ObjectNotFoundException();
                 }
                 this.uow.Context.UserTags.Remove(r);
+                await this.tagService.Update(id, false);
                 await this.uow.SaveAsync();
             }
             catch (Exception e)
@@ -53,6 +54,7 @@ namespace Alpha.Service.Services
                 var r = Mapper.Map<UserTag>(item);
                 this.uow.UserTagRepository.Insert(r);
                 await this.uow.SaveAsync();
+                await this.tagService.Update(r.TagId, true);
                 return Mapper.Map<UserTagBo>(r);
             }
             catch (Exception e)
@@ -79,7 +81,7 @@ namespace Alpha.Service.Services
                          join utags in this.uow.Context.UserTags
                          on tags.Id equals utags.TagId
                          where utags.UserId == userid
-                         select new { Text = tags.TagName, Value = tags.Id, Id = utags.Id }).ToList();
+                         select new { Text = tags.TagName, Value = tags.Id, Id = utags.Id, Cout = tags.TagCount }).ToList();
 
                 var lst = new List<UserTagBo>();
                 foreach (var item in r)
@@ -88,7 +90,7 @@ namespace Alpha.Service.Services
                     {
                         Id = item.Id,
                         TagId = item.Value,
-                        TagName = item.Text
+                        TagName = $"{item.Text} ({item.Cout})"
                     });
                 }
                 return lst;
@@ -136,7 +138,6 @@ namespace Alpha.Service.Services
                 throw ExceptionHandler(e);
             }
         }
-
         public Task Update(UserTagBo item)
         {
             throw new NotImplementedException();

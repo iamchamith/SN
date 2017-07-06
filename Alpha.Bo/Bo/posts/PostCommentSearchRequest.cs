@@ -14,5 +14,8 @@ namespace Alpha.Bo.Bo.posts
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public string ProfileImage { get; set; }
+        public string CommentDateStr { get; set; }
+        public bool IsMine { get; set; }
+        public Guid PostId { get; set; }
     }
 }

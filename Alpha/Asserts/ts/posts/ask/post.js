@@ -9,6 +9,16 @@ var Alpha;
                 this.pop = $("#notification").kendoNotification({ position: { top: 0, bottom: 20, right: 10 } }).data("kendoNotification");
                 this.cm = new Alpha.Utility.comman();
                 this.userid = this.cm.getQueryString('userid');
+                var c = this.cm.getQueryString('type');
+                if (c == 'ask') {
+                    this.posttype = Post.Posttype.Ask;
+                }
+                else if (c == 'answer') {
+                    this.posttype = Post.Posttype.Answer;
+                }
+                else {
+                    this.posttype = Post.Posttype.Feed;
+                }
             }
             ask.prototype.execute = function () {
                 this.initController();
@@ -24,7 +34,8 @@ var Alpha;
                     IsNeedComments: true,
                     IsPoll: true,
                     IsQuestions: true,
-                    Tags: []
+                    Tags: [],
+                    PostType: this.posttype
                 };
                 this.bindSearchData(search);
             };
@@ -53,7 +64,8 @@ var Alpha;
                                 IsNeedComments: viewModel.get('IsNeedComments'),
                                 IsPoll: viewModel.get('IsPoll'),
                                 IsQuestions: viewModel.get('IsQuestions'),
-                                Tags: []
+                                Tags: [],
+                                PostType: _this.posttype
                             };
                             _this.bindSearchData(search);
                         }, reset: function () {
@@ -68,7 +80,8 @@ var Alpha;
                                 IsNeedComments: true,
                                 IsPoll: true,
                                 IsQuestions: true,
-                                Tags: []
+                                Tags: [],
+                                PostType: _this.posttype
                             };
                             _this.bindSearchData(search);
                             viewModel.set('Titile', '');
@@ -107,7 +120,8 @@ var Alpha;
                     var data = {
                         PostId: $postid,
                         Type: 0,
-                        IsSelect: $state
+                        IsSelect: $state,
+                        PostLikeModeType: 0
                     };
                     _this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', function (e) {
                         _this.changeLikeButtonState(0, $state, $postid, el);
@@ -119,7 +133,8 @@ var Alpha;
                     var data = {
                         PostId: $postid,
                         Type: 1,
-                        IsSelect: $state
+                        IsSelect: $state,
+                        PostLikeModeType: 0
                     };
                     _this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', function (e) {
                         _this.changeLikeButtonState(1, $state, $postid, el);
@@ -136,12 +151,78 @@ var Alpha;
                         });
                     }
                 });
-                $('.sendpost').off('click').on('click', function (el) {
+                $('.sendcomment').off('click').on('click', function (el) {
                     var $postid = $(el.target).data('postid');
                     var $txt = $("#txt_" + $postid).val();
-                    _this.ajax.post('', null, el, 'sent', function () {
-                        alert('sent');
+                    var $commentContent = $("#c_" + $postid);
+                    if ($.trim($txt) == '') {
+                        _this.pop.show('please write a comment', 'info');
+                        $("#txt_" + $postid).animateCss(Alpha.Utility.comman.animateTypeAttention);
+                        return;
+                    }
+                    var data = {
+                        Comment: $txt,
+                        PostIdStr: $postid
+                    };
+                    _this.ajax.post('/api/v1/topost/comment', data, el, 'sent', function (r) {
+                        var d = [];
+                        d.push(r);
+                        var template = kendo.template($("#postsComment-template").html());
+                        var result = template(d);
+                        $commentContent.append(result);
+                        $("#txt_" + $postid).val('');
                     });
+                });
+                $('.showcomment').off('click').on('click', function (el) {
+                    var $postid = $(el.target).data('postid');
+                    var $commentContent = $("#c_" + $postid);
+                    $commentContent.html('loading...');
+                    _this.ajax.get("/api/v1/topost/comment?postid=" + $postid, null, el, '', function (r) {
+                        var template = kendo.template($("#postsComment-template").html());
+                        var result = template(r);
+                        $commentContent.html(result);
+                        _this.initController();
+                    });
+                });
+                $('.commentlike').off('click').on('click', function (el) {
+                    var $postid = $(el.target).data('commentid');
+                    var $state = !$(el.target).data('state');
+                    var data = {
+                        PostId: $postid,
+                        Type: 1,
+                        IsSelect: $state,
+                        PostLikeModeType: 1
+                    };
+                    _this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', function (e) {
+                        //this.changeLikeButtonState(1, $state, $postid, el);
+                    });
+                });
+                $('.commentdislike').off('click').on('click', function (el) {
+                    var $postid = $(el.target).data('commentid');
+                    var $state = !$(el.target).data('state');
+                    var data = {
+                        PostId: $postid,
+                        Type: 1,
+                        IsSelect: $state,
+                        PostLikeModeType: 1
+                    };
+                    _this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', function (e) {
+                        //this.changeLikeButtonState(1, $state, $postid, el);
+                    });
+                });
+                $('.commentremove').off('click').on('click', function (el) {
+                    if (confirm('do you want to remove this comment ?')) {
+                        var pid_2 = $(el.target).data('commentid');
+                        _this.ajax.post("/api/v1/topost/comment/remove", { CommentId: pid_2 }, el, 'Removed', function () {
+                            $('#c_' + pid_2).remove();
+                        });
+                    }
+                });
+                $('.votepoll').off('click').on('click', function (el) {
+                    var $t = $(el.target);
+                    var $state = $t.data('state');
+                    var $what = $t.data('what');
+                    var $postid = $t.data('postid');
                 });
             };
             ask.prototype.bindSearchData = function (e) {

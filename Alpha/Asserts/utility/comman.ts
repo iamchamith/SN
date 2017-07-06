@@ -20,9 +20,10 @@
     export class comman {
         public static loading: string = "<img src='/asserts/images/loader.gif'/>";
         public static animateType: string = 'bounceInDown';
-        public static animateTypeAfterSearch: string = 'bounceIn';
+        public static animateTypeAfterSearch: string = 'bounceInRight';
         public static animateTypeAfterSave: string = 'pulse';
         public static animateTypeLeftMenu: string = 'fadeInDown';
+        public static animateTypeAttention: string = 'shake';
         public profileRederect = '/useracccount/userprofile?userid=';
         private pop = $("#notification").kendoNotification().data("kendoNotification");
 

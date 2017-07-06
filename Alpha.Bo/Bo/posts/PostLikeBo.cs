@@ -13,5 +13,6 @@ namespace Alpha.Bo.Bo
         public Guid UserId { get; set; }
         public Guid PostId { get; set; }
         public PostLikeType PostLikeType { get; set; }
+        public PostLikeModeType PostLikeModeType { get; set; }
     }
 }

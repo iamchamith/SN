@@ -311,6 +311,9 @@
                 var viewModel = kendo.observable({
                     Followings: e.Followings,
                     Followers: e.Followers,
+                    FollowingsCriends: e.FollowingsCriends,
+                    FollowersCriends: e.FollowersCriends,
+                    Reputation:40,
                     Asks: e.Asks,
                     Answers: e.Answers,
                     Country: e.Country,

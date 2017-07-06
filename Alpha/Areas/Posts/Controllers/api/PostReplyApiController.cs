@@ -35,7 +35,7 @@ namespace Alpha.Areas.Posts.Controllers.api
         {
             try
             {
-                await postLikeService.LikeDislikePost(GCSession.UserGuid, Guid.Parse(item.PostId), item.Type, item.IsSelect);
+                await postLikeService.LikeDislikePost(GCSession.UserGuid, Guid.Parse(item.PostId), item.Type, item.PostLikeModeType, item.IsSelect);
                 return Ok();
             }
             catch (Exception e)
@@ -52,9 +52,19 @@ namespace Alpha.Areas.Posts.Controllers.api
             try
             {
                 item.CommentDate = DateTime.UtcNow;
+                item.PostId = Guid.Parse(item.PostIdStr);
                 item.UserId = GCSession.UserGuid;
                 var r = await this.postcommentService.Insert(Mapper.Map<PostCommentBo>(item));
-                return Ok<PostCommentViewModel>(Mapper.Map<PostCommentViewModel>(r));
+                var response = new PostCommentSearchResponse
+                {
+                    Comment = r.Comment,
+                    CommentId = r.CommentId,
+                    ProfileImage = GCSession.ProfileImage,
+                    CommentDateStr = "just now",
+                    Name = GCSession.UserDisplayName,
+                    UserId = GCSession.UserGuid
+                };
+                return Ok<PostCommentSearchResponse>(response);
             }
             catch (Exception e)
             {
@@ -66,7 +76,7 @@ namespace Alpha.Areas.Posts.Controllers.api
         {
             try
             {
-                await this.postcommentService.Delete(item.PostId, GCSession.UserGuid);
+                await this.postcommentService.Delete(item.CommentId, GCSession.UserGuid);
                 return Ok();
             }
             catch (Exception e)
@@ -79,7 +89,7 @@ namespace Alpha.Areas.Posts.Controllers.api
         {
             try
             {
-                var r = await this.postcommentService.Search(Guid.Parse(postid));
+                var r = await this.postcommentService.Search(Guid.Parse(postid), GCSession.UserGuid);
                 return Ok<List<PostCommentSearchResponse>>(r);
             }
             catch (Exception e)

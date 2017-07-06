@@ -46,5 +46,25 @@ namespace Alpha.Service.Services
                 return Bo.Utility.Configs.ImagePrefixBlob + Bo.Enums.Enums.Imagetype.profileimages.ToString() + "/";
             }
         }
+
+        public string DateShow(DateTime dt)
+        {
+            TimeSpan difference = DateTime.UtcNow - dt;
+            double days = Math.Floor(difference.TotalDays);
+            double hr = Math.Floor(difference.TotalHours);
+            double min = Math.Floor(difference.TotalMinutes);
+            var caption = new StringBuilder();
+            if (days > 0)
+            {
+                hr = hr - days * 24;
+                caption.Append($"{days} days and {hr} hours ago");
+            }
+            else
+            {
+                min = min = hr * 60;
+                caption.Append($"{hr} hours and {min} minits ago");
+            }
+            return caption.ToString();
+        }
     }
 }

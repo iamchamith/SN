@@ -8,8 +8,17 @@ module Alpha.Post {
         private pop = $("#notification").kendoNotification({ position: { top: 0, bottom: 20, right: 10 } }).data("kendoNotification");
         private userid;
         private cm = new Alpha.Utility.comman();
+        private posttype: Posttype;
         constructor() {
             this.userid = this.cm.getQueryString('userid');
+            let c = this.cm.getQueryString('type');
+            if (c == 'ask') {
+                this.posttype = Posttype.Ask;
+            } else if (c == 'answer') {
+                this.posttype = Posttype.Answer;
+            } else {
+                this.posttype = Posttype.Feed;
+            }
         }
         public execute() {
             this.initController();
@@ -25,7 +34,8 @@ module Alpha.Post {
                 IsNeedComments: true,
                 IsPoll: true,
                 IsQuestions: true,
-                Tags: []
+                Tags: [],
+                PostType: this.posttype
             };
             this.bindSearchData(search);
         }
@@ -53,7 +63,8 @@ module Alpha.Post {
                             IsNeedComments: viewModel.get('IsNeedComments'),
                             IsPoll: viewModel.get('IsPoll'),
                             IsQuestions: viewModel.get('IsQuestions'),
-                            Tags: []
+                            Tags: [],
+                            PostType: this.posttype
                         };
                         this.bindSearchData(search);
                     }, reset: () => {
@@ -68,7 +79,8 @@ module Alpha.Post {
                             IsNeedComments: true,
                             IsPoll: true,
                             IsQuestions: true,
-                            Tags: []
+                            Tags: [],
+                            PostType: this.posttype
                         };
                         this.bindSearchData(search);
                         viewModel.set('Titile', '');
@@ -105,7 +117,8 @@ module Alpha.Post {
                 let data = {
                     PostId: $postid,
                     Type: 0,
-                    IsSelect: $state
+                    IsSelect: $state,
+                    PostLikeModeType: 0
                 };
                 this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', (e) => {
                     this.changeLikeButtonState(0, $state, $postid, el);
@@ -117,7 +130,8 @@ module Alpha.Post {
                 let data = {
                     PostId: $postid,
                     Type: 1,
-                    IsSelect: $state
+                    IsSelect: $state,
+                    PostLikeModeType: 0
                 };
                 this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', (e) => {
                     this.changeLikeButtonState(1, $state, $postid, el);
@@ -134,12 +148,78 @@ module Alpha.Post {
                     });
                 }
             });
-            $('.sendpost').off('click').on('click', (el) => {
+            $('.sendcomment').off('click').on('click', (el) => {
                 let $postid = $(el.target).data('postid');
                 let $txt = $(`#txt_${$postid}`).val();
-                this.ajax.post('', null, el, 'sent', () => {
-                    alert('sent');
+                let $commentContent = $(`#c_${$postid}`);
+                if ($.trim($txt) == '') {
+                    this.pop.show('please write a comment', 'info');
+                    $(`#txt_${$postid}`).animateCss(Alpha.Utility.comman.animateTypeAttention);
+                    return;
+                }
+                var data = {
+                    Comment: $txt,
+                    PostIdStr: $postid
+                };
+                this.ajax.post('/api/v1/topost/comment', data, el, 'sent', (r) => {
+                    var d = [];
+                    d.push(r);
+                    var template = kendo.template($("#postsComment-template").html());
+                    var result = template(d);
+                    $commentContent.append(result);
+                    $(`#txt_${$postid}`).val('');
                 });
+            });
+            $('.showcomment').off('click').on('click', (el) => {
+                let $postid = $(el.target).data('postid');
+                let $commentContent = $(`#c_${$postid}`);
+                $commentContent.html('loading...');
+                this.ajax.get(`/api/v1/topost/comment?postid=${$postid}`, null, el, '', (r) => {
+                    var template = kendo.template($("#postsComment-template").html());
+                    var result = template(r);
+                    $commentContent.html(result);
+                    this.initController();
+                });
+            });
+            $('.commentlike').off('click').on('click', (el) => {
+                let $postid = $(el.target).data('commentid');
+                let $state = !$(el.target).data('state');
+                let data = {
+                    PostId: $postid,
+                    Type: 1,
+                    IsSelect: $state,
+                    PostLikeModeType: 1
+                };
+                this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', (e) => {
+                    //this.changeLikeButtonState(1, $state, $postid, el);
+                });
+            });
+            $('.commentdislike').off('click').on('click', (el) => {
+                let $postid = $(el.target).data('commentid');
+                let $state = !$(el.target).data('state');
+                let data = {
+                    PostId: $postid,
+                    Type: 1,
+                    IsSelect: $state,
+                    PostLikeModeType: 1
+                };
+                this.ajax.post('/api/v1/topost/likedislike', data, el, 'saved', (e) => {
+                    //this.changeLikeButtonState(1, $state, $postid, el);
+                });
+            });
+            $('.commentremove').off('click').on('click', (el) => {
+                if (confirm('do you want to remove this comment ?')) {
+                    let pid = $(el.target).data('commentid');
+                    this.ajax.post(`/api/v1/topost/comment/remove`, { CommentId: pid }, el, 'Removed', () => {
+                        $('#c_' + pid).remove();
+                    });
+                }
+            });
+            $('.votepoll').off('click').on('click', (el) => {
+                let $t = $(el.target);
+                let $state = $t.data('state');
+                let $what = $t.data('what');
+                let $postid = $t.data('postid');
             });
         }
         private bindSearchData(e: postSearchRequest) {

@@ -18,6 +18,14 @@ var Alpha;
             postCreations.prototype.execute = function () {
                 this.initControllers();
             };
+            postCreations.prototype.genaralValidation = function () {
+                if ($.trim(this.viewModel.get('Topic')) == '') {
+                    this.pop.show('please add the topic', 'info');
+                    $('.topic').animateCss(Alpha.Utility.comman.animateTypeAttention);
+                    return false;
+                }
+                return true;
+            };
             postCreations.prototype.initControllers = function () {
                 var _this = this;
                 $('.askQuestionMenu').off('click').on('click', function () {
@@ -29,24 +37,38 @@ var Alpha;
                             Tagss: e,
                             Tag: '',
                             IsAnonymas: false,
+                            TopicLength: 150,
+                            MoreLength: 300,
                             Vs1Data: '/asserts/images/dragdrop.png',
                             Vs2Data: '/asserts/images/dragdrop.png',
                             AskCommentImage: '/asserts/images/dragdrop.png',
                             askcomment: function (el) {
-                                _this.ajax.post('/api/v1/post/comment', _this.viewModel, el, "success share", function () {
-                                    $('#model-askQuestion').modal('hide');
-                                });
+                                if (_this.genaralValidation()) {
+                                    _this.ajax.post('/api/v1/post/comment', _this.viewModel, el, "success share", function () {
+                                        $('#model-askQuestion').modal('hide');
+                                    });
+                                }
                             },
                             askpoll: function (el) {
-                                _this.ajax.post('/api/v1/post/poll', _this.viewModel, el, "success share", function () {
-                                    $('#model-askQuestion').modal('hide');
-                                });
+                                if (_this.genaralValidation()) {
+                                    _this.ajax.post('/api/v1/post/poll', _this.viewModel, el, "success share", function () {
+                                        $('#model-askQuestion').modal('hide');
+                                    });
+                                }
                             },
                             askquestion: function (el) {
-                                _this.ajax.post('/api/v1/post/question', _this.viewModel, el, "success share", function () {
-                                    $('#model-askQuestion').modal('hide');
-                                });
-                            }
+                                if (_this.genaralValidation()) {
+                                    _this.ajax.post('/api/v1/post/question', _this.viewModel, el, "success share", function () {
+                                        $('#model-askQuestion').modal('hide');
+                                    });
+                                }
+                            },
+                            changetopic: function (el) {
+                                _this.viewModel.set('TopicLength', 150 - $(el.target).val().length);
+                            },
+                            changeMore: function (el) {
+                                _this.viewModel.set('MoreLength', 300 - $(el.target).val().length);
+                            },
                         });
                         kendo.bind($("#model-askQuestion"), _this.viewModel);
                     });

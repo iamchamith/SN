@@ -12,5 +12,9 @@
         IsMyAnswers: boolean;
         Skip: number;
         Take: number;
+        PostType: Posttype
+    }
+    export enum Posttype {
+        Feed,Ask,Answer
     }
 }

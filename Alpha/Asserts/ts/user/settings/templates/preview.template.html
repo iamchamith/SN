@@ -8,22 +8,34 @@
             </div>
             <div class="col-md-3" style="text-align:center; padding-top:15px;">
                 <h4 style="margin:0px;" data-bind="text: Name"></h4>
+                 <br />
+                <button class="btn btn-primary" type="button">
+                    Reputation <span class="badge" data-bind="text: Reputation">0</span>
+                </button>
             </div>
             <div class="col-md-7">
                 <div class="row">
-                    <div style="width:25%; text-align:center; padding-top:15px; float:left;">
+                    <div class="col-md-4" style="text-align:center; padding-top:15px; float:left;">
                         <h4 style="color:#2B587A; margin:0px;" data-bind="text: Followings">0</h4>
-                        <p style="font-size:11px;">Following</p>
+                        <p style="font-size:11px;">My Following</p>
                     </div>
-                    <div style="width:25%; text-align:center; padding-top:15px; float:left;">
+                    <div class="col-md-4" style="text-align:center; padding-top:15px; float:left;">
+                        <h4 style="color:#2B587A; margin:0px;" data-bind="text: FollowingsCriends">0</h4>
+                        <p style="font-size:11px;">Other Following</p>
+                    </div>
+                    <div  class="col-md-4" style="text-align:center; padding-top:15px; float:left;">
                         <h4 style="color:#2B587A; margin:0px;" data-bind="text: Followers">0</h4>
-                        <p style="font-size:11px;">Followers</p>
+                        <p style="font-size:11px;">My Followers</p>
                     </div>
-                    <div style="width:25%; text-align:center; padding-top:15px; float:left;">
+                    <div class="col-md-4" style="text-align:center; padding-top:15px; float:left;">
+                        <h4 style="color:#2B587A; margin:0px;" data-bind="text: FollowersCriends">0</h4>
+                        <p style="font-size:11px;">Other Followers</p>
+                    </div>
+                    <div  class="col-md-4" style="text-align:center; padding-top:15px; float:left;">
                         <h4 style="color:#2B587A; margin:0px;" data-bind="text: Asks">0</h4>
                         <p style="font-size:11px;">Ask</p>
                     </div>
-                    <div style="width:25%; text-align:center; padding-top:15px; float:left;">
+                    <div  class="col-md-4" style="text-align:center; padding-top:15px; float:left;">
                         <h4 style="color:#2B587A; margin:0px;" data-bind="text: Answers">0</h4>
                         <p style="font-size:11px;">Answers</p>
                     </div>
