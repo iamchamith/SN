@@ -104,6 +104,9 @@
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="reCAPTCHA.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\reCAPTCH.MVC.1.0.1\lib\net45\reCAPTCHA.MVC.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -297,6 +300,7 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Asserts\authtest.html" />
     <Content Include="Asserts\images\dragdrop.png" />
     <Content Include="Asserts\images\emaillogo.PNG" />
     <Content Include="Asserts\images\errorimageloading.jpg" />
@@ -330,9 +334,8 @@
     <Content Include="Asserts\js\jquery.pjax.js" />
     <Content Include="Asserts\js\plugin.js" />
     <Content Include="Asserts\ts\help\settings\help.tags.template.html" />
-    <Content Include="Asserts\ts\posts\ask\postwall.css" />
-    <Content Include="Asserts\ts\posts\ask\templates\searchResult.template.html" />
-    <Content Include="Asserts\ts\user\authentication\templates\welcome.template.html" />
+    <Content Include="Asserts\ts\posts\postwall.css" />
+    <Content Include="Asserts\ts\posts\templates\searchResult.template.html" />
     <Content Include="Asserts\ts\user\authentication\templates\join.template.html" />
     <Content Include="Asserts\ts\user\search\templates\searchResult.template.html" />
     <Content Include="Asserts\ts\user\profile\templates\message.template.html" />
@@ -361,6 +364,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\Site2.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\sweetalert.min.css" />
     <Content Include="Content\timeline.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -418,6 +422,7 @@
     <Content Include="Asserts\resources\emailtemplate.html" />
     <Content Include="Areas\Posts\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserAcccount\Views\Settings\Stater.cshtml" />
+    <Content Include="Areas\Posts\Views\Post\Notifivation.cshtml" />
     <None Include="Properties\PublishProfiles\criends - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -436,6 +441,7 @@
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="Scripts\site.bootstrap.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -450,7 +456,7 @@
     </Content>
     <Content Include="Views\Shared\_TopMenu.cshtml" />
     <Content Include="Views\Default\_404.cshtml" />
-    <Content Include="Views\Shared\_Posts.cshtml" />
+    <Content Include="Views\Shared\post\_Posts.cshtml" />
     <Content Include="Views\Shared\_View.cshtml" />
     <Content Include="Views\Default\_500.cshtml" />
     <Content Include="Views\Shared\_ViewPure.cshtml" />
@@ -460,6 +466,8 @@
     <Content Include="Views\Shared\models\_HelpModel.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_PjaxLayout.cshtml" />
+    <Content Include="Views\Shared\post\_Comments.cshtml" />
+    <Content Include="Views\Shared\post\_PostLikeDislike.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Posts\Views\Shared\" />
@@ -488,9 +496,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Asserts\ts\posts\ask\post.ts" />
-    <TypeScriptCompile Include="Asserts\ts\posts\ask\postViewModel.ts" />
-    <TypeScriptCompile Include="Asserts\ts\posts\ask\postRoute.ts" />
+    <TypeScriptCompile Include="Asserts\ts\posts\post.ts" />
+    <TypeScriptCompile Include="Asserts\ts\posts\postViewModel.ts" />
+    <TypeScriptCompile Include="Asserts\ts\posts\postRoute.ts" />
     <TypeScriptCompile Include="Asserts\ts\posts\createPost.ts" />
     <TypeScriptCompile Include="Asserts\ts\user\authentication\authentication.ts" />
     <TypeScriptCompile Include="Asserts\ts\user\authentication\authenticationRoute.ts" />

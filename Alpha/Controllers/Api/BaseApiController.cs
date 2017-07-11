@@ -10,6 +10,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -61,7 +62,18 @@ namespace Alpha.Controllers.Api
                 byte[] bytes = Convert.FromBase64String(data);
                 using (MemoryStream ms = new MemoryStream(bytes))
                 {
-                    UploadImageBlob(ms, imgtype, imagename);
+                    Image img = null;
+                    if (imgtype == Enums.Imagetype.profileimages)
+                    {
+                        img = ImageProcess.ResizeImage(Image.FromStream(ms), 150, 150);
+                    }
+                    else if (imgtype == Enums.Imagetype.postimages)
+                    {
+                        img = ImageProcess.ResizeImage(Image.FromStream(ms), 300, 300);
+                    }
+                    var msimg = new MemoryStream();
+                    img.Save(msimg, ImageFormat.Png);
+                    UploadImageBlob(msimg, imgtype, imagename);
                 }
             }
             catch
@@ -87,7 +99,8 @@ namespace Alpha.Controllers.Api
         }
 
         [NonAction]
-        void RemoveImageBlob(Enums.Imagetype imagetype,string fileName) {
+        void RemoveImageBlob(Enums.Imagetype imagetype, string fileName)
+        {
 
             try
             {

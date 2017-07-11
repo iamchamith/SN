@@ -157,3 +157,4 @@ D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\roslyn\vbc.exe.config
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\roslyn\vbc.rsp
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\roslyn\VBCSCompiler.exe
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\roslyn\VBCSCompiler.exe.config
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha\bin\reCAPTCHA.MVC.dll

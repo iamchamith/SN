@@ -14,5 +14,6 @@ namespace Alpha.Areas.Posts.Models
         public string Topic { get; set; }
         public string Tags { get; set; }
         public bool IsAnonymas { get; set; }
+        public int Days { get; set; }
     }
 }

@@ -72,6 +72,19 @@ var Alpha;
                                     };
                                     _this.searchCriends(search, el);
                                     $('#criendsearchskip').val(10);
+                                },
+                                any: function (el) {
+                                    $("#searchcriends").html(Alpha.Utility.comman.loading);
+                                    var search = {
+                                        Name: '',
+                                        Country: -1,
+                                        Sex: -1,
+                                        MaritalStatus: -1,
+                                        Skip: 0,
+                                        Take: 10
+                                    };
+                                    _this.searchCriends(search, el);
+                                    $('#criendsearchskip').val(10);
                                 }
                             });
                             kendo.bind($("#criendsearch"), _this.mvvm);

@@ -20,6 +20,7 @@ namespace Alpha.Poco
         public PostLikeModeType PostLikeModeType { get; set; }
         public Poll Poll { get; set; }
         public PostType PostType { get; set; }
+        public bool IsAnonymas { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
     }

@@ -25,32 +25,31 @@ var Alpha;
             })(jQuery, document);
             $(document).ready(function () {
                 var a;
+                var template = '../asserts/ts/user/authentication/templates/join.template.html';
                 var router = new kendo.Router({
                     init: function () {
-                        templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/welcome.template.htm", function () {
-                            $('#welcome').animateCss('pulse');
+                        templateLoader.loadExtTemplate(template, function () {
+                            animi();
                         });
                     }
                 });
                 router.route("/", function () {
-                    templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/welcome.template.html", function () {
-                        $('#welcome').animateCss('pulse');
-                    });
-                });
-                router.route("/welcome", function () {
-                    templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/welcome.template.html", function () {
-                        $('#welcome').animateCss('pulse');
+                    templateLoader.loadExtTemplate(template, function () {
+                        animi();
                     });
                 });
                 router.route("/join", function () {
-                    templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/join.template.html", function () {
-                        a = new Alpha.User.Authentication.login();
-                        a.execute();
-                        a = new Alpha.User.Authentication.register();
-                        a.execute();
-                        $('#join').animateCss(Alpha.Utility.comman.animateType);
+                    templateLoader.loadExtTemplate(template, function () {
+                        animi();
                     });
                 });
+                function animi() {
+                    a = new Alpha.User.Authentication.login();
+                    a.execute();
+                    a = new Alpha.User.Authentication.register();
+                    a.execute();
+                    $('#join').animateCss(Alpha.Utility.comman.animateType);
+                }
                 router.start();
                 router.navigate("/welcome");
             });

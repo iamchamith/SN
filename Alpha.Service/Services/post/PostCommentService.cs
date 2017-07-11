@@ -81,7 +81,7 @@ namespace Alpha.Service.Services.post
                     var r =  cn.Query<PostCommentSearchResponse>(@"select [PostComment].Comment,
                             [PostComment].CommentDate,[PostComment].CommentId,
                             [PostComment].UserId,[User].Name,[User].ProfileImage,
-                            [PostComment].PostId
+                            [PostComment].PostId,[PostComment].IsAnonymas
                             from [PostComment]
                             inner join [User] on [User].UserId = [PostComment].UserId
                             where [PostComment].PostId = @PostId 
@@ -108,7 +108,7 @@ namespace Alpha.Service.Services.post
                     var r = cn.Query<PostCommentSearchResponse>(@"select [PostComment].Comment,
                             [PostComment].CommentDate,[PostComment].CommentId,
                             [PostComment].UserId,[User].Name,[User].ProfileImage,
-                            [PostComment].PostId
+                            [PostComment].PostId,[PostComment].IsAnonymas
                             from [PostComment]
                             inner join [User] on [User].UserId = [PostComment].UserId
                             where [PostComment].PostId in @PostId 

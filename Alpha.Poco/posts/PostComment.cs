@@ -22,6 +22,7 @@ namespace Alpha.Poco
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
         public DateTime CommentDate { get; set; }
+        public bool IsAnonymas { get; set; }
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
         public PostComment()

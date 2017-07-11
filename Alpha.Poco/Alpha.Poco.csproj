@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Error.cs" />
-    <Compile Include="posts\Notifications.cs" />
+    <Compile Include="posts\Notification.cs" />
     <Compile Include="posts\PostLike.cs" />
     <Compile Include="user\UserContact.cs" />
     <Compile Include="IPoco.cs" />

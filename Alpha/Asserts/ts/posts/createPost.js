@@ -39,27 +39,27 @@ var Alpha;
                             IsAnonymas: false,
                             TopicLength: 150,
                             MoreLength: 300,
+                            Days: 5,
+                            AskTabType: 0,
                             Vs1Data: '/asserts/images/dragdrop.png',
                             Vs2Data: '/asserts/images/dragdrop.png',
                             AskCommentImage: '/asserts/images/dragdrop.png',
-                            askcomment: function (el) {
-                                if (_this.genaralValidation()) {
-                                    _this.ajax.post('/api/v1/post/comment', _this.viewModel, el, "success share", function () {
-                                        $('#model-askQuestion').modal('hide');
-                                    });
-                                }
+                            gonext: function () {
+                                $('#askquestiontab .nav-tabs a[href="#menu1"]').tab('show');
                             },
-                            askpoll: function (el) {
-                                if (_this.genaralValidation()) {
-                                    _this.ajax.post('/api/v1/post/poll', _this.viewModel, el, "success share", function () {
-                                        $('#model-askQuestion').modal('hide');
-                                    });
+                            ask: function (el) {
+                                var asktype = _this.viewModel.get('AskTabType');
+                                var posturl = '/api/v1/post/question';
+                                if (asktype == 1) {
+                                    posturl = '/api/v1/post/poll';
                                 }
-                            },
-                            askquestion: function (el) {
+                                else if (asktype == 2) {
+                                    posturl = '/api/v1/post/comment';
+                                }
                                 if (_this.genaralValidation()) {
-                                    _this.ajax.post('/api/v1/post/question', _this.viewModel, el, "success share", function () {
+                                    _this.ajax.post(posturl, _this.viewModel, el, "success share", function () {
                                         $('#model-askQuestion').modal('hide');
+                                        window.location.href = '/posts/post/index?type=ask';
                                     });
                                 }
                             },
@@ -69,9 +69,15 @@ var Alpha;
                             changeMore: function (el) {
                                 _this.viewModel.set('MoreLength', 300 - $(el.target).val().length);
                             },
+                            onDaysChange: function (el) {
+                                _this.viewModel.get("Days");
+                            }
                         });
                         kendo.bind($("#model-askQuestion"), _this.viewModel);
                     });
+                });
+                $('#asktabtype a[data-toggle="tab"]').on('click', function (e) {
+                    _this.viewModel.set('AskTabType', $(e.target).closest('li').index());
                 });
                 $('#pollImgVs1').on('change', function (e) {
                     _this.cm.fileTo64BaseString(e.target.files[0], function (r) {

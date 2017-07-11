@@ -225,6 +225,14 @@
     <Compile Include="Migrations\201707051214096_enhancePostLikeTable3.Designer.cs">
       <DependentUpon>201707051214096_enhancePostLikeTable3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707080959386_addUserExparePostTime.cs" />
+    <Compile Include="Migrations\201707080959386_addUserExparePostTime.Designer.cs">
+      <DependentUpon>201707080959386_addUserExparePostTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707081446497_addanonymasLike_commentType.cs" />
+    <Compile Include="Migrations\201707081446497_addanonymasLike_commentType.Designer.cs">
+      <DependentUpon>201707081446497_addanonymasLike_commentType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -371,6 +379,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707051214096_enhancePostLikeTable3.resx">
       <DependentUpon>201707051214096_enhancePostLikeTable3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707080959386_addUserExparePostTime.resx">
+      <DependentUpon>201707080959386_addUserExparePostTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707081446497_addanonymasLike_commentType.resx">
+      <DependentUpon>201707081446497_addanonymasLike_commentType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,6 +13,9 @@ using Alpha.Poco;
 using Alpha.Bo;
 using Alpha.Bo.Bo.criends;
 using AutoMapper;
+using System.Data;
+using Alpha.Bo.Bo.posts;
+
 namespace Alpha.Service.Services
 {
     public class ConnectCriendsService : BaseService, IConnectCriends
@@ -201,6 +204,41 @@ namespace Alpha.Service.Services
                 {
                     return Mapper.Map<CriendsRelationsBo>(res);
                 }
+            }
+            catch (Exception e)
+            {
+                throw ExceptionHandler(e);
+            }
+        }
+
+        public async Task<List<SearchCriendsResultBo>> Search(List<Guid> userids, Guid ownerId, IDbConnection cn = null)
+        {
+            try
+            {
+                if (cn == null)
+                {
+                    cn = DatabaseInfo.Connection;
+                }
+                var sql = new StringBuilder();
+                sql.Append("select UserId,Email,Name,ProfileImage from [User]    WHERE  UserId in @UserId ");
+                var r = cn.Query<SearchCriendsResultBo>(sql.ToString(), new
+                {
+                    UserId = userids,
+                }).ToList();
+                var query = @"SELECT UserId,IsFollowing,IsFollower,IsBlock from UserRelations where UserId in @UserId
+                        AND OwnerId =  @OwnerId; ";
+                var relations = cn.Query<CriendsRelationsBo>(query
+                        , new
+                        {
+                            UserId = userids,
+                            OwnerId = ownerId
+                        }).ToList();
+                foreach (var obj in r)
+                {
+                    obj.ProfileImage = $"{Bo.Utility.Configs.ImagePrefixBlob}{Bo.Enums.Enums.Imagetype.profileimages}/{obj.ProfileImage}";
+                    obj.Relationships = relations.FirstOrDefault(p => p.UserId == obj.UserId) ?? new CriendsRelationsBo();
+                }
+                return r;
             }
             catch (Exception e)
             {

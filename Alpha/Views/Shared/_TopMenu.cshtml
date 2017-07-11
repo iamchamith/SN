@@ -3,7 +3,7 @@
 
         @if (!Alpha.Utility.GCSession.IsStater)
         {
-            <li class="askQuestionMenu pull-left"><a href="#." class="askQuestionMenu" @((Request.RawUrl == "/") ? "data-pjax" : "")><i class="fa fa-question-circle fa-2 menuiconfont" aria-hidden="true"></i> Ask Question | </a></li>
+            <li class="askQuestionMenu pull-left"><a href="#." @((Request.RawUrl == "/") ? "data-pjax" : "")><i class="fa fa-bullhorn fa-2 menuiconfont" aria-hidden="true"></i> Ask Question | </a></li>
             <li><a href="/posts/post/index?type=feed" class="top-pjax-menu" @((Request.RawUrl == "/") ? "data-pjax" : "")><i class="fa fa-newspaper-o fa-2 menuiconfont" aria-hidden="true"></i> Feeds | </a></li>
             <li><a href="/posts/post/index?type=answers" class="top-pjax-menu" @((Request.RawUrl == "/") ? "data-pjax" : "")><i class="fa fa-reply fa-2 menuiconfont" aria-hidden="true"></i> Answer | </a></li>
             <li><a href="/posts/post/index?type=ask" class="top-pjax-menu"><i class="fa fa-question-circle fa-2 menuiconfont" aria-hidden="true"></i> Question | </a></li>
@@ -20,7 +20,7 @@
                 {
                     <li><a href="/useracccount/settings#/preview" tabindex="-1"><i class="fa fa-user fa-2" aria-hidden="true"></i> My Profile</a></li>
                     <li><a href="/useracccount/settings#/basic" tabindex="-1"><i class="fa fa-cog fa-2" aria-hidden="true"></i> Settings</a></li>
-                    <li><a href="/useracccount/settings#/tags" tabindex="-1"><i class="fa fa-tags fa-2" aria-hidden="true"></i> Intrestings</a><hr /></li>
+                    <li><a href="/useracccount/settings#/tags" tabindex="-1"><i class="fa fa-tags fa-2" aria-hidden="true"></i> Intrestings</a></li>
                 }
                 <li id="logout"><a tabindex="-1"><i class="fa fa-sign-out fa-2" aria-hidden="true"></i> Logout</a></li>
             </ul>

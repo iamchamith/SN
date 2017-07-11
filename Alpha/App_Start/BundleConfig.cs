@@ -19,7 +19,8 @@ namespace Alpha.App_Start
              "~/Content/kendo/kendo.mobile.all.min.css",
               "~/Content/font-awesome.min.css",
               "~/Content/animate.min.css",
-              "~/Content/Site2.css"));
+              "~/Content/Site2.css",
+              "~/Content/sweetalert.min.css"));
             BundleTable.EnableOptimizations = true;
         }
     }

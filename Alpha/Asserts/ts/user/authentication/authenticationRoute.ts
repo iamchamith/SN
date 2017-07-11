@@ -21,32 +21,31 @@ module Alpha.User.Authentication {
     })(jQuery, document);
     $(document).ready(() => {
         let a: Alpha.User.Authentication.authenticate;
+        let template = '../asserts/ts/user/authentication/templates/join.template.html';
         var router = new kendo.Router({
             init: function () {
-                templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/welcome.template.htm", () => {
-                    $('#welcome').animateCss('pulse');
+                templateLoader.loadExtTemplate(template, () => {
+                    animi();
                 });
             }
         });
         router.route("/", function () {
-            templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/welcome.template.html", () => {
-                $('#welcome').animateCss('pulse');
-            });
-        });
-        router.route("/welcome", function () {
-            templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/welcome.template.html", () => {
-                $('#welcome').animateCss('pulse');
+            templateLoader.loadExtTemplate(template, () => {
+                animi();
             });
         });
         router.route("/join", function () {
-            templateLoader.loadExtTemplate("../asserts/ts/user/authentication/templates/join.template.html", () => {
-                a = new Alpha.User.Authentication.login();
-                a.execute();
-                a = new Alpha.User.Authentication.register();
-                a.execute();
-                $('#join').animateCss(Alpha.Utility.comman.animateType);
+            templateLoader.loadExtTemplate(template, () => {
+                animi();
             });
         });
+        function animi() {
+            a = new Alpha.User.Authentication.login();
+            a.execute();
+            a = new Alpha.User.Authentication.register();
+            a.execute();
+            $('#join').animateCss(Alpha.Utility.comman.animateType);
+        }
         router.start();
         router.navigate("/welcome");
     });

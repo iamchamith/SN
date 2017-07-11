@@ -14,5 +14,6 @@ namespace Alpha.Bo.Bo
         public Guid PostId { get; set; }
         public PostLikeType PostLikeType { get; set; }
         public PostLikeModeType PostLikeModeType { get; set; }
+        public bool IsAnonymas { get; set; }
     }
 }

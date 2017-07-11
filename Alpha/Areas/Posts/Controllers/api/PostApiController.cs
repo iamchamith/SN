@@ -16,6 +16,7 @@ using Alpha.Bo;
 using Alpha.Bo.Bo;
 using Alpha.Bo.Bo.posts;
 using Alpha.Bo.Enums;
+using reCAPTCHA.MVC;
 
 namespace Alpha.Areas.Posts.Controllers
 {
@@ -27,7 +28,7 @@ namespace Alpha.Areas.Posts.Controllers
         {
             service = new UserPostService(new UnitOfWork());
         }
-        [Route("post/question"), HttpPost, Authorized, ValidateModel]
+        [Route("post/question"), HttpPost, Authorized, ValidateModel, CaptchaValidator]
         public async Task<IHttpActionResult> Create(UserPostQuestionViewModel item)
         {
             try
@@ -36,7 +37,8 @@ namespace Alpha.Areas.Posts.Controllers
                     , new UserPostBo
                     {
                         Anonymous = item.IsAnonymas ? Bo.Enums.Enums.YesNo.Yes : Bo.Enums.Enums.YesNo.No,
-                        UserId = GCSession.UserGuid
+                        UserId = GCSession.UserGuid,
+                        ResponseMinits = item.Days * 1440
                     });
                 return Ok();
             }
@@ -45,7 +47,7 @@ namespace Alpha.Areas.Posts.Controllers
                 return InternalServerError(e);
             }
         }
-        [Route("post/poll"), HttpPost, Authorized, ValidateModel]
+        [Route("post/poll"), HttpPost, Authorized, ValidateModel, CaptchaValidator]
         public async Task<IHttpActionResult> Create(UserPostPollViewModel item)
         {
             try
@@ -66,7 +68,7 @@ namespace Alpha.Areas.Posts.Controllers
             }
         }
 
-        [Route("post/comment"), HttpPost, Authorized, ValidateModel]
+        [Route("post/comment"), HttpPost, Authorized, ValidateModel, CaptchaValidator]
         public async Task<IHttpActionResult> Create(UserPostNeedCommentViewModel item)
         {
             try

@@ -81,7 +81,7 @@
                         save: (el) => {
                             if ($("#basic").data("kendoValidator").validate()) {
                                 this.ajax.post('/api/v1/user/settings/basic', viewModel, el, "Saved", (e) => {
-                                    window.location.href = '/useracccount/settings/stater#/image'
+                                    //window.location.href = '/useracccount/settings/stater#/image'
                                 });
                             }
                         },

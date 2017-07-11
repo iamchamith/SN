@@ -17,5 +17,6 @@ namespace Alpha.Bo.Bo.posts
         public string CommentDateStr { get; set; }
         public bool IsMine { get; set; }
         public Guid PostId { get; set; }
+        public bool IsAnonymas { get; set; }
     }
 }

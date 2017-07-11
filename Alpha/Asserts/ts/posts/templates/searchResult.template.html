@@ -1,0 +1,46 @@
+﻿<div id="seachpostresult">
+    <div style="padding:20px; background: #f5f5f5; border-bottom: 1px solid #e1e1e8;" id="searchpostcontrollers">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" name="name" value="" placeholder="Enter part of titile" class="form-control" data-bind="value:Titile" />
+            </div>
+            <div class="col-md-6">
+                <select data-role="multiselect"
+                        data-placeholder="Type a interesting e.g. 'rice'"
+                        data-value-primitive="true"
+                        data-text-field="TagName"
+                        data-value-field="TagId"
+                        data-bind="value: Tag,source: Tagss " style="width:100%"></select>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8">
+                <input type="checkbox" id="eq2" class="k-checkbox" data-bind="checked:Reason">
+                <label class="k-checkbox-label" for="eq2"> Is Most Reason?</label> | 
+                <input type="checkbox" id="eq3" class="k-checkbox" data-bind="checked:IsQuestions">
+                <label class="k-checkbox-label" for="eq3"> Questions I </label> | 
+                <input type="checkbox" id="eq4" class="k-checkbox" data-bind="checked:IsPoll">
+                <label class="k-checkbox-label" for="eq4"> Poll  I </label> | 
+                <input type="checkbox" id="eq5" class="k-checkbox" data-bind="checked:IsNeedComments">
+                <label class="k-checkbox-label" for="eq5"> Need Comments</label>
+            </div>
+            <div class="col-md-4">
+                <div class="pull-right">
+                    <button class="btn btn-primary" data-bind="click:search">
+                        <i class="fa fa-search fa-2 menuiconfont" aria-hidden="true"></i>  Search
+                    </button>
+                    <button class="btn btn-primary" data-bind="click:reset">
+                        <i class="fa fa-refresh fa-2 menuiconfont" aria-hidden="true"></i> Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:0px; background-color:#ffffff; border:1px solid #e1e1e8; border-radius:4px;">
+        <div style="padding:20px;">
+            <div id="searchposts"></div>
+        </div>
+    </div>
+</div>

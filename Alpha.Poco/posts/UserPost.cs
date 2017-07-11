@@ -30,6 +30,7 @@ namespace Alpha.Poco
         public virtual Post Post { get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }
+        public int ResponseMinits { get; set; }
         public UserPost()
         {
             this.Likes = 0;

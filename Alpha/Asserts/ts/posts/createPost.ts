@@ -31,27 +31,26 @@
                         IsAnonymas: false,
                         TopicLength: 150,
                         MoreLength: 300,
+                        Days: 5,
+                        AskTabType: 0,
                         Vs1Data: '/asserts/images/dragdrop.png',
                         Vs2Data: '/asserts/images/dragdrop.png',
                         AskCommentImage: '/asserts/images/dragdrop.png',
-                        askcomment: (el) => {
-                            if (this.genaralValidation()) {
-                                this.ajax.post('/api/v1/post/comment', this.viewModel, el, "success share", () => {
-                                    $('#model-askQuestion').modal('hide');
-                                });
-                            }
+                        gonext: () => {
+                            $('#askquestiontab .nav-tabs a[href="#menu1"]').tab('show');
                         },
-                        askpoll: (el) => {
-                            if (this.genaralValidation()) {
-                                this.ajax.post('/api/v1/post/poll', this.viewModel, el, "success share", () => {
-                                    $('#model-askQuestion').modal('hide');
-                                });
+                        ask: (el) => {
+                            let asktype = this.viewModel.get('AskTabType');
+                            let posturl = '/api/v1/post/question';
+                            if (asktype == 1) {
+                                posturl = '/api/v1/post/poll'
+                            } else if (asktype == 2) {
+                                posturl = '/api/v1/post/comment';
                             }
-                        },
-                        askquestion: (el) => {
                             if (this.genaralValidation()) {
-                                this.ajax.post('/api/v1/post/question', this.viewModel, el, "success share", () => {
+                                this.ajax.post(posturl, this.viewModel, el, "success share", () => {
                                     $('#model-askQuestion').modal('hide');
+                                    window.location.href = '/posts/post/index?type=ask';
                                 });
                             }
                         },
@@ -61,12 +60,16 @@
                         changeMore: (el) => {
                             this.viewModel.set('MoreLength', 300 - $(el.target).val().length);
                         },
-
+                        onDaysChange: (el) => {
+                            this.viewModel.get("Days")
+                        }
                     });
                     kendo.bind($("#model-askQuestion"), this.viewModel);
                 });
             });
-           
+            $('#asktabtype a[data-toggle="tab"]').on('click', (e) => {
+                this.viewModel.set('AskTabType', $(e.target).closest('li').index());
+            });
             $('#pollImgVs1').on('change', (e: any) => {
                 this.cm.fileTo64BaseString(e.target.files[0], (r) => {
                     this.viewModel.set('Vs1Data', r);

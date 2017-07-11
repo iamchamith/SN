@@ -1,0 +1,58 @@
+﻿#if(ismine){#
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Like #=post.Likes# <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="\#." class="whodolikedislike" data-type="like" data-postid="#=post.PostId#">Who liked</a></li>
+    </ul>
+</div>
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dislike #=post.Dislikes# <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="\#." class="whodolikedislike" data-type="dislike" data-postid="#=post.PostId#">Who Disliked</a></li>
+    </ul>
+</div>
+  #}else{#
+
+#
+let likebuttonclass = 'btn-default';
+let dislikebuttonclass = 'btn-default';
+if(post.MeLike){
+    likebuttonclass = 'btn-primary';
+}
+if(post.MeDislike){
+    dislikebuttonclass = 'btn-primary';
+}#
+    <div class="btn-group">
+    <button type="button" class="btn #=likebuttonclass# dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Like #=post.Likes# <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        #if(post.MeLike){#
+            <li><a href="\#." data-liketype="removelike" class="like" data-postid="#=post.PostId#">Remove like</a></li>
+        #}else{#
+            <li><a href="\#."  data-liketype="like"  class="like" data-postid="#=post.PostId#">Like</a></li>
+            <li><a href="\#."  data-liketype="likeanonymas"  class="like" data-postid="#=post.PostId#">Like anonymasly</a></li>
+        #}#
+        <li><a href="\#." class="whodopostlike" data-type="like" data-postid="#=post.PostId#">Who liked</a></li>
+    </ul>
+</div>
+   <div class="btn-group">
+    <button type="button" class="btn #=dislikebuttonclass# dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dislike #=post.Dislikes# <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        #if(post.MeDislike){#
+          <li><a href="\#." data-liketype="removedislike" class="dislike" data-postid="#=post.PostId#">Remove dislike</a></li>
+        #}else{#
+            <li><a href="\#." data-liketype="dislike" class="dislike" data-postid="#=post.PostId#">Dislike</a></li>
+            <li><a href="\#." data-liketype="dislikeanonymas" class="dislike" data-postid="#=post.PostId#">Dlike anonymasly</a></li>
+        #}#
+        <li><a href="\#." class="whodopostlike" data-type="dislike" data-postid="#=post.PostId#">Who Disliked</a></li>
+    </ul>
+</div>
+  #}#
+ 

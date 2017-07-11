@@ -22,6 +22,24 @@ var Alpha;
                     }
                 };
             })(jQuery, document);
+            var templateLoaderHelp = (function ($, host) {
+                $("#placeholder").html(Alpha.Utility.comman.loading);
+                return {
+                    loadExtTemplate: function (path, callback) {
+                        var tmplLoader = $.get(path)
+                            .done(function (result) {
+                            $("#infoz").html(result);
+                            callback();
+                        })
+                            .fail(function (result) {
+                            alert("Error Loading Templates -- TODO: Better Error Handling");
+                        });
+                        tmplLoader.always(function () {
+                            $(host).trigger("TEMPLATE_LOADED", [path]);
+                        });
+                    }
+                };
+            })(jQuery, document);
             $(document).ready(function () {
                 var obj;
                 var router = new kendo.Router({});
@@ -85,6 +103,21 @@ var Alpha;
                         obj.execute();
                         $('#preferences').animateCss(Alpha.Utility.comman.animateType);
                     });
+                });
+                router.route("/info", function (params) {
+                    if ($.type(params.type) == 'undefined') {
+                        templateLoader.loadExtTemplate("/asserts/ts/user/settings/templates/help.template.html", function () {
+                            $('#info').animateCss(Alpha.Utility.comman.animateType);
+                            templateLoaderHelp.loadExtTemplate("/asserts/ts/help/genaral/faq.template.html", function () {
+                                $('#infoz').animateCss(Alpha.Utility.comman.animateTypeAfterSearch);
+                            });
+                        });
+                    }
+                    else {
+                        templateLoaderHelp.loadExtTemplate("/asserts/ts/help/genaral/" + params.type + ".template.html", function () {
+                            $('#infoz').animateCss(Alpha.Utility.comman.animateTypeAfterSearch);
+                        });
+                    }
                 });
                 router.start();
                 router.navigate("/preview");

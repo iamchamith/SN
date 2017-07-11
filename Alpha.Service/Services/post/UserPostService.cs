@@ -194,9 +194,9 @@ namespace Alpha.Service.Services
                     where.Append($"	 Post.Topic Like '{request.Topic}%'   and   ");
                     isWhere = true;
                 }
-                if (request.PostSearchType != Bo.Enums.Enums.PostSearchType.Feed)
+                if (request.PostSearchType == Bo.Enums.Enums.PostSearchType.Ask)
                 {
-                    where.Append($" UserPost.UserId Like '{request.UserId}'   and   ");
+                    where.Append($" UserPost.UserId = '{request.UserId}'   and   ");
                     isWhere = true;
                 }
                 if (request.IsNeedComments)

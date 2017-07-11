@@ -44,8 +44,8 @@
         }
 
         private bindSearchData() {
-            this.ajax.get('/api/v1/criends/search/looksup', null, null,"", (e) => {
-                this.ajax.get('/api/v1/tag/read', null, null,"", (e1) => {
+            this.ajax.get('/api/v1/criends/search/looksup', null, null, "", (e) => {
+                this.ajax.get('/api/v1/tag/read', null, null, "", (e1) => {
                     this.mvvm = kendo.observable({
                         Countries: e.Countries,
                         Country: e.Country,
@@ -63,6 +63,19 @@
                                 Country: (this.mvvm.get('Country') == null) ? -1 : this.mvvm.get('Country'),
                                 Sex: (this.mvvm.get('Gender') == null) ? -1 : this.mvvm.get('Gender'),
                                 MaritalStatus: (this.mvvm.get('MaritalStatus') == null) ? -1 : this.mvvm.get('MaritalStatus'),
+                                Skip: 0,
+                                Take: 10
+                            };
+                            this.searchCriends(search, el);
+                            $('#criendsearchskip').val(10);
+                        },
+                        any: (el) => {
+                            $("#searchcriends").html(Alpha.Utility.comman.loading);
+                            var search = {
+                                Name: '',
+                                Country: -1,
+                                Sex: -1,
+                                MaritalStatus: -1,
                                 Skip: 0,
                                 Take: 10
                             };
@@ -89,7 +102,7 @@
             if ($searchmore.hasClass('hidden')) {
                 $searchmore.removeClass('hidden');
             }
-            this.ajax.post('/api/v1/criends/search', search, el,"", (r) => {
+            this.ajax.post('/api/v1/criends/search', search, el, "", (r) => {
                 var d = [];
                 d.push(r);
                 var templateContent = $("#searchCriends-template").html();

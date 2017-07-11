@@ -61,3 +61,5 @@ D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Debug\Alpha.DbAcce
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Debug\Alpha.DbAccess.Migrations.addTagCountToTagTable.resources
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Debug\Alpha.DbAccess.Migrations.addcolomPostTypeModeToPostLikeTable.resources
 D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Debug\Alpha.DbAccess.Migrations.enhancePostLikeTable3.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Debug\Alpha.DbAccess.Migrations.addUserExparePostTime.resources
+D:\Projects\angular\My Project\Alpha\Alpha\Alpha.DbAccess\obj\Debug\Alpha.DbAccess.Migrations.addanonymasLike_commentType.resources

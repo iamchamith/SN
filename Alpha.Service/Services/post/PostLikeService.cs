@@ -10,15 +10,20 @@ using Alpha.DbAccess;
 using static Alpha.Bo.Enums.Enums;
 using Alpha.Poco;
 using Alpha.Bo.Exceptions;
+using Alpha.Bo.Bo;
+using Alpha.Bo.Enums;
+using Alpha.Bo.Bo.posts;
 
 namespace Alpha.Service.Services.post
 {
     public class PostLikeService : BaseService, IPostLikeService
     {
         IUnitOfWork uow;
+        IConnectCriends connectCriends;
         public PostLikeService(IUnitOfWork _uow)
         {
             this.uow = _uow;
+            connectCriends = new ConnectCriendsService(this.uow);
         }
         public async Task LikeDislikePost(Guid userid, Guid postid, PostLikeType postLikeType, PostLikeModeType modeType, bool islike)
         {
@@ -53,7 +58,8 @@ namespace Alpha.Service.Services.post
                             this.uow.PostLikeRepository.Delete(response);
                         }
                     }
-                    var ress = this.uow.Context.UserPosts.FirstOrDefault(p => p.UserId == userid && p.PostId == postid);
+                    //update post like dislike count
+                    var ress = this.uow.Context.UserPosts.FirstOrDefault(p => p.PostId == postid);
                     if (ress is null)
                     {
                         throw new ObjectNotFoundException();
@@ -64,13 +70,11 @@ namespace Alpha.Service.Services.post
                         {
                             if (postLikeType == PostLikeType.Like)
                             {
-                                ress.Likes = 1;
-                                ress.Dislikes = 0;
+                                ress.Likes = ress.Likes + 1;
                             }
                             else
                             {
-                                ress.Likes = 0;
-                                ress.Dislikes = 1;
+                                ress.Dislikes = ress.Dislikes + 1;
                             }
                         }
                         else
@@ -80,13 +84,11 @@ namespace Alpha.Service.Services.post
                                 if (islike)
                                 {
                                     ress.Likes = ress.Likes + 1;
-                                    ress.Dislikes = ress.Dislikes - 1;
                                 }
                                 else
                                 {
                                     ress.Likes = ress.Likes - 1;
                                 }
-
                             }
                             else
                             {
@@ -104,6 +106,31 @@ namespace Alpha.Service.Services.post
                         this.uow.UserPostRepository.Update(ress);
                     }
                     await this.uow.SaveAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ExceptionHandler(ex);
+            }
+        }
+
+        public async Task<WhoLikeDislikeDoBo> WhoLikeDislikeDo(Guid postid, Guid userid, PostLikeType postLikeType)
+        {
+            try
+            {
+                using (var cn = DatabaseInfo.Connection)
+                {
+                    var result = cn.Query<UserPostLikeDislikeBo>($@"select UserId, IsAnonymas from postlikes where PostId = @PostId
+                    and PostLikeType ='{(int)(postLikeType)}'",
+                    new { PostId = postid }).ToList();
+                    var criends = await this.connectCriends.Search(result.Select(p => p.UserId).ToList(), userid, cn);
+                    var useridsAnonymas = result.Where(p => p.IsAnonymas).Select(p => p.UserId).ToList();
+                    criends.RemoveAll(p => useridsAnonymas.Contains(p.UserId));
+                    return new WhoLikeDislikeDoBo
+                    {
+                        Criends = criends,
+                        AnonymasCount = useridsAnonymas.Count
+                    }; 
                 }
             }
             catch (Exception ex)

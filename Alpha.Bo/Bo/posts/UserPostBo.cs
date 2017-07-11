@@ -14,6 +14,7 @@ namespace Alpha.Bo
         public DateTime PostDate { get; set; }
         public Guid ParentPostId { get; set; }
         public YesNo Anonymous { get; set; }
+        public int ResponseMinits { get; set; }
     }
 
     public class UserPostInfoBo
@@ -28,7 +29,6 @@ namespace Alpha.Bo
         public string Topic { get; set; }
         public bool IsDateDesc { get; set; }
         public string[] Tags { get; set; }
-        public Enums.Enums.PostType posttype { get; set; }
         public int Skip { get; set; }
         public int Take { get; set; }
 

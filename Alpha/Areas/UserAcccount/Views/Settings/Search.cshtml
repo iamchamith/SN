@@ -7,7 +7,7 @@
     {
         Layout = "~/Views/Shared/_View.cshtml";
     }
-} 
+}
 <div id="criendsearch" style="position:static">
     <div class="header-title-bg" style="margin-left:1px; margin-top:1px;">
         <i class="fa fa-search fa-2 d" aria-hidden="true"></i> Search options
@@ -83,18 +83,24 @@
         <div class="form-group">
             <div class="row" data-toggle="tooltip" data-placement="top" title="">
                 <div class="col-md-12">
-                    <button name="name" class="btn btn-primary pull-left" id="resetSearch">
-                        <i class="fa fa-refresh fa-2 d menuiconfont" aria-hidden="true"></i> Reset</button>
-                    <button name="name" class="btn btn-primary pull-right " data-bind="click:Search">
-                        <i class="fa fa-search fa-2 d menuiconfont" aria-hidden="true"></i> Search   
-                    </button>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" id="resetSearch">
+                            <i class="fa fa-refresh fa-2 d" aria-hidden="true"></i> Refresh
+                        </button>
+                        <button type="button" class="btn btn-default" data-bind="click:any">
+                            <i class="fa fa-list fa-2 d" aria-hidden="true"></i> Any
+                        </button>
+                        <button type="button" class="btn btn-primary" data-bind="click:Search">
+                            <i class="fa fa-search fa-2 d menuiconfont" aria-hidden="true"></i> Filter
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row" data-toggle="tooltip" data-placement="top" title="">
                 <div class="col-md-12">
-                   <b>Or</b><br />
+                    <b>Or</b><br />
                     <input type="button" name="name" value="From Social networks" class="btn btn-primary" style="width:100%" />
                 </div>
             </div>
@@ -117,7 +123,8 @@
             </div>
             <div style="float:left; padding-left:10px;">
                 <a href="/useracccount/userprofile?userid=#=user.UserId#">
-               <b>#=user.Name# </b></a>
+                    <b>#=user.Name# </b>
+                </a>
                 <br>
                 <span class="tags">
                     #for(var k=0;k < user.UserTags.length;k++ ){
@@ -148,15 +155,15 @@
                 blockButton = 'btn-success';
                 }#
                 <div class="btn-group">
-                    <div class="btn-group btn-group-xs" role="group" aria-label="action">     
+                    <div class="btn-group btn-group-xs" role="group" aria-label="action">
                         <button type="button" class="btn #=followingButton# relation" id="#=user.UserId#_following" data-type="@((int)Alpha.Bo.Enums.Enums.UserRelationshipStatus.Following)" data-userid="#=user.UserId#" data-isrelation="#=relations.IsFollowing#">
-                          Following
+                            Following
                         </button>
-                        <button type="button" class="btn  #=followerButton# relation"  id="#=user.UserId#_follower" data-type="@((int)Alpha.Bo.Enums.Enums.UserRelationshipStatus.Follower)" data-userid="#=user.UserId#" data-isrelation="#=relations.IsFollower#">
-                          Follower
+                        <button type="button" class="btn  #=followerButton# relation" id="#=user.UserId#_follower" data-type="@((int)Alpha.Bo.Enums.Enums.UserRelationshipStatus.Follower)" data-userid="#=user.UserId#" data-isrelation="#=relations.IsFollower#">
+                            Follower
                         </button>
                         <button type="button" class="btn  #=blockButton# relation" id="#=user.UserId#_block" data-type="@((int)Alpha.Bo.Enums.Enums.UserRelationshipStatus.Block)" data-userid="#=user.UserId#" data-isrelation="#=relations.IsBlock#">
-                           Block
+                            Block
                         </button>
                     </div>
                 </div>

@@ -21,5 +21,9 @@ namespace Alpha.Areas.Posts.Controllers
             return View();
         }
 
+        [HttpGet, Compress]
+        public ActionResult Notifivation() {
+            return View();
+        }
     }
 }

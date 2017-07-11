@@ -12,5 +12,6 @@ namespace Alpha.Areas.Posts.Models
         public PostLikeType Type { get; set; }
         public bool IsSelect { get; set; }
         public PostLikeModeType PostLikeModeType { get; set; }
+        public bool IsAnonymas { get; set; }
     }
 }

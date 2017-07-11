@@ -14,5 +14,6 @@ namespace Alpha.Areas.Posts.Models
         public string Comment { get; set; }
         public Guid UserId { get; set; }
         public DateTime CommentDate { get; set; }
+        public bool IsAnonymas { get; set; }
     }
 }

@@ -43,6 +43,21 @@ namespace Alpha.Areas.Posts.Controllers.api
                 return InternalServerError(e);
             }
         }
+
+        [Route("topost/whodolikedislike"), HttpGet]
+        public async Task<IHttpActionResult> WhoLikeDislikeDo(Guid postid, bool islike)
+        {
+            try
+            {
+                var r = await this.postLikeService.WhoLikeDislikeDo(postid, GCSession.UserGuid, islike ? PostLikeType.Like : PostLikeType.Dislike);
+                return Ok<WhoLikeDislikeDoBo>(r);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+           
+        }
         #endregion
 
         #region post comment
@@ -62,7 +77,9 @@ namespace Alpha.Areas.Posts.Controllers.api
                     ProfileImage = GCSession.ProfileImage,
                     CommentDateStr = "just now",
                     Name = GCSession.UserDisplayName,
-                    UserId = GCSession.UserGuid
+                    UserId = GCSession.UserGuid,
+                    IsMine = true,
+                    IsAnonymas = item.IsAnonymas
                 };
                 return Ok<PostCommentSearchResponse>(response);
             }

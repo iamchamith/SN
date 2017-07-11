@@ -1,0 +1,41 @@
+﻿<li class="comment" id="c_#=d.CommentId#">
+
+    #if(d.IsAnonymas){#
+    <a class="pull-left" href="\#.">
+        <img class="avatar" src="~/Asserts/images/boy.png" alt="anonymas">
+    </a>
+    #}else{#
+    <a class="pull-left" href="/useracccount/userprofile?userid=#=d.UserId#">
+        <img class="avatar" src="#=d.ProfileImage#" alt="#=d.Name#">
+    </a>
+    #}#
+    <div class="comment-body">
+        <div class="comment-heading">
+            #if(d.IsAnonymas){#
+            <h4 class="user">Anonymas</h4>
+            #}else{#
+            <a href="/useracccount/userprofile?userid=#=d.UserId#">
+                <h4 class="user"> #=d.Name#</h4>
+            </a>
+            #}#
+
+            <h5 class="time">#=d.CommentDateStr#</h5>
+            <div class="pull-right">
+                <a href="\#." title="like" class="commentlike" data-commentid="#=d.CommentId#" data-state="fa">
+                    <i class="fa fa-thumbs-up" aria-hidden="true" title="like" data-commentid="#=d.CommentId#"></i>
+                </a>
+                <a href="\#." title="disike" class="commentdislike" data-commentid="#=d.CommentId#">
+                    <i class="fa fa-thumbs-down" aria-hidden="true" title="disike" data-commentid="#=d.CommentId#"></i>
+                </a>
+                #if(d.IsMine){#
+                <a href="\#." title="remove" class="commentremove" data-commentid="#=d.CommentId#">
+                    <i class="fa fa-close" aria-hidden="true" title="remove" data-commentid="#=d.CommentId#"></i>
+                </a>
+                #}else{#
+                <span> &nbsp; &nbsp;</span>
+                #}#
+            </div>
+        </div>
+        <p>#=d.Comment#</p>
+    </div>
+</li>
